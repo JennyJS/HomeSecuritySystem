@@ -107,6 +107,17 @@ public class KeyPadPanel extends JFrame implements ActionListener {
         f2Btn = new JButton("Fire Sensor 2");
         b1Btn = new JButton("Break-in Sensor 1");
         b2Btn = new JButton("Break-in Sensor 2");
+        f1Btn.setBackground(Color.RED);
+        f1Btn.setOpaque(true);
+        //f1Btn.setBorderPainted(false);
+        f2Btn.setBackground(Color.RED);
+        f2Btn.setOpaque(true);
+        //f2Btn.setBorderPainted(false);
+        b1Btn.setBackground(Color.BLUE);
+        b1Btn.setOpaque(true);
+        b2Btn.setBackground(Color.BLUE);
+        b2Btn.setOpaque(true);
+
         sensorPanel.setLayout(new GridLayout(2,2));
         sensorPanel.add(f1Btn);
         sensorPanel.add(f2Btn);
