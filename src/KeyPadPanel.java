@@ -1,0 +1,112 @@
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * Created by manhongren on 5/13/17.
+ */
+public class KeyPadPanel extends JFrame implements ActionListener {
+    private JButton b1;
+    private JButton b2;
+    private JButton b3;
+    private JButton b4;
+    private JButton b5;
+    private JButton b6;
+    private JButton b7;
+    private JButton b8;
+    private JButton b9;
+    private JButton b0;
+    private JButton bm;
+    private JButton bd;
+
+    private JButton offButton;
+    private JButton awayButton;
+    private JButton onButton;
+    private JButton panicButton;
+
+    public KeyPadPanel(){
+       // Container container = getContentPane();
+        JFrame jFrame = new JFrame();
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        JPanel keys = new JPanel();
+        keys.setLayout(new GridLayout(4,3));
+        b1 = new JButton("1");
+        b2 = new JButton("2");
+        b3 = new JButton("3");
+        b4 = new JButton("4");
+        b5 = new JButton("5");
+        b6 = new JButton("6");
+        b7 = new JButton("7");
+        b8 = new JButton("8");
+        b9 = new JButton("9");
+        bm = new JButton("menu");
+        b0 = new JButton("0");
+        bd = new JButton("delete");
+        offButton = new JButton("Off");
+        awayButton = new JButton("Away");
+        onButton = new JButton("On");
+        panicButton = new JButton("Panic");
+
+        JPanel functionPanel = new JPanel();
+        functionPanel.add(offButton);
+        functionPanel.add(onButton);
+        functionPanel.add(awayButton);
+        panel.add(functionPanel, BorderLayout.NORTH);
+
+
+        JPanel panicPanel = new JPanel();
+        panicPanel.add(panicButton);
+        panel.add(panicPanel, BorderLayout.SOUTH);
+
+
+        keys.add(b1);
+        keys.add(b2);
+        keys.add(b3);
+        keys.add(b4);
+        keys.add(b5);
+        keys.add(b6);
+        keys.add(b7);
+        keys.add(b8);
+        keys.add(b9);
+        keys.add(bm);
+        keys.add(b0);
+        keys.add(bd);
+
+
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        b4.addActionListener(this);
+        b5.addActionListener(this);
+        b6.addActionListener(this);
+        b7.addActionListener(this);
+        b8.addActionListener(this);
+        b9.addActionListener(this);
+        bm.addActionListener(this);
+        b0.addActionListener(this);
+        bd.addActionListener(this);
+        offButton.addActionListener(this);
+        onButton.addActionListener(this);
+        panicButton.addActionListener(this);
+
+        panel.add(keys, BorderLayout.CENTER);
+        jFrame.add(panel);
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    public static void main(String[] args){
+        KeyPadPanel keyPadPanel = new KeyPadPanel();
+        keyPadPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+}
