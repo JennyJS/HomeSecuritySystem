@@ -26,13 +26,22 @@ public class KeyPadPanel extends JFrame implements ActionListener {
     private JButton onButton;
     private JButton panicButton;
 
+    private JTextField textField;
+
     public KeyPadPanel(){
        // Container container = getContentPane();
         JFrame jFrame = new JFrame();
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
+
+        JPanel textPanel = new JPanel();
+        textField = new JTextField();
+        textField.setColumns(20);
+        textPanel.add(textField);
+        panel.add(textPanel, BorderLayout.NORTH);
+
         JPanel keys = new JPanel();
-        keys.setLayout(new GridLayout(4,3));
+        keys.setLayout(new GridLayout(5,3));
         b1 = new JButton("1");
         b2 = new JButton("2");
         b3 = new JButton("3");
@@ -49,19 +58,9 @@ public class KeyPadPanel extends JFrame implements ActionListener {
         awayButton = new JButton("Away");
         onButton = new JButton("On");
         panicButton = new JButton("Panic");
-
-        JPanel functionPanel = new JPanel();
-        functionPanel.add(offButton);
-        functionPanel.add(onButton);
-        functionPanel.add(awayButton);
-        panel.add(functionPanel, BorderLayout.NORTH);
-
-
-        JPanel panicPanel = new JPanel();
-        panicPanel.add(panicButton);
-        panel.add(panicPanel, BorderLayout.SOUTH);
-
-
+        keys.add(offButton);
+        keys.add(onButton);
+        keys.add(awayButton);
         keys.add(b1);
         keys.add(b2);
         keys.add(b3);
@@ -74,7 +73,11 @@ public class KeyPadPanel extends JFrame implements ActionListener {
         keys.add(bm);
         keys.add(b0);
         keys.add(bd);
+        panel.add(keys, BorderLayout.CENTER);
 
+        JPanel panicPanel = new JPanel();
+        panicPanel.add(panicButton);
+        panel.add(panicPanel, BorderLayout.SOUTH);
 
         b1.addActionListener(this);
         b2.addActionListener(this);
@@ -92,7 +95,7 @@ public class KeyPadPanel extends JFrame implements ActionListener {
         onButton.addActionListener(this);
         panicButton.addActionListener(this);
 
-        panel.add(keys, BorderLayout.CENTER);
+
         jFrame.add(panel);
         jFrame.pack();
         jFrame.setLocationRelativeTo(null);
