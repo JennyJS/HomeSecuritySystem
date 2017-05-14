@@ -28,17 +28,23 @@ public class KeyPadPanel extends JFrame implements ActionListener {
 
     private JTextField textField;
 
+    private JButton f1Btn;
+    private JButton f2Btn;
+    private JButton b1Btn;
+    private JButton b2Btn;
+
     public KeyPadPanel(){
        // Container container = getContentPane();
         JFrame jFrame = new JFrame();
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        JPanel keyPadPanel = new JPanel();
+        keyPadPanel.setLayout(new BorderLayout());
 
         JPanel textPanel = new JPanel();
         textField = new JTextField();
         textField.setColumns(20);
+        textField.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 100));
         textPanel.add(textField);
-        panel.add(textPanel, BorderLayout.NORTH);
+        keyPadPanel.add(textPanel, BorderLayout.NORTH);
 
         JPanel keys = new JPanel();
         keys.setLayout(new GridLayout(5,3));
@@ -73,11 +79,11 @@ public class KeyPadPanel extends JFrame implements ActionListener {
         keys.add(bm);
         keys.add(b0);
         keys.add(bd);
-        panel.add(keys, BorderLayout.CENTER);
+        keyPadPanel.add(keys, BorderLayout.CENTER);
 
         JPanel panicPanel = new JPanel();
         panicPanel.add(panicButton);
-        panel.add(panicPanel, BorderLayout.SOUTH);
+        keyPadPanel.add(panicPanel, BorderLayout.SOUTH);
 
         b1.addActionListener(this);
         b2.addActionListener(this);
@@ -96,7 +102,25 @@ public class KeyPadPanel extends JFrame implements ActionListener {
         panicButton.addActionListener(this);
 
 
-        jFrame.add(panel);
+        JPanel sensorPanel = new JPanel();
+        f1Btn = new JButton("Fire Sensor 1");
+        f2Btn = new JButton("Fire Sensor 2");
+        b1Btn = new JButton("Break-in Sensor 1");
+        b2Btn = new JButton("Break-in Sensor 2");
+        sensorPanel.setLayout(new GridLayout(2,2));
+        sensorPanel.add(f1Btn);
+        sensorPanel.add(f2Btn);
+        sensorPanel.add(b1Btn);
+        sensorPanel.add(b2Btn);
+        jFrame.add(sensorPanel);
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setVisible(true);
+
+        keyPadPanel.add(sensorPanel, BorderLayout.EAST);
+
+
+        jFrame.add(keyPadPanel);
         jFrame.pack();
         jFrame.setLocationRelativeTo(null);
         jFrame.setVisible(true);
