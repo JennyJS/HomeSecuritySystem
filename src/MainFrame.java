@@ -19,7 +19,7 @@ public class MainFrame extends JFrame{
     public MainFrame(){
 //        setLayout(new BorderLayout());
 //        add(BorderLayout.SOUTH, KeyPadPanel.getKeyPadPanel());
-//        add(BorderLayout.CENTER, new BuildingLayoutPanel());
+       //   add(BorderLayout.CENTER, new BuildingLayoutPanel());
         setLayout(new GridLayout(0, 1));
         //add(new BuildingLayoutPanel());
         add(new MenuPanel());
