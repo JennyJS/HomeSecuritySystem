@@ -1,13 +1,10 @@
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
- * Created by manhongren on 5/13/17.
+ * Created by manhongren on 5/31/17.
  */
-public class KeyPadPanel extends JFrame implements ActionListener {
+public class KeyPadPanel extends JPanel {
     private JButton b1;
     private JButton b2;
     private JButton b3;
@@ -18,36 +15,42 @@ public class KeyPadPanel extends JFrame implements ActionListener {
     private JButton b8;
     private JButton b9;
     private JButton b0;
-    private JButton bm;
-    private JButton bd;
-
     private JButton offButton;
     private JButton awayButton;
     private JButton onButton;
+
+    private JButton menuBtn;
+    private JButton deleteBtn;
+    private JButton enterBtn;
     private JButton panicButton;
+    private JButton backBtn;
 
-    private JTextField textField;
+    private static KeyPadPanel keyPadPanel;
 
-    private JButton f1Btn;
-    private JButton f2Btn;
-    private JButton b1Btn;
-    private JButton b2Btn;
+    private KeyPadPanel(){
+        //initialize keys
+        initializeKeys();
 
-    public KeyPadPanel(){
-       // Container container = getContentPane();
-        JFrame jFrame = new JFrame();
-        JPanel keyPadPanel = new JPanel();
-        keyPadPanel.setLayout(new BorderLayout());
+        //Create the event handler
 
-        JPanel textPanel = new JPanel();
-        textField = new JTextField();
-        textField.setColumns(20);
-        textField.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 100));
-        textPanel.add(textField);
-        keyPadPanel.add(textPanel, BorderLayout.NORTH);
+        setLayout(new GridLayout(6,3));
 
-        JPanel keys = new JPanel();
-        keys.setLayout(new GridLayout(5,3));
+        //add buttons to this panel
+        addBtnToPanel();
+
+    }
+
+    public static KeyPadPanel getKeyPadPanel(){
+        if (keyPadPanel == null){
+            keyPadPanel = new KeyPadPanel();
+        }
+        return keyPadPanel;
+    }
+
+    private void initializeKeys(){
+        offButton = new JButton("Off");
+        onButton = new JButton("On");
+        awayButton = new JButton("Away");
         b1 = new JButton("1");
         b2 = new JButton("2");
         b3 = new JButton("3");
@@ -57,94 +60,33 @@ public class KeyPadPanel extends JFrame implements ActionListener {
         b7 = new JButton("7");
         b8 = new JButton("8");
         b9 = new JButton("9");
-        bm = new JButton("menu");
+        menuBtn = new JButton("menu");
         b0 = new JButton("0");
-        bd = new JButton("delete");
-        offButton = new JButton("Off");
-        awayButton = new JButton("Away");
-        onButton = new JButton("On");
+        deleteBtn = new JButton("delete");
+        enterBtn = new JButton("Enter");
         panicButton = new JButton("Panic");
-        keys.add(offButton);
-        keys.add(onButton);
-        keys.add(awayButton);
-        keys.add(b1);
-        keys.add(b2);
-        keys.add(b3);
-        keys.add(b4);
-        keys.add(b5);
-        keys.add(b6);
-        keys.add(b7);
-        keys.add(b8);
-        keys.add(b9);
-        keys.add(bm);
-        keys.add(b0);
-        keys.add(bd);
-        keyPadPanel.add(keys, BorderLayout.CENTER);
-
-        JPanel panicPanel = new JPanel();
-        panicPanel.add(panicButton);
-        keyPadPanel.add(panicPanel, BorderLayout.SOUTH);
-
-        b1.addActionListener(this);
-        b2.addActionListener(this);
-        b3.addActionListener(this);
-        b4.addActionListener(this);
-        b5.addActionListener(this);
-        b6.addActionListener(this);
-        b7.addActionListener(this);
-        b8.addActionListener(this);
-        b9.addActionListener(this);
-        bm.addActionListener(this);
-        b0.addActionListener(this);
-        bd.addActionListener(this);
-        offButton.addActionListener(this);
-        onButton.addActionListener(this);
-        panicButton.addActionListener(this);
-
-
-        JPanel sensorPanel = new JPanel();
-        f1Btn = new JButton("Fire Sensor 1");
-        f2Btn = new JButton("Fire Sensor 2");
-        b1Btn = new JButton("Break-in Sensor 1");
-        b2Btn = new JButton("Break-in Sensor 2");
-        f1Btn.setBackground(Color.RED);
-        f1Btn.setOpaque(true);
-        //f1Btn.setBorderPainted(false);
-        f2Btn.setBackground(Color.RED);
-        f2Btn.setOpaque(true);
-        //f2Btn.setBorderPainted(false);
-        b1Btn.setBackground(Color.BLUE);
-        b1Btn.setOpaque(true);
-        b2Btn.setBackground(Color.BLUE);
-        b2Btn.setOpaque(true);
-
-        sensorPanel.setLayout(new GridLayout(2,2));
-        sensorPanel.add(f1Btn);
-        sensorPanel.add(f2Btn);
-        sensorPanel.add(b1Btn);
-        sensorPanel.add(b2Btn);
-        jFrame.add(sensorPanel);
-        jFrame.pack();
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setVisible(true);
-
-        keyPadPanel.add(sensorPanel, BorderLayout.EAST);
-
-
-        jFrame.add(keyPadPanel);
-        jFrame.pack();
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setVisible(true);
+        backBtn = new JButton("Back");
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-    public static void main(String[] args){
-        KeyPadPanel keyPadPanel = new KeyPadPanel();
-        keyPadPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private void addBtnToPanel(){
+        add(offButton);
+        add(onButton);
+        add(awayButton);
+        add(b1);
+        add(b2);
+        add(b3);
+        add(b4);
+        add(b5);
+        add(b6);
+        add(b7);
+        add(b8);
+        add(b9);
+        add(menuBtn);
+        add(b0);
+        add(deleteBtn);
+        add(enterBtn);
+        add(panicButton);
+        add(backBtn);
     }
 
 }
