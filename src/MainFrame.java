@@ -21,8 +21,9 @@ public class MainFrame extends JFrame{
 //        add(BorderLayout.SOUTH, KeyPadPanel.getKeyPadPanel());
        //   add(BorderLayout.CENTER, new BuildingLayoutPanel());
         setLayout(new GridLayout(0, 1));
-        //add(new BuildingLayoutPanel());
-        add(new MenuPanel());
+      //  add(new BuildingLayoutPanel());
+       // add(new MenuPanel());
+        add(DisplayPanel.getDisplayPanel());
         add(KeyPadPanel.getKeyPadPanel());
     }
 }

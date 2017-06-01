@@ -1,5 +1,9 @@
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by manhongren on 5/31/17.
@@ -26,6 +30,7 @@ public class KeyPadPanel extends JPanel {
     private JButton backBtn;
 
     private static KeyPadPanel keyPadPanel;
+  //  private DisplayPanel displayPanel = new DisplayPanel();
 
     private KeyPadPanel(){
         //initialize keys
@@ -35,8 +40,12 @@ public class KeyPadPanel extends JPanel {
 
         setLayout(new GridLayout(6,3));
 
+        // add action listeners
+        addActionListeners();
+
         //add buttons to this panel
         addBtnToPanel();
+
 
     }
 
@@ -87,6 +96,19 @@ public class KeyPadPanel extends JPanel {
         add(enterBtn);
         add(panicButton);
         add(backBtn);
+    }
+
+    private void addActionListeners(){
+        //DisplayPanel displayPanel = new DisplayPanel();
+        System.out.println("Menu button is clicked");
+   //     displayPanel.getCards();
+        menuBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayPanel.getDisplayPanel().getCards().next(DisplayPanel.getDisplayPanel());
+                System.out.println("Hello");
+            }
+        });
     }
 
 }
