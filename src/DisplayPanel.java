@@ -7,16 +7,30 @@ import java.awt.*;
 public class DisplayPanel extends JPanel {
     private CardLayout cards = new CardLayout();
     private static DisplayPanel displayPanel;
+    private JPanel buildingPanel = new BuildingLayoutPanel();
+    private JPanel menuPanel = new MenuPanel();
+    private JPanel phoneNumberPanel = new PhoneNumberPanel();
+    private JPanel passwordPanel = new PasswordPanel();
     private DisplayPanel(){
         //cards = new CardLayout();
         setLayout(cards);
         setBorder(BorderFactory.createEmptyBorder(8,8,12,8));
-        JPanel buildingPanel = new BuildingLayoutPanel();
-        JPanel menuPanel = new MenuPanel();
-        JPanel phoneNumberPanel = new PhoneNumberPanel();
+        initiatePanels();
+        addPanels();
+    }
+
+    private void initiatePanels(){
+        buildingPanel = new BuildingLayoutPanel();
+        menuPanel = new MenuPanel();
+        phoneNumberPanel = new PhoneNumberPanel();
+        passwordPanel = new PasswordPanel();
+    }
+
+    private void addPanels(){
         add(buildingPanel, "buildingLayoutPanel");
         add(menuPanel, "menuPanel");
         add(phoneNumberPanel, "phoneNumberPanel");
+        add(passwordPanel, "passwordPanel");
     }
 
     public static DisplayPanel getDisplayPanel(){

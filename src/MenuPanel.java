@@ -51,5 +51,12 @@ public class MenuPanel extends JPanel {
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "phoneNumberPanel");
             }
         });
+
+        setPasswordBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "passwordPanel");
+            }
+        });
     }
 }
