@@ -23,14 +23,6 @@ public class MenuPanel extends JPanel {
         //add action listeners
         addActionListeners();
 
-//        setBorder(
-//                BorderFactory.createTitledBorder(
-//                        BorderFactory.createEtchedBorder(
-//                                EtchedBorder.RAISED, Color.GRAY
-//                                , Color.DARK_GRAY)));
-        setBorder(BorderFactory.createEmptyBorder(4,4,8,4));
-      //  setBorder(BorderFactory.createLineBorder(Color.black));
-
         //add buttons to this panel
         addButtonsToPanel();
 

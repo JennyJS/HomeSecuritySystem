@@ -10,6 +10,7 @@ public class DisplayPanel extends JPanel {
     private DisplayPanel(){
         //cards = new CardLayout();
         setLayout(cards);
+        setBorder(BorderFactory.createEmptyBorder(8,8,12,8));
         JPanel buildingPanel = new BuildingLayoutPanel();
         JPanel menuPanel = new MenuPanel();
         JPanel phoneNumberPanel = new PhoneNumberPanel();

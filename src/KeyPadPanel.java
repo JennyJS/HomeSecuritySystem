@@ -28,6 +28,7 @@ public class KeyPadPanel extends JPanel {
     private JButton enterBtn;
     private JButton panicButton;
     private JButton backBtn;
+    private boolean isBuildingLayoutShown = true;
 
     private static KeyPadPanel keyPadPanel;
   //  private DisplayPanel displayPanel = new DisplayPanel();
@@ -105,9 +106,14 @@ public class KeyPadPanel extends JPanel {
         menuBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               // DisplayPanel.getDisplayPanel().getCards().next(DisplayPanel.getDisplayPanel());
-                //System.out.println("Hello");
-                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
+                //switch only between buildingLayoutPanel and menuPanel
+
+                if (isBuildingLayoutShown){
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
+                } else {
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "buildingLayoutPanel");
+                }
+                isBuildingLayoutShown = !isBuildingLayoutShown;
             }
         });
     }
