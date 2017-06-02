@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by manhongren on 6/1/17.
@@ -17,6 +19,9 @@ public class MenuPanel extends JPanel {
         initiatedButtons();
 
         setLayout(new GridLayout(0, 1));
+
+        //add action listeners
+        addActionListeners();
 
 //        setBorder(
 //                BorderFactory.createTitledBorder(
@@ -45,5 +50,14 @@ public class MenuPanel extends JPanel {
         add(setSensorBtn);
         add(scheduleTimeBtn);
         add(monthlyFeeBtn);
+    }
+
+    private void addActionListeners(){
+        setPhoneNumberBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "phoneNumberPanel");
+            }
+        });
     }
 }

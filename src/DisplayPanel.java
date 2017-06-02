@@ -12,8 +12,10 @@ public class DisplayPanel extends JPanel {
         setLayout(cards);
         JPanel buildingPanel = new BuildingLayoutPanel();
         JPanel menuPanel = new MenuPanel();
-        add(buildingPanel);
-        add(menuPanel);
+        JPanel phoneNumberPanel = new PhoneNumberPanel();
+        add(buildingPanel, "buildingLayoutPanel");
+        add(menuPanel, "menuPanel");
+        add(phoneNumberPanel, "phoneNumberPanel");
     }
 
     public static DisplayPanel getDisplayPanel(){

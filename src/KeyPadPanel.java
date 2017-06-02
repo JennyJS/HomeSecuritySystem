@@ -105,8 +105,9 @@ public class KeyPadPanel extends JPanel {
         menuBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DisplayPanel.getDisplayPanel().getCards().next(DisplayPanel.getDisplayPanel());
-                System.out.println("Hello");
+               // DisplayPanel.getDisplayPanel().getCards().next(DisplayPanel.getDisplayPanel());
+                //System.out.println("Hello");
+                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });
     }
