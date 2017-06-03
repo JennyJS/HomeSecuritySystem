@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -28,6 +30,7 @@ public class ScheduleTimePanel extends JPanel {
         add(radioButtonPanel);
         add(spinnerPanel);
         add(buttonPanel);
+        addActionListeners();
     }
 
     private void initializeComponents(){
@@ -64,12 +67,28 @@ public class ScheduleTimePanel extends JPanel {
     }
 
     private void setSpinners(){
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(Calendar.HOUR_OF_DAY, 24); // 1pm
-        SpinnerDateModel dateModel = new SpinnerDateModel(calendar.getTime(), null,
-                null, Calendar.HOUR_OF_DAY);
 
-        fromSpinner = new JSpinner(dateModel);
-        toSpinner = new JSpinner(dateModel);
+        Integer current = new Integer(12);
+        Integer min = new Integer(1);
+        Integer max = new Integer(24);
+        Integer step = new Integer(1);
+
+        Integer current2 = new Integer(12);
+        Integer min2 = new Integer(1);
+        Integer max2= new Integer(24);
+        Integer step2 = new Integer(1);
+        SpinnerNumberModel model = new SpinnerNumberModel(current, min, max, step);
+        SpinnerNumberModel model2 = new SpinnerNumberModel(current2, min2, max2, step2);
+        fromSpinner = new JSpinner(model);
+        toSpinner = new JSpinner(model2);
+    }
+
+    private void addActionListeners(){
+        doneButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
+            }
+        });
     }
 }
