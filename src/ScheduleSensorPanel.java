@@ -45,6 +45,11 @@ public class ScheduleSensorPanel extends JPanel {
         fireCheckBox2 = new JCheckBox();
         scheduleSensorLabel = new JLabel("Check the sensor you want to turn on: ");
         scheduleSensorLabel.setFont(new Font("Serif", Font.BOLD, 16));
+        //add checkbox to map
+        SensorManager.getInstance().addToCheckBoxToButtonMap(breakInCheckBox, BuildingLayoutPanel.getBuildingLayoutPanel().getBreakInSensorBtn());
+        SensorManager.getInstance().addToCheckBoxToButtonMap(breakInCheckBox2, BuildingLayoutPanel.getBuildingLayoutPanel().getBreakInSensorBtn2());
+        SensorManager.getInstance().addToCheckBoxToButtonMap(fireCheckBox1, BuildingLayoutPanel.getBuildingLayoutPanel().getFireSensorBtn1());
+        SensorManager.getInstance().addToCheckBoxToButtonMap(fireCheckBox2, BuildingLayoutPanel.getBuildingLayoutPanel().getFireSensorBtn2());
     }
 
     private void setPositionOfButtons(){
@@ -65,7 +70,25 @@ public class ScheduleSensorPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
+                System.out.println("OOOOOO");
             }
         });
+
+        if (breakInCheckBox.isSelected()){
+            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(breakInCheckBox);
+            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
+            tmpSensor.setSensorOn(true);
+            System.out.println("HHHHHH");
+        }
+
+        if (breakInCheckBox2.isSelected()){
+            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(breakInCheckBox2);
+            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
+            tmpSensor.setSensorOn(true);
+            System.out.println("LLLLL");
+        }
+
+
+
     }
 }

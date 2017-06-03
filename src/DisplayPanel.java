@@ -7,7 +7,7 @@ import java.awt.*;
 public class DisplayPanel extends JPanel {
     private CardLayout cards = new CardLayout();
     private static DisplayPanel displayPanel;
-    private JPanel buildingPanel = new BuildingLayoutPanel();
+  //  private JPanel buildingPanel = new BuildingLayoutPanel();
     private JPanel menuPanel = new MenuPanel();
     private JPanel phoneNumberPanel = new PhoneNumberPanel();
     private JPanel passwordPanel = new PasswordPanel();
@@ -23,14 +23,14 @@ public class DisplayPanel extends JPanel {
     }
 
     private void initiatePanels(){
-        buildingPanel = new BuildingLayoutPanel();
+      //  buildingPanel = new BuildingLayoutPanel();
         menuPanel = new MenuPanel();
         phoneNumberPanel = new PhoneNumberPanel();
         passwordPanel = new PasswordPanel();
     }
 
     private void addPanels(){
-        add(buildingPanel, "buildingLayoutPanel");
+        add(BuildingLayoutPanel.getBuildingLayoutPanel(), "buildingLayoutPanel");
         add(menuPanel, "menuPanel");
         add(phoneNumberPanel, "phoneNumberPanel");
         add(passwordPanel, "passwordPanel");
