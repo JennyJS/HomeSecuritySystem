@@ -15,7 +15,7 @@ public class BuildingLayoutPanel extends JPanel {
     private JButton fireSensor1;
     private JButton fireSensor2;
     public BuildingLayoutPanel(){
-        setPreferredSize(new Dimension(350, 350));
+        setPreferredSize(new Dimension(350, 400));
         try{
             image = ImageIO.read(new File("src/buildingLayout.jpg"));
         } catch (IOException e) {

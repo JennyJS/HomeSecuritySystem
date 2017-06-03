@@ -18,7 +18,7 @@ public class ImagePanel extends JPanel {
 
     public ImagePanel(){
 
-        setPreferredSize(new Dimension(350, 700));
+        setPreferredSize(new Dimension(350, 400));
         try{
             image = ImageIO.read(new File("src/buildingLayout.jpg"));
         } catch (IOException e) {

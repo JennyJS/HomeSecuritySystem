@@ -22,7 +22,7 @@ public class ScheduleSensorPanel extends JPanel {
 
     public ScheduleSensorPanel(){
 
-        setPreferredSize(new Dimension(350, 700));
+        setPreferredSize(new Dimension(350, 400));
         initializeComponents();
         setPositionOfButtons();
         addButtonsToPanel();
