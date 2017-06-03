@@ -61,7 +61,7 @@ public class MenuPanel extends JPanel {
         setSensorBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "buildingLayoutPanel");
+                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "scheduleSensorPanel");
             }
         });
 
