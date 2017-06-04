@@ -127,6 +127,15 @@ public class KeyPadPanel extends JPanel {
                 isBuildingLayoutShown = !isBuildingLayoutShown;
             }
         });
+
+        //delete the last digit from any Textfield
+        deleteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField currTextField = ActiveTextField.getActiveTextField().getCurrentTextField();
+                currTextField.setText(""+currTextField.getText().substring(0, currTextField.getText().length() - 1));
+            }
+        });
     }
 
 
