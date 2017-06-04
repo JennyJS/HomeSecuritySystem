@@ -1,5 +1,7 @@
 package menuPanels;
 
+import fileManagers.SensorInfoFileManager;
+import fileManagers.UpdateFile;
 import main.BuildingLayoutPanel;
 import sensor.Sensor;
 import sensor.SensorManager;
@@ -77,9 +79,17 @@ public class ImagePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (breakInCheckBox.isSelected()){
                     tmpSensor.setSensorOn(true);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),true, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("breakInCheckBox is checked");
                 } else {
                     tmpSensor.setSensorOn(false);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),false, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("breakInCheckBox is unChecked");
                 }
             }
@@ -92,9 +102,17 @@ public class ImagePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (breakInCheckBox2.isSelected()){
                     tmpSensor.setSensorOn(true);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),true, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("breakInCheckBox2 is checked");
                 } else {
                     tmpSensor.setSensorOn(false);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),false, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("breakInCheckBox2 is unChecked");
                 }
             }
@@ -107,9 +125,17 @@ public class ImagePanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (fireCheckBox1.isSelected()){
                     tmpSensor.setSensorOn(true);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),true, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("fireCheckBox1 is checked");
                 } else {
                     tmpSensor.setSensorOn(false);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),false, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("fireCheckBox1 is unChecked");
                 }
             }
@@ -120,11 +146,19 @@ public class ImagePanel extends JPanel {
             Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (fireCheckBox1.isSelected()){
+                if (fireCheckBox2.isSelected()){
                     tmpSensor.setSensorOn(true);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),true, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("fireCheckBox2 is checked");
                 } else {
                     tmpSensor.setSensorOn(false);
+                    //update file
+                    String fileName = SensorInfoFileManager.getFileManager().getFileName();
+                    SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry(tmpSensor.getSensorId(),false, tmpSensor.getType());
+                    UpdateFile.updateFiles(fileName, tmpSensor.getSensorId(), entry.toString());
                     System.out.println("fireCheckBox2 is unChecked");
                 }
             }

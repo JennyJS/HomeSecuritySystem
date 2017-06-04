@@ -20,4 +20,12 @@ public class Sensor {
     public void setSensorOn(boolean isOn){
         this.isOn = isOn;
     }
+
+    public String getSensorId(){
+        return this.id;
+    }
+
+    public Type getType(){
+        return this.type;
+    }
 }

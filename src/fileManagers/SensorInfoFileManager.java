@@ -87,6 +87,11 @@ public class SensorInfoFileManager {
         return this.file;
     }
 
+    public String getFileName(){
+        return this.file.getName();
+    }
+
+
     public boolean isFileEmpty(){
         BufferedReader br = null;
 //        init();
