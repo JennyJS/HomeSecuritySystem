@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /**
  * Created by manhongren on 6/2/17.
@@ -46,6 +45,30 @@ public class PasswordPanel extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
+            }
+        });
+
+        passwordTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(passwordTextField);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+
+        confirmPasswordTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(confirmPasswordTextField);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
             }
         });
     }

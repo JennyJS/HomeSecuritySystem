@@ -1,6 +1,7 @@
 import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ public class KeyPadPanel extends JPanel {
     private JButton panicButton;
     private JButton backBtn;
     private boolean isBuildingLayoutShown = true;
+    private ActionHandler actionHandler = new ActionHandler();
 
     private static KeyPadPanel keyPadPanel;
   //  private DisplayPanel displayPanel = new DisplayPanel();
@@ -100,6 +102,16 @@ public class KeyPadPanel extends JPanel {
     }
 
     private void addActionListeners(){
+        b1.addActionListener(actionHandler);
+        b2.addActionListener(actionHandler);
+        b3.addActionListener(actionHandler);
+        b4.addActionListener(actionHandler);
+        b5.addActionListener(actionHandler);
+        b6.addActionListener(actionHandler);
+        b7.addActionListener(actionHandler);
+        b8.addActionListener(actionHandler);
+        b9.addActionListener(actionHandler);
+        b0.addActionListener(actionHandler);
         menuBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,6 +125,29 @@ public class KeyPadPanel extends JPanel {
                 isBuildingLayoutShown = !isBuildingLayoutShown;
             }
         });
+    }
+
+
+    public class ActionHandler implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Object source = e.getSource();
+            if (source instanceof JButton) {
+                JButton btn = (JButton) source;
+                try {
+                    int value = Integer.parseInt(btn.getText().trim());
+                    Component comp = ActiveTextField.getActiveTextField().getCurrentTextField();
+                    if (comp instanceof JTextComponent) {
+                        JTextComponent tc = (JTextComponent) comp;
+                        tc.setText(tc.getText() + value);
+                    }
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                }
+            }
+
+        }
     }
 
 }
