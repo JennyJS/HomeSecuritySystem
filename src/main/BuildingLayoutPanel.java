@@ -10,6 +10,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import static sensor.Sensor.Type.BREAKIN;
+import static sensor.Sensor.Type.FIRE;
+
 /**
  * Created by manhongren on 6/1/17.
  */
@@ -60,10 +63,10 @@ public class BuildingLayoutPanel extends JPanel {
         fireSensorBtn2 = new JButton("FS");
         fireSensorBtn2.setForeground(Color.RED);
         //mapSensorsButtons to sensor object
-        SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn1, new Sensor("FS1", false));
-        SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn2, new Sensor("FS2", false));
-        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn, new Sensor("BS1", false));
-        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn2, new Sensor("BS2", false));
+        SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn1, new Sensor("FS1", false, FIRE));
+        SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn2, new Sensor("FS2", false, FIRE));
+        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn, new Sensor("BS1", false, BREAKIN));
+        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn2, new Sensor("BS2", false, BREAKIN));
     }
 
     private void setPositionOfButtons(){
