@@ -15,7 +15,8 @@ import java.awt.event.FocusListener;
 public class PhoneNumberPanel extends JPanel {
     private JButton enterBtn;
     private JButton doneBtn;
-    private JTextField phoneNumberTextField;
+    private JTextField phoneNumberTextField1;
+    private JTextField phoneNumberTextField2;
     private JLabel phoneNumberLabel;
     public PhoneNumberPanel(){
         initiateBtns();
@@ -25,15 +26,19 @@ public class PhoneNumberPanel extends JPanel {
     }
 
     private void initiateBtns(){
-        phoneNumberLabel = new JLabel("Please enter your phone number: ");
+        phoneNumberLabel = new JLabel("Please enter two different phone numbers: ");
         enterBtn = new JButton("Enter");
         doneBtn = new JButton("Done");
-        phoneNumberTextField = new JTextField();
+        phoneNumberTextField1 = new JTextField();
+        phoneNumberTextField1.setUI(new HintTextFieldUI(" 1st Contact Number", true));
+        phoneNumberTextField2 = new JTextField();
+        phoneNumberTextField2.setUI(new HintTextFieldUI(" 2nd Contact Number", true));
         phoneNumberLabel.setFont(new Font("Serif", Font.ITALIC, 20));
     }
     private void addBtnsToPanel(){
         add(phoneNumberLabel);
-        add(phoneNumberTextField);
+        add(phoneNumberTextField1);
+        add(phoneNumberTextField2);
         add(enterBtn);
         add(doneBtn);
     }
@@ -46,10 +51,10 @@ public class PhoneNumberPanel extends JPanel {
             }
         });
 
-        phoneNumberTextField.addFocusListener(new FocusListener() {
+        phoneNumberTextField1.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(phoneNumberTextField);
+                ActiveTextField.getActiveTextField().setCurrentTextField(phoneNumberTextField1);
             }
 
             @Override
@@ -57,6 +62,20 @@ public class PhoneNumberPanel extends JPanel {
 
             }
         });
+
+        phoneNumberTextField2.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(phoneNumberTextField2);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+
+
     }
 
 }

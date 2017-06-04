@@ -12,8 +12,8 @@ import java.awt.event.*;
 public class PasswordPanel extends JPanel{
     private JButton enterBtn;
     private JButton doneBtn;
-    private JTextField passwordTextField;
-    private JTextField confirmPasswordTextField;
+    private JPasswordField passwordTextField;
+    private JPasswordField confirmPasswordTextField;
     private JLabel passwordLabel;
     private JLabel confirmPasswordLabel;
 
@@ -30,9 +30,9 @@ public class PasswordPanel extends JPanel{
         confirmPasswordLabel = new JLabel("Please confirm your password: ");
         enterBtn = new JButton("Enter");
         doneBtn = new JButton("Done");
-        passwordTextField = new JTextField();
+        passwordTextField = new JPasswordField();
         passwordLabel.setFont(new Font("Serif", Font.ITALIC, 20));
-        confirmPasswordTextField = new JTextField();
+        confirmPasswordTextField = new JPasswordField();
         confirmPasswordLabel.setFont(new Font("Serif", Font.ITALIC, 20));
     }
     private void addBtnsToPanel(){
