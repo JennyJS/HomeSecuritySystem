@@ -44,9 +44,20 @@ public class SensorInfoFileManager {
     // add an entry to the file
     public void addToFile(Entry e){
         try {
-            FileWriter fw = new FileWriter(file,true);
+            FileWriter fw = new FileWriter(file,false); // false means not to append, to overwrite
             fw.append(e.toString() + '\n');
             System.out.println("Adding to file " + e.toString());
+            fw.close();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void addToFile(String str){
+        try {
+            FileWriter fw = new FileWriter(file,false); // false means not to append, to overwrite
+            fw.append(str);
+            System.out.println("Adding to file " + '\n' + str);
             fw.close();
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -70,5 +81,24 @@ public class SensorInfoFileManager {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public File getFile(){
+        return this.file;
+    }
+
+    public boolean isFileEmpty(){
+        BufferedReader br = null;
+//        init();
+        try {
+            br = new BufferedReader(new FileReader(file));
+            if (br.readLine() == null) {
+                System.out.println("Sensor Info File is empty");
+                return true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

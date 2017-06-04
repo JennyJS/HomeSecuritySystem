@@ -70,8 +70,10 @@ public class BuildingLayoutPanel extends JPanel {
         SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn, new Sensor("BS1", false, BREAKIN));
         SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn2, new Sensor("BS2", false, BREAKIN));
 
-        //add to sensorInfo file
+        //add to sensorInfo file, if the file is empty(which means add only once the sensor info)
         addSensorInfoToFile();
+
+
     }
 
     private void setPositionOfButtons(){
@@ -105,11 +107,11 @@ public class BuildingLayoutPanel extends JPanel {
 
     private void addSensorInfoToFile(){
         SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry("FS1", false, FIRE);
-        SensorInfoFileManager.getFileManager().addToFile(entry);
-
         SensorInfoFileManager.Entry entry2 = new SensorInfoFileManager.Entry("FS2", false, FIRE);
-        SensorInfoFileManager.getFileManager().addToFile(entry2);
-
+        SensorInfoFileManager.Entry entry3 = new SensorInfoFileManager.Entry("BS1", false, FIRE);
+        SensorInfoFileManager.Entry entry4 = new SensorInfoFileManager.Entry("BS2", false, FIRE);
+        SensorInfoFileManager.getFileManager().addToFile(entry.toString() + '\n' + entry2.toString() + '\n' +
+                entry3.toString() + '\n' + entry4.toString() );
     }
 
 }
