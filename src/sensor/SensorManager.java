@@ -8,8 +8,9 @@ import java.util.Map;
  * Created by manhongren on 6/3/17.
  */
 public class SensorManager {
-    private Map<JButton, Sensor> sensorToButtonMap;
+    private Map<JButton, Sensor> buttonToSensorMap;
     private Map<JCheckBox, JButton> checkBoxToButtonMap;
+    private Map<String, JCheckBox> sensorIdToCheckBox;
     private static SensorManager sensorManager;
     private SensorManager(){}
     public static SensorManager getInstance(){
@@ -20,16 +21,17 @@ public class SensorManager {
         return sensorManager;
     }
     private void init() {
-        sensorToButtonMap =  new HashMap<>();
+        buttonToSensorMap =  new HashMap<>();
         checkBoxToButtonMap = new HashMap<>();
+        sensorIdToCheckBox = new HashMap<>();
     }
 
     public void addToSensorToButtonMap(JButton button, Sensor sensor){
-        this.sensorToButtonMap.put(button, sensor);
+        this.buttonToSensorMap.put(button, sensor);
     }
 
     public Sensor getSensorFromButton(JButton button){
-        return sensorToButtonMap.get(button);
+        return buttonToSensorMap.get(button);
     }
 
     public void addToCheckBoxToButtonMap(JCheckBox checkBox, JButton button){
@@ -38,5 +40,13 @@ public class SensorManager {
 
     public JButton getButtonFromCheckBox(JCheckBox checkBox){
         return checkBoxToButtonMap.get(checkBox);
+    }
+
+    public void addToSensorIdToCheckBox(String sensorId, JCheckBox jCheckBox){
+        sensorIdToCheckBox.put(sensorId, jCheckBox);
+    }
+
+    public JCheckBox getCheckBoxFromSensorId(String sensorId){
+        return sensorIdToCheckBox.get(sensorId);
     }
 }

@@ -19,7 +19,7 @@ import static sensor.Sensor.Type.FIRE;
  */
 public class BuildingLayoutPanel extends JPanel {
     private BufferedImage image;
-    private JButton breakInSensorBtn;
+    private JButton breakInSensorBtn1;
     private JButton breakInSensorBtn2;
     private JButton fireSensorBtn1;
     private JButton fireSensorBtn2;
@@ -56,8 +56,8 @@ public class BuildingLayoutPanel extends JPanel {
     }
 
     private void initializeButtons(){
-        breakInSensorBtn = new JButton("BS");
-        breakInSensorBtn.setForeground(Color.BLUE);
+        breakInSensorBtn1 = new JButton("BS");
+        breakInSensorBtn1.setForeground(Color.BLUE);
         breakInSensorBtn2 = new JButton("BS");
         breakInSensorBtn2.setForeground(Color.BLUE);
         fireSensorBtn1 = new JButton("FS");
@@ -67,7 +67,7 @@ public class BuildingLayoutPanel extends JPanel {
         //mapSensorsButtons to sensor object
         SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn1, new Sensor("FS1", false, FIRE));
         SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn2, new Sensor("FS2", false, FIRE));
-        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn, new Sensor("BS1", false, BREAKIN));
+        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn1, new Sensor("BS1", false, BREAKIN));
         SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn2, new Sensor("BS2", false, BREAKIN));
 
         //check whether sensorInfo.txt exist or not first, if not, add sensor info to file; preserve the previous sensor state info
@@ -83,18 +83,18 @@ public class BuildingLayoutPanel extends JPanel {
     private void setPositionOfButtons(){
         fireSensorBtn1.setBounds(30, 50, 50, 50);
         fireSensorBtn2.setBounds(130, 20, 50, 50);
-        breakInSensorBtn.setBounds(120, 260, 50,50);
+        breakInSensorBtn1.setBounds(120, 260, 50,50);
         breakInSensorBtn2.setBounds(250, 200, 50,50);
     }
 
     private void addButtonsToPanel() {
-        add(breakInSensorBtn);
+        add(breakInSensorBtn1);
         add(breakInSensorBtn2);
         add(fireSensorBtn1);
         add(fireSensorBtn2);
     }
-    public JButton getBreakInSensorBtn(){
-        return this.breakInSensorBtn;
+    public JButton getBreakInSensorBtn1(){
+        return this.breakInSensorBtn1;
     }
 
     public JButton getBreakInSensorBtn2(){
