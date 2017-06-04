@@ -1,4 +1,4 @@
-import oracle.jvm.hotspot.jfr.JFR;
+package main;
 
 import javax.swing.*;
 import java.awt.*;

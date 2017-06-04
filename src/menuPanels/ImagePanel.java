@@ -1,6 +1,11 @@
+package menuPanels;
+
+import main.BuildingLayoutPanel;
+import sensor.Sensor;
+import sensor.SensorManager;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +27,7 @@ public class ImagePanel extends JPanel {
 
         setPreferredSize(new Dimension(350, 400));
         try{
-            image = ImageIO.read(new File("src/buildingLayout.jpg"));
+            image = ImageIO.read(new File("src/resources/buildingLayout.jpg"));
         } catch (IOException e) {
             System.out.println("Can't open the image");
         }

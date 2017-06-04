@@ -1,3 +1,5 @@
+package sensor;
+
 /**
  * Created by manhongren on 6/3/17.
  */

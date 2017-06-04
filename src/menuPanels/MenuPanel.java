@@ -1,5 +1,8 @@
+package menuPanels;
+
+import main.DisplayPanel;
+
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +34,7 @@ public class MenuPanel extends JPanel {
     private void initiatedButtons(){
         setPhoneNumberBtn = new JButton("Set Phone Number");
         setPasswordBtn = new JButton("Set Password");
-        setSensorBtn = new JButton("Schedule Sensor");
+        setSensorBtn = new JButton("Schedule sensor");
         scheduleTimeBtn = new JButton("Schedule Time");
         monthlyFeeBtn = new JButton("Monthly Fee");
     }

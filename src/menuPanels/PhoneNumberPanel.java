@@ -1,3 +1,7 @@
+package menuPanels;
+
+import main.DisplayPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

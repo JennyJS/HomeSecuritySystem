@@ -1,9 +1,11 @@
+package menuPanels;
+
+import main.DisplayPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 /**
  * Created by manhongren on 6/2/17.
@@ -49,7 +51,7 @@ public class ScheduleTimePanel extends JPanel {
 
         enterButton = new JButton("Enter");
         doneButton = new JButton("Done");
-        titleLabel = new JLabel("Set Sensor Mode to : ");
+        titleLabel = new JLabel("Set sensor.sensor Mode to : ");
         titleLabel.setFont(new Font("Serif", Font.ITALIC, 17));
     }
     private void addComponentsToPanels(){

@@ -1,3 +1,5 @@
+package menuPanels;
+
 import javax.swing.*;
 
 /**

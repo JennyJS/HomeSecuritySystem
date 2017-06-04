@@ -1,4 +1,6 @@
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+package main;
+
+import menuPanels.ActiveTextField;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -33,7 +35,7 @@ public class KeyPadPanel extends JPanel {
     private ActionHandler actionHandler = new ActionHandler();
 
     private static KeyPadPanel keyPadPanel;
-  //  private DisplayPanel displayPanel = new DisplayPanel();
+  //  private main.DisplayPanel displayPanel = new main.DisplayPanel();
 
     private KeyPadPanel(){
         //initialize keys
