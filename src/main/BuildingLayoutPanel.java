@@ -1,5 +1,6 @@
 package main;
 
+import fileManagers.SensorInfoFileManager;
 import sensor.Sensor;
 import sensor.SensorManager;
 
@@ -23,6 +24,7 @@ public class BuildingLayoutPanel extends JPanel {
     private JButton fireSensorBtn1;
     private JButton fireSensorBtn2;
     private static BuildingLayoutPanel buildingLayoutPanel;
+ //   private boolean hasStoredInFile;
     private BuildingLayoutPanel(){
 
     }
@@ -67,6 +69,9 @@ public class BuildingLayoutPanel extends JPanel {
         SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn2, new Sensor("FS2", false, FIRE));
         SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn, new Sensor("BS1", false, BREAKIN));
         SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn2, new Sensor("BS2", false, BREAKIN));
+
+        //add to sensorInfo file
+        addSensorInfoToFile();
     }
 
     private void setPositionOfButtons(){
@@ -96,6 +101,15 @@ public class BuildingLayoutPanel extends JPanel {
 
     public JButton getFireSensorBtn2(){
         return this.fireSensorBtn2;
+    }
+
+    private void addSensorInfoToFile(){
+        SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry("FS1", false, FIRE);
+        SensorInfoFileManager.getFileManager().addToFile(entry);
+
+        SensorInfoFileManager.Entry entry2 = new SensorInfoFileManager.Entry("FS2", false, FIRE);
+        SensorInfoFileManager.getFileManager().addToFile(entry2);
+
     }
 
 }
