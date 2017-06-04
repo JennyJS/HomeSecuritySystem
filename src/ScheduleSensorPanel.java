@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 
 import static javax.swing.BoxLayout.Y_AXIS;
@@ -10,10 +12,6 @@ import static javax.swing.BoxLayout.Y_AXIS;
  * Created by manhongren on 6/3/17.
  */
 public class ScheduleSensorPanel extends JPanel {
-    private JCheckBox breakInCheckBox;
-    private JCheckBox breakInCheckBox2;
-    private JCheckBox fireCheckBox1;
-    private JCheckBox fireCheckBox2;
     private JLabel scheduleSensorLabel;
     private JPanel labelPanel;
     private JPanel buttonPanel;
@@ -24,7 +22,6 @@ public class ScheduleSensorPanel extends JPanel {
 
         setPreferredSize(new Dimension(350, 400));
         initializeComponents();
-        setPositionOfButtons();
         addButtonsToPanel();
         setLayout(new BoxLayout(this, Y_AXIS));
         add(labelPanel);
@@ -39,24 +36,8 @@ public class ScheduleSensorPanel extends JPanel {
         buttonPanel = new JPanel();
         enterButton = new JButton("Enter");
         doneButton = new JButton("Done");
-        breakInCheckBox = new JCheckBox();
-        breakInCheckBox2 = new JCheckBox();
-        fireCheckBox1 = new JCheckBox();
-        fireCheckBox2 = new JCheckBox();
         scheduleSensorLabel = new JLabel("Check the sensor you want to turn on: ");
         scheduleSensorLabel.setFont(new Font("Serif", Font.BOLD, 16));
-        //add checkbox to map
-        SensorManager.getInstance().addToCheckBoxToButtonMap(breakInCheckBox, BuildingLayoutPanel.getBuildingLayoutPanel().getBreakInSensorBtn());
-        SensorManager.getInstance().addToCheckBoxToButtonMap(breakInCheckBox2, BuildingLayoutPanel.getBuildingLayoutPanel().getBreakInSensorBtn2());
-        SensorManager.getInstance().addToCheckBoxToButtonMap(fireCheckBox1, BuildingLayoutPanel.getBuildingLayoutPanel().getFireSensorBtn1());
-        SensorManager.getInstance().addToCheckBoxToButtonMap(fireCheckBox2, BuildingLayoutPanel.getBuildingLayoutPanel().getFireSensorBtn2());
-    }
-
-    private void setPositionOfButtons(){
-        fireCheckBox1.setBounds(30, 50, 50, 50);
-        fireCheckBox2.setBounds(130, 20, 50, 50);
-        breakInCheckBox.setBounds(130, 260, 50,50);
-        breakInCheckBox2.setBounds(250, 210, 50,50);
     }
 
     private void addButtonsToPanel() {
@@ -70,25 +51,8 @@ public class ScheduleSensorPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
-                System.out.println("OOOOOO");
             }
         });
-
-        if (breakInCheckBox.isSelected()){
-            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(breakInCheckBox);
-            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
-            tmpSensor.setSensorOn(true);
-            System.out.println("HHHHHH");
-        }
-
-        if (breakInCheckBox2.isSelected()){
-            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(breakInCheckBox2);
-            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
-            tmpSensor.setSensorOn(true);
-            System.out.println("LLLLL");
-        }
-
-
 
     }
 }

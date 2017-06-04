@@ -2,6 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -29,6 +31,7 @@ public class ImagePanel extends JPanel {
         setLayout(null);
         setPositionOfButtons();
         addButtonsToPanel();
+        registerActionListeners();
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -41,6 +44,10 @@ public class ImagePanel extends JPanel {
         breakInCheckBox2 = new JCheckBox();
         fireCheckBox1 = new JCheckBox();
         fireCheckBox2 = new JCheckBox();
+        SensorManager.getInstance().addToCheckBoxToButtonMap(breakInCheckBox, BuildingLayoutPanel.getBuildingLayoutPanel().getBreakInSensorBtn());
+        SensorManager.getInstance().addToCheckBoxToButtonMap(breakInCheckBox2, BuildingLayoutPanel.getBuildingLayoutPanel().getBreakInSensorBtn2());
+        SensorManager.getInstance().addToCheckBoxToButtonMap(fireCheckBox1, BuildingLayoutPanel.getBuildingLayoutPanel().getFireSensorBtn1());
+        SensorManager.getInstance().addToCheckBoxToButtonMap(fireCheckBox2, BuildingLayoutPanel.getBuildingLayoutPanel().getFireSensorBtn2());
     }
 
     private void setPositionOfButtons(){
@@ -55,5 +62,68 @@ public class ImagePanel extends JPanel {
         add(breakInCheckBox2);
         add(fireCheckBox1);
         add(fireCheckBox2);
+    }
+
+    private void registerActionListeners(){
+        breakInCheckBox.addActionListener(new ActionListener() {
+            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(breakInCheckBox);
+            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (breakInCheckBox.isSelected()){
+                    tmpSensor.setSensorOn(true);
+                    System.out.println("breakInCheckBox is checked");
+                } else {
+                    tmpSensor.setSensorOn(false);
+                    System.out.println("breakInCheckBox is unChecked");
+                }
+            }
+        });
+
+        breakInCheckBox2.addActionListener(new ActionListener() {
+            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(breakInCheckBox2);
+            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (breakInCheckBox2.isSelected()){
+                    tmpSensor.setSensorOn(true);
+                    System.out.println("breakInCheckBox2 is checked");
+                } else {
+                    tmpSensor.setSensorOn(false);
+                    System.out.println("breakInCheckBox2 is unChecked");
+                }
+            }
+        });
+
+        fireCheckBox1.addActionListener(new ActionListener() {
+            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(fireCheckBox1);
+            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (fireCheckBox1.isSelected()){
+                    tmpSensor.setSensorOn(true);
+                    System.out.println("fireCheckBox1 is checked");
+                } else {
+                    tmpSensor.setSensorOn(false);
+                    System.out.println("fireCheckBox1 is unChecked");
+                }
+            }
+        });
+
+        fireCheckBox2.addActionListener(new ActionListener() {
+            JButton tmpButton = SensorManager.getInstance().getButtonFromCheckBox(fireCheckBox2);
+            Sensor tmpSensor = SensorManager.getInstance().getSensorFromButton(tmpButton);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (fireCheckBox1.isSelected()){
+                    tmpSensor.setSensorOn(true);
+                    System.out.println("fireCheckBox2 is checked");
+                } else {
+                    tmpSensor.setSensorOn(false);
+                    System.out.println("fireCheckBox2 is unChecked");
+                }
+            }
+        });
+
     }
 }
