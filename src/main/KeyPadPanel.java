@@ -174,7 +174,7 @@ public class KeyPadPanel extends JPanel {
                 String sensorId = innerStrArr[0].split(":")[1];
                 //set the specific Check box checked
                 JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
-                System.out.println("Triggerd");
+                System.out.println("Triggerd$$$$$$$$$$");
                 button.setBackground(Color.GREEN);
                 button.setOpaque(true);
             }

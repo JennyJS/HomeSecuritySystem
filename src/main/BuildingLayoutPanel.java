@@ -73,6 +73,7 @@ public class BuildingLayoutPanel extends JPanel {
 //        }
 
         addToMaps();
+        updateButtonState();
         //check whether sensorInfo.txt exist or not first, if not, add sensor info to file; preserve the previous sensor state info
         //File f = new File(SensorInfoFileManager.getFileManager().getFileName());
         if(!f.exists()) {
@@ -124,10 +125,60 @@ public class BuildingLayoutPanel extends JPanel {
 
 
     private void addToMaps(){
-        SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn1, new Sensor("FS1", false, FIRE));
-        SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn2, new Sensor("FS2", false, FIRE));
-        SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn1, new Sensor("BS1", false, BREAKIN));
-        SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn2, new Sensor("BS2", false, BREAKIN));
+        // get sensor status from file
+        File f = new File(SensorInfoFileManager.getFileManager().getFileName());
+        boolean FS1isOn = false;
+        boolean FS2isOn = false;
+        boolean BS1isOn = false;
+        boolean BS2isOn = false;
+        if(f.exists()) {
+            String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
+            String[] strArr = fileStr.split(System.lineSeparator());
+            for (String innerStr : strArr){
+                String[] innerStrArr = innerStr.split(",");
+                String statusStr = innerStrArr[2];
+                if (statusStr.split(":")[1].equals("true")) {
+                    String sensorId = innerStrArr[0].split(":")[1];
+                    if (sensorId.equals("FS1")){
+                        FS1isOn = true;
+                    }
+
+                    if (sensorId.equals("FS2")){
+                        FS2isOn = true;
+                    }
+
+                    if (sensorId.equals("BS1")){
+                        BS1isOn = true;
+                    }
+
+                    if (sensorId.equals("BS2")){
+                        BS2isOn = true;
+                    }
+
+                }
+            }
+        }
+        SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn1, new Sensor("FS1", FS1isOn, FIRE));
+        SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn2, new Sensor("FS2", FS2isOn, FIRE));
+        SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn1, new Sensor("BS1", BS1isOn, BREAKIN));
+        SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn2, new Sensor("BS2", BS2isOn, BREAKIN));
+    }
+
+    private void updateButtonState(){
+        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
+        String[] strArr = fileStr.split(System.lineSeparator());
+        for (String innerStr : strArr){
+            String[] innerStrArr = innerStr.split(",");
+            String statusStr = innerStrArr[2];
+            if (statusStr.split(":")[1].equals("true")) {
+                String sensorId = innerStrArr[0].split(":")[1];
+                //set the specific Check box checked
+                JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
+                System.out.println("Triggerd");
+                button.setBackground(Color.GREEN);
+                button.setOpaque(true);
+            }
+        }
     }
 
 }
