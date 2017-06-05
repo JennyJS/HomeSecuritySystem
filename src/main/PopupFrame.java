@@ -6,16 +6,16 @@ import java.awt.*;
 /**
  * Created by manhongren on 6/5/17.
  */
-public class FirePopupFrame extends JFrame {
+public class PopupFrame extends JFrame {
     private JLabel imageLabel;
     private JLabel label;
     private JPasswordField passwordField;
     private JButton enterButton;
     private JPanel topImagePanel;
     private JPanel bottomInputPanel;
-    public FirePopupFrame(){
+    public PopupFrame(String fileName){
         //initialize
-        initializeComponents();
+        initializeComponents(fileName);
         addComponentsToPanel();
         setLayout(new GridLayout(0, 1));
         add(topImagePanel);
@@ -25,8 +25,8 @@ public class FirePopupFrame extends JFrame {
         setVisible(true);
     }
 
-    private void initializeComponents(){
-        ImageIcon icon = new ImageIcon("src/resources/sprinkler.jpg");
+    private void initializeComponents(String fileName){
+        ImageIcon icon = new ImageIcon(fileName);
         imageLabel = new JLabel();
         imageLabel.setIcon(icon);
         label = new JLabel("Enter password to disarm the system");
@@ -44,5 +44,4 @@ public class FirePopupFrame extends JFrame {
         bottomInputPanel.add(passwordField);
         bottomInputPanel.add(enterButton);
     }
-
 }

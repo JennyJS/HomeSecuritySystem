@@ -1,13 +1,11 @@
 package main;
 
 import fileManagers.SensorInfoFileManager;
-import menuPanels.ActiveTextField;
 import sensor.Sensor;
 import sensor.SensorManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -185,13 +183,16 @@ public class BuildingLayoutPanel extends JPanel {
                 Sensor sensor = SensorManager.getInstance().getSensorFromButton(btn);
                 if (sensor.isSensorOn()){
                     System.out.println(sensor.getSensorId() + " is triggered");
+                    String imagePath;
                     if (sensor.getType().equals(FIRE)){
                         //sprinklers on
-                        FirePopupFrame firePopupFrame = new FirePopupFrame();
-                        firePopupFrame.setVisible(true);
+                        imagePath = "src/resources/sprinkler.jpg";
                         System.out.println("********* water **********");
-
+                    } else{
+                        imagePath = "src/resources/burglar.jpeg";
                     }
+                    PopupFrame frame = new PopupFrame(imagePath);
+                    frame.setVisible(true);
                     //ask for password
                     //call service
                     //log into file
