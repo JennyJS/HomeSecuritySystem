@@ -65,13 +65,16 @@ public class BuildingLayoutPanel extends JPanel {
         fireSensorBtn2 = new JButton("FS");
         fireSensorBtn2.setForeground(Color.RED);
         //mapSensorsButtons to sensor object
-        SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn1, new Sensor("FS1", false, FIRE));
-        SensorManager.getInstance().addToSensorToButtonMap(fireSensorBtn2, new Sensor("FS2", false, FIRE));
-        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn1, new Sensor("BS1", false, BREAKIN));
-        SensorManager.getInstance().addToSensorToButtonMap(breakInSensorBtn2, new Sensor("BS2", false, BREAKIN));
+        File f = new File(SensorInfoFileManager.getFileManager().getFileName());
+        if (!f.exists()){
+            addToMaps();
+        } else {
+            updateButtonState();
+        }
+
 
         //check whether sensorInfo.txt exist or not first, if not, add sensor info to file; preserve the previous sensor state info
-        File f = new File(SensorInfoFileManager.getFileManager().getFileName());
+        //File f = new File(SensorInfoFileManager.getFileManager().getFileName());
         if(!f.exists()) {
             addSensorInfoToFile();
         }
@@ -116,6 +119,28 @@ public class BuildingLayoutPanel extends JPanel {
         SensorInfoFileManager.Entry entry4 = new SensorInfoFileManager.Entry("BS2", false, BREAKIN);
         SensorInfoFileManager.getFileManager().addToFile(entry.toString() + '\n' + entry2.toString() + '\n' +
                 entry3.toString() + '\n' + entry4.toString() );
+    }
+
+    private void updateButtonState(){
+        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
+        String[] strArr = fileStr.split(System.lineSeparator());
+        for (String innerStr : strArr){
+            String[] innerStrArr = innerStr.split(",");
+            String statusStr = innerStrArr[2];
+            if (statusStr.split(":")[1].equals("true")) {
+                String sensorId = innerStrArr[0].split(":")[1];
+                //set the specific Check box checked
+                JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
+                button.setBackground(Color.GREEN);
+            }
+        }
+    }
+
+    private void addToMaps(){
+        SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn1, new Sensor("FS1", false, FIRE));
+        SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn2, new Sensor("FS2", false, FIRE));
+        SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn1, new Sensor("BS1", false, BREAKIN));
+        SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn2, new Sensor("BS2", false, BREAKIN));
     }
 
 }
