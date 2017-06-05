@@ -7,6 +7,8 @@ import sensor.SensorManager;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -47,6 +49,8 @@ public class BuildingLayoutPanel extends JPanel {
         initializeButtons();
         setLayout(null);
         setPositionOfButtons();
+        //add action listeners
+        registerActionListeners();
         addButtonsToPanel();
     }
     @Override
@@ -152,6 +156,18 @@ public class BuildingLayoutPanel extends JPanel {
         SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn2, new Sensor("FS2", FS2isOn, FIRE));
         SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn1, new Sensor("BS1", BS1isOn, BREAKIN));
         SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn2, new Sensor("BS2", BS2isOn, BREAKIN));
+    }
+
+    private void registerActionListeners(){
+        breakInSensorBtn1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Sensor sensor = SensorManager.getInstance().getSensorFromButton(breakInSensorBtn1);
+                if (sensor.isSensorOn()){
+                    System.out.println("**********BreakIn sensor triggered**************");
+                }
+            }
+        });
     }
 
 }

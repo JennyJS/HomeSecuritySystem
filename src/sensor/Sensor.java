@@ -28,4 +28,8 @@ public class Sensor {
     public Type getType(){
         return this.type;
     }
+
+    public boolean isSensorOn(){
+        return isOn;
+    }
 }
