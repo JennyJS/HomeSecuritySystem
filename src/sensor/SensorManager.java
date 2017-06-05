@@ -1,6 +1,9 @@
 package sensor;
 
+import fileManagers.SensorInfoFileManager;
+
 import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,5 +58,24 @@ public class SensorManager {
 
     public JCheckBox getCheckBoxFromSensorId(String sensorId){
         return sensorIdToCheckBox.get(sensorId);
+    }
+
+    public void updateButtonState(){
+        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
+        String[] strArr = fileStr.split(System.lineSeparator());
+        for (String innerStr : strArr){
+            String[] innerStrArr = innerStr.split(",");
+            String statusStr = innerStrArr[2];
+            String sensorId = innerStrArr[0].split(":")[1];
+            JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
+            if (statusStr.split(":")[1].equals("true")) {
+                //set the specific Check box checked
+                button.setBackground(Color.GREEN);
+                button.setOpaque(true);
+            } else {
+                button.setBackground(Color.WHITE);
+                button.setOpaque(true);
+            }
+        }
     }
 }

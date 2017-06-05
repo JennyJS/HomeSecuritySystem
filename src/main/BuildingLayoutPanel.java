@@ -73,11 +73,14 @@ public class BuildingLayoutPanel extends JPanel {
 //        }
 
         addToMaps();
-        updateButtonState();
+//        updateButtonState();
+
         //check whether sensorInfo.txt exist or not first, if not, add sensor info to file; preserve the previous sensor state info
         //File f = new File(SensorInfoFileManager.getFileManager().getFileName());
         if(!f.exists()) {
             addSensorInfoToFile();
+        } else {
+            SensorManager.getInstance().updateButtonState();
         }
 
 
@@ -164,23 +167,23 @@ public class BuildingLayoutPanel extends JPanel {
         SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn2, new Sensor("BS2", BS2isOn, BREAKIN));
     }
 
-    private void updateButtonState(){
-        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
-        String[] strArr = fileStr.split(System.lineSeparator());
-        for (String innerStr : strArr){
-            String[] innerStrArr = innerStr.split(",");
-            String statusStr = innerStrArr[2];
-            String sensorId = innerStrArr[0].split(":")[1];
-            JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
-            if (statusStr.split(":")[1].equals("true")) {
-                //set the specific Check box checked
-                button.setBackground(Color.GREEN);
-                button.setOpaque(true);
-            } else {
-                button.setBackground(Color.WHITE);
-                button.setOpaque(true);
-            }
-        }
-    }
+//    private void updateButtonState(){
+//        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
+//        String[] strArr = fileStr.split(System.lineSeparator());
+//        for (String innerStr : strArr){
+//            String[] innerStrArr = innerStr.split(",");
+//            String statusStr = innerStrArr[2];
+//            String sensorId = innerStrArr[0].split(":")[1];
+//            JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
+//            if (statusStr.split(":")[1].equals("true")) {
+//                //set the specific Check box checked
+//                button.setBackground(Color.GREEN);
+//                button.setOpaque(true);
+//            } else {
+//                button.setBackground(Color.WHITE);
+//                button.setOpaque(true);
+//            }
+//        }
+//    }
 
 }
