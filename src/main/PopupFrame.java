@@ -29,7 +29,7 @@ public class PopupFrame extends JFrame {
         ImageIcon icon = new ImageIcon(fileName);
         imageLabel = new JLabel();
         imageLabel.setIcon(icon);
-        label = new JLabel("Enter password to disarm the system");
+        label = new JLabel(" Enter password to disarm system: ");
         label.setFont(new Font("Serif", Font.ITALIC, 20));
         passwordField = new JPasswordField();
         enterButton = new JButton("Enter");

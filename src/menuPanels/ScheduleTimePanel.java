@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by manhongren on 6/2/17.
@@ -13,8 +16,6 @@ import java.awt.event.ActionListener;
 public class ScheduleTimePanel extends JPanel {
     private JRadioButton onJRadioButton;
     private JRadioButton offJRadioButton;
-//    private JSpinner fromSpinner;
-//    private JSpinner toSpinner;
     private JPanel radioButtonPanel;
     private JPanel timePanel;
     private JPanel buttonPanel;
@@ -29,6 +30,7 @@ public class ScheduleTimePanel extends JPanel {
     private JTextField toMinuteTextField;
     private JLabel colonLabel;
     private JLabel colonLabel2;
+    private Timer timer;
     public ScheduleTimePanel(){
         initializeComponents();
 
@@ -95,29 +97,65 @@ public class ScheduleTimePanel extends JPanel {
         buttonPanel.add(doneButton);
     }
 
-    private void setSpinners(){
-
-        Integer current = new Integer(12);
-        Integer min = new Integer(1);
-        Integer max = new Integer(24);
-        Integer step = new Integer(1);
-
-        Integer current2 = new Integer(12);
-        Integer min2 = new Integer(1);
-        Integer max2= new Integer(24);
-        Integer step2 = new Integer(1);
-        SpinnerNumberModel model = new SpinnerNumberModel(current, min, max, step);
-        SpinnerNumberModel model2 = new SpinnerNumberModel(current2, min2, max2, step2);
-//        fromSpinner = new JSpinner(model);
-//        toSpinner = new JSpinner(model2);
-    }
 
     private void addActionListeners(){
         doneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //read start time and end time from textfield
+                StringBuilder sbForStartTimer = new StringBuilder();
+                sbForStartTimer.append(fromHourTextField.getText());
+                sbForStartTimer.append(":");
+                sbForStartTimer.append(fromMinuteTextField.getText());
+
+                StringBuilder sbToStartTimer = new StringBuilder();
+                sbToStartTimer.append(toHourTextField.getText());
+                sbToStartTimer.append(":");
+                sbToStartTimer.append(toMinuteTextField.getText());
+
+                //Start Timer
+                startTimer(sbForStartTimer.toString(), sbToStartTimer.toString());
+
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });
+    }
+
+    private void startTimer(String startTime, String endTime){
+
+        final DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+
+        ActionListener timerListener = new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                Date date = new Date();
+                String time = timeFormat.format(date);
+                System.out.println("Current time " + time);
+                if (time.equals(startTime)){
+                    System.out.println("*********** Sensors On ***********");
+                }
+
+                if (time.equals(endTime)){
+                    System.out.println("$$$$$$$$$$$ Sensors Off $$$$$$$$$$$");
+                    timer.stop();
+                }
+//                if (time.equals(startTime)){
+//                    //update file
+//                    System.out.println("*********** Sensor On ***********");
+//                    timer.start();
+//                }
+//
+//                if (time.equals(endTime)){
+//                    //update file
+//                    System.out.println("*********** Sensor Off ***********");
+//                    timer.stop();
+//                }
+            }
+        };
+        timer = new Timer(10000, timerListener);
+        timer.start();
+        // to make sure it doesn't wait one second at the start
+        timer.setInitialDelay(0);
+
     }
 }
