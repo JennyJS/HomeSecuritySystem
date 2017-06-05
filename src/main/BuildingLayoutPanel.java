@@ -170,12 +170,14 @@ public class BuildingLayoutPanel extends JPanel {
         for (String innerStr : strArr){
             String[] innerStrArr = innerStr.split(",");
             String statusStr = innerStrArr[2];
+            String sensorId = innerStrArr[0].split(":")[1];
+            JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
             if (statusStr.split(":")[1].equals("true")) {
-                String sensorId = innerStrArr[0].split(":")[1];
                 //set the specific Check box checked
-                JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
-                System.out.println("Triggerd");
                 button.setBackground(Color.GREEN);
+                button.setOpaque(true);
+            } else {
+                button.setBackground(Color.WHITE);
                 button.setOpaque(true);
             }
         }
