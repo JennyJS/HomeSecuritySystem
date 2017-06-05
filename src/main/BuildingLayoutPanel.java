@@ -187,6 +187,8 @@ public class BuildingLayoutPanel extends JPanel {
                     System.out.println(sensor.getSensorId() + " is triggered");
                     if (sensor.getType().equals(FIRE)){
                         //sprinklers on
+                        FirePopupFrame firePopupFrame = new FirePopupFrame();
+                        firePopupFrame.setVisible(true);
                         System.out.println("********* water **********");
 
                     }
