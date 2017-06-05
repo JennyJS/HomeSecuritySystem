@@ -1,11 +1,13 @@
 package main;
 
 import fileManagers.SensorInfoFileManager;
+import menuPanels.ActiveTextField;
 import sensor.Sensor;
 import sensor.SensorManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +28,7 @@ public class BuildingLayoutPanel extends JPanel {
     private JButton fireSensorBtn1;
     private JButton fireSensorBtn2;
     private static BuildingLayoutPanel buildingLayoutPanel;
+    private ActionHandler actionHandler;
  //   private boolean hasStoredInFile;
     private BuildingLayoutPanel(){
 
@@ -51,6 +54,7 @@ public class BuildingLayoutPanel extends JPanel {
         setPositionOfButtons();
         //add action listeners
         registerActionListeners();
+
         addButtonsToPanel();
     }
     @Override
@@ -60,6 +64,7 @@ public class BuildingLayoutPanel extends JPanel {
     }
 
     private void initializeButtons(){
+        actionHandler = new ActionHandler();
         breakInSensorBtn1 = new JButton("BS1");
         breakInSensorBtn1.setForeground(Color.BLUE);
         breakInSensorBtn2 = new JButton("BS2");
@@ -158,16 +163,48 @@ public class BuildingLayoutPanel extends JPanel {
         SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn2, new Sensor("BS2", BS2isOn, BREAKIN));
     }
 
-    private void registerActionListeners(){
-        breakInSensorBtn1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Sensor sensor = SensorManager.getInstance().getSensorFromButton(breakInSensorBtn1);
+//    private void registerActionListeners(){
+//        breakInSensorBtn1.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                Sensor sensor = SensorManager.getInstance().getSensorFromButton(breakInSensorBtn1);
+//                if (sensor.isSensorOn()){
+//                    System.out.println("**********BreakIn sensor triggered**************");
+//                }
+//            }
+//        });
+//    }
+
+    private class ActionHandler implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Object source = e.getSource();
+            if (source instanceof JButton) {
+                JButton btn = (JButton) source;
+                Sensor sensor = SensorManager.getInstance().getSensorFromButton(btn);
                 if (sensor.isSensorOn()){
-                    System.out.println("**********BreakIn sensor triggered**************");
+                    System.out.println(sensor.getSensorId() + " is triggered");
+                    if (sensor.getType().equals(FIRE)){
+                        //sprinklers on
+                        System.out.println("********* water **********");
+
+                    }
+                    //ask for password
+                    //call service
+                    //log into file
                 }
+
             }
-        });
+
+        }
+    }
+
+    private void registerActionListeners(){
+        breakInSensorBtn1.addActionListener(actionHandler);
+        breakInSensorBtn2.addActionListener(actionHandler);
+        fireSensorBtn1.addActionListener(actionHandler);
+        fireSensorBtn2.addActionListener(actionHandler);
     }
 
 }
