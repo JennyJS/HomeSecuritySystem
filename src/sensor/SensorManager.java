@@ -9,6 +9,7 @@ import java.util.Map;
  */
 public class SensorManager {
     private Map<JButton, Sensor> buttonToSensorMap;
+    private Map<String, JButton> sensorIdToButtonMap;
     private Map<JCheckBox, JButton> checkBoxToButtonMap;
     private Map<String, JCheckBox> sensorIdToCheckBox;
     private static SensorManager sensorManager;
@@ -24,14 +25,20 @@ public class SensorManager {
         buttonToSensorMap =  new HashMap<>();
         checkBoxToButtonMap = new HashMap<>();
         sensorIdToCheckBox = new HashMap<>();
+        sensorIdToButtonMap = new HashMap<>();
     }
 
-    public void addToSensorToButtonMap(JButton button, Sensor sensor){
+    public void addToSensorButtonMap(JButton button, Sensor sensor){
         this.buttonToSensorMap.put(button, sensor);
+        this.sensorIdToButtonMap.put(sensor.getSensorId(), button);
     }
 
     public Sensor getSensorFromButton(JButton button){
         return buttonToSensorMap.get(button);
+    }
+
+    public JButton getButtonFromSensorId(String sensorId){
+        return sensorIdToButtonMap.get(sensorId);
     }
 
     public void addToCheckBoxToButtonMap(JCheckBox checkBox, JButton button){

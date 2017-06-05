@@ -66,13 +66,13 @@ public class BuildingLayoutPanel extends JPanel {
         fireSensorBtn2.setForeground(Color.RED);
         //mapSensorsButtons to sensor object
         File f = new File(SensorInfoFileManager.getFileManager().getFileName());
-        if (!f.exists()){
-            addToMaps();
-        } else {
-            updateButtonState();
-        }
+//        if (!f.exists()){
+//            addToMaps();
+//        } else {
+//            updateButtonState();
+//        }
 
-
+        addToMaps();
         //check whether sensorInfo.txt exist or not first, if not, add sensor info to file; preserve the previous sensor state info
         //File f = new File(SensorInfoFileManager.getFileManager().getFileName());
         if(!f.exists()) {
