@@ -1,6 +1,8 @@
 package main;
 
+import fileManagers.SensorInfoFileManager;
 import menuPanels.ActiveTextField;
+import sensor.SensorManager;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -122,6 +124,7 @@ public class KeyPadPanel extends JPanel {
                 if (isBuildingLayoutShown){
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
                 } else {
+                    updateButtonState();
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "buildingLayoutPanel");
                 }
                 isBuildingLayoutShown = !isBuildingLayoutShown;
@@ -160,5 +163,24 @@ public class KeyPadPanel extends JPanel {
 
         }
     }
+
+    private void updateButtonState(){
+        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
+        String[] strArr = fileStr.split(System.lineSeparator());
+        for (String innerStr : strArr){
+            String[] innerStrArr = innerStr.split(",");
+            String statusStr = innerStrArr[2];
+            if (statusStr.split(":")[1].equals("true")) {
+                String sensorId = innerStrArr[0].split(":")[1];
+                //set the specific Check box checked
+                JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
+                System.out.println("Triggerd");
+                button.setBackground(Color.GREEN);
+                button.setOpaque(true);
+            }
+        }
+    }
+
+
 
 }

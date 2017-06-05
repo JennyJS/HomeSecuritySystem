@@ -1,6 +1,8 @@
 package menuPanels;
 
+import fileManagers.SensorInfoFileManager;
 import main.DisplayPanel;
+import sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,4 +59,6 @@ public class ScheduleSensorPanel extends JPanel {
         });
 
     }
+
+
 }

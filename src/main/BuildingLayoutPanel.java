@@ -121,20 +121,7 @@ public class BuildingLayoutPanel extends JPanel {
                 entry3.toString() + '\n' + entry4.toString() );
     }
 
-    private void updateButtonState(){
-        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
-        String[] strArr = fileStr.split(System.lineSeparator());
-        for (String innerStr : strArr){
-            String[] innerStrArr = innerStr.split(",");
-            String statusStr = innerStrArr[2];
-            if (statusStr.split(":")[1].equals("true")) {
-                String sensorId = innerStrArr[0].split(":")[1];
-                //set the specific Check box checked
-                JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
-                button.setBackground(Color.GREEN);
-            }
-        }
-    }
+
 
     private void addToMaps(){
         SensorManager.getInstance().addToSensorButtonMap(fireSensorBtn1, new Sensor("FS1", false, FIRE));
