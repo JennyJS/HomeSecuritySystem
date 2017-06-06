@@ -72,4 +72,16 @@ public class PhoneNumberFileManager {
         return "";
     }
 
+    public String getFileName(){
+        return this.file.getName();
+    }
+
+    public boolean isExit(){
+        if (file.exists()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

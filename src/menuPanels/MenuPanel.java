@@ -1,5 +1,9 @@
 package menuPanels;
 
+import fileManagers.PasswordFileManager;
+import fileManagers.PhoneNumberFileManager;
+import fileManagers.SensorInfoFileManager;
+import main.CheckIdentityFrame;
 import main.DisplayPanel;
 
 import javax.swing.*;
@@ -51,6 +55,11 @@ public class MenuPanel extends JPanel {
         setPhoneNumberBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //enter password first to modify
+                if (PasswordFileManager.getFileManager().isExit()){
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    checkIdentityFrame.setVisible(true);
+                }
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "phoneNumberPanel");
             }
         });
@@ -58,12 +67,22 @@ public class MenuPanel extends JPanel {
         setPasswordBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //enter password first to modify
+                if (PasswordFileManager.getFileManager().isExit()){
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    checkIdentityFrame.setVisible(true);
+                }
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "passwordPanel");
             }
         });
         setSensorBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //enter password first to modify
+                if (PasswordFileManager.getFileManager().isExit()){
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    checkIdentityFrame.setVisible(true);
+                }
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "scheduleSensorPanel");
             }
         });
@@ -71,6 +90,11 @@ public class MenuPanel extends JPanel {
         scheduleTimeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //enter password first to modify
+                if (PasswordFileManager.getFileManager().isExit()){
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    checkIdentityFrame.setVisible(true);
+                }
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "scheduleTimePanel");
             }
         });

@@ -106,4 +106,12 @@ public class SensorInfoFileManager {
         }
         return false;
     }
+
+    public boolean isExit(){
+        if (file.exists()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
