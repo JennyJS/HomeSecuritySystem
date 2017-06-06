@@ -17,7 +17,9 @@ public class CheckIdentityFrame extends JFrame {
     private JLabel label;
     private JPasswordField passwordField;
     private JButton enterButton;
-    public CheckIdentityFrame(){
+    private String nextPanelToShow;
+    public CheckIdentityFrame(String nextPanelToShow){
+        this.nextPanelToShow = nextPanelToShow;
         label = new JLabel("    Enter Password:     ");
         passwordField = new JPasswordField();
         enterButton = new JButton("Enter");
@@ -38,6 +40,7 @@ public class CheckIdentityFrame extends JFrame {
                 String actualPassword = PasswordFileManager.getFileManager().readFromFile();
                 String userEnterPassword = String.valueOf(passwordField.getPassword());
                 if (actualPassword.equals(userEnterPassword)){
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), nextPanelToShow);
                     dispose(); // close the pop up frame
                 } else {
                     JOptionPane.showMessageDialog(getParent(),

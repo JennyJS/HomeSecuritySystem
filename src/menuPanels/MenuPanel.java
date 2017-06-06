@@ -57,10 +57,12 @@ public class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
                 if (PasswordFileManager.getFileManager().isExit()){
-                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("phoneNumberPanel");
                     checkIdentityFrame.setVisible(true);
+                } else {
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "phoneNumberPanel");
                 }
-                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "phoneNumberPanel");
+
             }
         });
 
@@ -69,10 +71,11 @@ public class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
                 if (PasswordFileManager.getFileManager().isExit()){
-                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("passwordPanel");
                     checkIdentityFrame.setVisible(true);
+                } else{
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "passwordPanel");
                 }
-                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "passwordPanel");
             }
         });
         setSensorBtn.addActionListener(new ActionListener() {
@@ -80,10 +83,11 @@ public class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
                 if (PasswordFileManager.getFileManager().isExit()){
-                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("scheduleSensorPanel");
                     checkIdentityFrame.setVisible(true);
+                } else {
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "scheduleSensorPanel");
                 }
-                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "scheduleSensorPanel");
             }
         });
 
@@ -92,10 +96,11 @@ public class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
                 if (PasswordFileManager.getFileManager().isExit()){
-                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame();
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("scheduleTimePanel");
                     checkIdentityFrame.setVisible(true);
+                } else {
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "scheduleTimePanel");
                 }
-                DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "scheduleTimePanel");
             }
         });
     }
