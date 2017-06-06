@@ -27,7 +27,6 @@ public class BuildingLayoutPanel extends JPanel {
     private JButton fireSensorBtn2;
     private static BuildingLayoutPanel buildingLayoutPanel;
     private ActionHandler actionHandler;
- //   private boolean hasStoredInFile;
     private BuildingLayoutPanel(){
 
     }
@@ -181,9 +180,10 @@ public class BuildingLayoutPanel extends JPanel {
                     } else{
                         imagePath = "src/resources/burglar.jpeg";
                     }
+                    //ask for password
                     PopupFrame frame = new PopupFrame(imagePath);
                     frame.setVisible(true);
-                    //ask for password
+
                     //call service
                     //log into file
                 }

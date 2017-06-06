@@ -11,21 +11,13 @@ import java.awt.*;
 public class DisplayPanel extends JPanel {
     private CardLayout cards = new CardLayout();
     private static DisplayPanel displayPanel;
-//    private JPanel menuPanel = new MenuPanel();
-//    private JPanel phoneNumberPanel = new PhoneNumberPanel();
-//    private JPanel passwordPanel = new PasswordPanel();
-//    private JPanel scheduleTimePanel = new ScheduleTimePanel();
-//    private JPanel scheduleSensorPanel = new ScheduleSensorPanel();
-//    private JPanel checkIdentityPanel = new CheckIdentityFrame();
     private JPanel menuPanel;
     private JPanel phoneNumberPanel;
     private JPanel passwordPanel;
     private JPanel scheduleTimePanel;
     private JPanel scheduleSensorPanel;
-   // private JPanel checkIdentityPanel;
 
     private DisplayPanel(){
-        //cards = new CardLayout();
         setLayout(cards);
         setBorder(BorderFactory.createEmptyBorder(8,8,12,8));
         initiatePanels();
@@ -38,7 +30,6 @@ public class DisplayPanel extends JPanel {
         passwordPanel = new PasswordPanel();
         scheduleTimePanel = new ScheduleTimePanel();
         scheduleSensorPanel = new ScheduleSensorPanel();
-      //  checkIdentityPanel = new CheckIdentityFrame();
     }
 
     private void addPanels(){
@@ -48,7 +39,6 @@ public class DisplayPanel extends JPanel {
         add(passwordPanel, "passwordPanel");
         add(scheduleTimePanel, "scheduleTimePanel");
         add(scheduleSensorPanel, "scheduleSensorPanel");
-      //  add(checkIdentityPanel, "checkIdentityPanel");
     }
 
     public static DisplayPanel getDisplayPanel(){

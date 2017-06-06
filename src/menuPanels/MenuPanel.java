@@ -1,8 +1,6 @@
 package menuPanels;
 
 import fileManagers.PasswordFileManager;
-import fileManagers.PhoneNumberFileManager;
-import fileManagers.SensorInfoFileManager;
 import main.CheckIdentityFrame;
 import main.DisplayPanel;
 

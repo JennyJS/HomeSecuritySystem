@@ -41,18 +41,6 @@ public class SensorInfoFileManager {
         this.file = new File("sensorInfo.txt");
     }
 
-    // add an entry to the file
-    public void addToFile(Entry e){
-        try {
-            FileWriter fw = new FileWriter(file,false); // false means not to append, to overwrite
-            fw.append(e.toString() + '\n');
-            System.out.println("Adding to file " + e.toString());
-            fw.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
     public void addToFile(String str){
         try {
             FileWriter fw = new FileWriter(file,false); // false means not to append, to overwrite
@@ -83,35 +71,7 @@ public class SensorInfoFileManager {
         return "";
     }
 
-    public File getFile(){
-        return this.file;
-    }
-
     public String getFileName(){
         return this.file.getName();
-    }
-
-
-    public boolean isFileEmpty(){
-        BufferedReader br = null;
-//        init();
-        try {
-            br = new BufferedReader(new FileReader(file));
-            if (br.readLine() == null) {
-                System.out.println("Sensor Info File is empty");
-                return true;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean isExit(){
-        if (file.exists()){
-            return true;
-        } else {
-            return false;
-        }
     }
 }

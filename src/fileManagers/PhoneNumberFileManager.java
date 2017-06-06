@@ -52,36 +52,4 @@ public class PhoneNumberFileManager {
         }
     }
 
-
-    //read from the entire file
-    public String readFromFile(){
-        try(BufferedReader br = new BufferedReader(new FileReader(file))){
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null){
-                if (line.length() != 0){
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                }
-                line = br.readLine();
-            }
-            return sb.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    public String getFileName(){
-        return this.file.getName();
-    }
-
-    public boolean isExit(){
-        if (file.exists()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 }

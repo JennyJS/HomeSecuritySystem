@@ -14,7 +14,6 @@ import java.awt.event.FocusListener;
  * Created by manhongren on 6/1/17.
  */
 public class PhoneNumberPanel extends JPanel {
-   // private JButton enterBtn;
     private JButton doneBtn;
     private JTextField phoneNumberTextField1;
     private JTextField phoneNumberTextField2;
@@ -28,7 +27,6 @@ public class PhoneNumberPanel extends JPanel {
 
     private void initiateBtns(){
         phoneNumberLabel = new JLabel("Please enter two different phone numbers: ");
-      //  enterBtn = new JButton("Enter");
         doneBtn = new JButton("Done");
         phoneNumberTextField1 = new JTextField();
         phoneNumberTextField1.setUI(new HintTextFieldUI(" 1st Contact Number", true));
@@ -40,7 +38,6 @@ public class PhoneNumberPanel extends JPanel {
         add(phoneNumberLabel);
         add(phoneNumberTextField1);
         add(phoneNumberTextField2);
-     //   add(enterBtn);
         add(doneBtn);
     }
 
