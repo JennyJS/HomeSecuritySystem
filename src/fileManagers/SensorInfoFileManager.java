@@ -3,42 +3,38 @@ package fileManagers;
 import sensor.Sensor;
 
 import java.io.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by manhongren on 5/27/17. This Class is for managing files
  */
 public class SensorInfoFileManager {
+
     private File file;
-    /**
-     * each line in a file is an entry
-     */
-    public static class Entry{
-        String sensorId;
-        Sensor.Type type;
-        boolean isOn;
-        public Entry(String sensorId,boolean isOn, Sensor.Type type){
-            this.sensorId = sensorId;
-            this.type = type;
-            this.isOn = isOn;
-        }
-        @Override
-        public String toString(){
-            return "Sensor:" + sensorId + ", type of:" + type + ", isOn:" + isOn;
-        }
-    }
 
     private static SensorInfoFileManager fileManager;
 
-    public static SensorInfoFileManager getFileManager(){
+    public static SensorInfoFileManager getFileManager() throws IOException {
         if (fileManager == null){
             fileManager = new SensorInfoFileManager();
-            fileManager.init();
         }
         return fileManager;
     }
 
-    private void init() {
-        this.file = new File("sensorInfo.txt");
+    private SensorInfoFileManager() throws IOException {
+        file = new File("sensorInfo.txt");
+        file.createNewFile();
+    }
+
+    public void updateSensors(Set<Sensor> sensors) {
+        StringBuilder sb = new StringBuilder();
+        for (Sensor s : sensors) {
+            sb.append(s).append("\n");
+        }
+
+        addToFile(sb.toString());
     }
 
     public void addToFile(String str){
@@ -53,25 +49,16 @@ public class SensorInfoFileManager {
     }
 
     //read from the entire file
-    public String readFromFile(){
+    public Set<Sensor> readFromFile(){
+        Set<Sensor> sensors = new HashSet<>();
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null){
-                if (line.length() != 0){
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                }
-                line = br.readLine();
+            String line;
+            while ((line = br.readLine()) != null){
+                sensors.add(Sensor.fromString(line));
             }
-            return sb.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
-    }
-
-    public String getFileName(){
-        return this.file.getName();
+        return sensors;
     }
 }

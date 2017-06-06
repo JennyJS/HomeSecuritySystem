@@ -1,4 +1,5 @@
-Sensor:FS1, type of:FIRE, isOn:false
-Sensor:FS2, type of:FIRE, isOn:false
-Sensor:BS1, type of:BREAKIN, isOn:true
-Sensor:BS2, type of:BREAKIN, isOn:true
+e86811db-8fea-42ef-bbfb-3a09c3962e05,null,true,207,117
+87f3c18c-a4bc-4b49-8849-173375807905,null,true,197,137
+6f79f8af-45bf-4bb2-a334-1dc2cf7ca516,null,true,232,84
+fc5cf411-7943-484b-83a8-80d796a60418,null,true,104,100
+7895763d-75f9-4cf7-af50-a7f7fd9e66b0,null,true,158,193

@@ -1,6 +1,5 @@
 package main;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import menuPanels.*;
 
 import javax.swing.*;
@@ -17,6 +16,7 @@ public class DisplayPanel extends JPanel {
     private JPanel passwordPanel;
     private JPanel scheduleTimePanel;
     private JPanel scheduleSensorPanel;
+    private JPanel newBuildingPanel;
 
 
     private DisplayPanel(){
@@ -32,12 +32,11 @@ public class DisplayPanel extends JPanel {
         passwordPanel = new PasswordPanel();
         scheduleTimePanel = new ScheduleTimePanel();
         scheduleSensorPanel = new ScheduleSensorPanel();
-
+        newBuildingPanel = new NewBuildingPanel();
     }
 
     private void addPanels(){
-        add(NewBuildingLayout.getNewBuildingLayout(), "newBuildingLayoutPanel");
-        add(BuildingLayoutPanel.getBuildingLayoutPanel(), "buildingLayoutPanel");
+        add(newBuildingPanel, "newBuildingLayoutPanel");
         add(menuPanel, "menuPanel");
         add(phoneNumberPanel, "phoneNumberPanel");
         add(passwordPanel, "passwordPanel");

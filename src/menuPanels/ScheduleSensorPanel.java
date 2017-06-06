@@ -1,13 +1,14 @@
 package menuPanels;
 
-import fileManagers.SensorInfoFileManager;
 import main.DisplayPanel;
-import sensor.SensorManager;
+import main.NewBuildingPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 
 import static javax.swing.BoxLayout.Y_AXIS;
@@ -20,26 +21,28 @@ public class ScheduleSensorPanel extends JPanel {
     private JPanel labelPanel;
     private JPanel buttonPanel;
     private JButton doneButton;
+    private JPanel newBuildingPanel;
 
     public ScheduleSensorPanel(){
-
         setPreferredSize(new Dimension(350, 400));
-        initializeComponents();
-        addButtonsToPanel();
-        setLayout(new BoxLayout(this, Y_AXIS));
-        add(labelPanel);
-        add(new ImagePanel());
-        add(buttonPanel);
-        //add action listeners
-        addActionListeners();
-    }
 
-    private void initializeComponents(){
         labelPanel = new JPanel();
         buttonPanel = new JPanel();
         doneButton = new JButton("Done");
+        newBuildingPanel = new NewBuildingPanel();
         scheduleSensorLabel = new JLabel("Check the sensor you want to turn on: ");
         scheduleSensorLabel.setFont(new Font("Serif", Font.BOLD, 16));
+
+        add(labelPanel);
+        add(newBuildingPanel);
+        add(buttonPanel);
+        addButtonsToPanel();
+        setLayout(new BoxLayout(this, Y_AXIS));
+
+        //add action listeners
+        addActionListeners();
+
+        final ScheduleSensorPanel that = this;
     }
 
     private void addButtonsToPanel() {

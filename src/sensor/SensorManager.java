@@ -1,98 +1,93 @@
 package sensor;
 
+import com.apple.eio.FileManager;
 import fileManagers.SensorInfoFileManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by manhongren on 6/3/17.
  */
 public class SensorManager {
-    private Map<JButton, Sensor> buttonToSensorMap;
-    private Map<String, JButton> sensorIdToButtonMap;
-    private Map<JCheckBox, JButton> checkBoxToButtonMap;
-    private Map<String, JCheckBox> sensorIdToCheckBox;
+
+    interface OnSensorChangeListener{
+        void onSensorChange(Set<Sensor> sensors);
+    }
+
+    private Set<OnSensorChangeListener> onSensorChangeListeners;
+
     private static SensorManager sensorManager;
-    private SensorManager(){}
+
+    private Set<Sensor> sensors;
+
+    private SensorManager() throws IOException {
+        onSensorChangeListeners = new HashSet<>();
+        sensors = new HashSet<>();
+        syncFromFile();
+    }
+
     public static SensorManager getInstance(){
         if (sensorManager == null){
-            sensorManager = new SensorManager();
-            sensorManager.init();
+            try {
+                sensorManager = new SensorManager();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return sensorManager;
     }
-    private void init() {
-        buttonToSensorMap =  new HashMap<>();
-        checkBoxToButtonMap = new HashMap<>();
-        sensorIdToCheckBox = new HashMap<>();
-        sensorIdToButtonMap = new HashMap<>();
+
+    public void registerOnSensorChangeListener(OnSensorChangeListener listener){
+        onSensorChangeListeners.add(listener);
     }
 
-    public void addToSensorButtonMap(JButton button, Sensor sensor){
-        this.buttonToSensorMap.put(button, sensor);
-        this.sensorIdToButtonMap.put(sensor.getSensorId(), button);
+    public void removeOnSensorChangeListener(OnSensorChangeListener listener){
+        onSensorChangeListeners.remove(listener);
     }
 
-    public Sensor getSensorFromButton(JButton button){
-        return buttonToSensorMap.get(button);
+    public void addSensor(Sensor sensor) {
+        sensors.add(sensor);
+        try {
+            syncToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        notifySensorChange();
     }
 
-    public JButton getButtonFromSensorId(String sensorId){
-        return sensorIdToButtonMap.get(sensorId);
+    public Set<Sensor> getSensors() {
+        return Collections.unmodifiableSet(sensors);
     }
 
-    public void addToCheckBoxToButtonMap(JCheckBox checkBox, JButton button){
-        checkBoxToButtonMap.put(checkBox, button);
+    public void syncToFile() throws IOException {
+        // iterate all sensors
+        SensorInfoFileManager.getFileManager().updateSensors(sensors);
     }
 
-    public JButton getButtonFromCheckBox(JCheckBox checkBox){
-        return checkBoxToButtonMap.get(checkBox);
+    public void setAllSensors(boolean isOn) {
+        for (Sensor s : sensors) {
+            s.setSensorOn(isOn);
+        }
+
+        try {
+            syncToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        notifySensorChange();
     }
 
-    public void addToSensorIdToCheckBox(String sensorId, JCheckBox jCheckBox){
-        sensorIdToCheckBox.put(sensorId, jCheckBox);
-    }
-
-    public JCheckBox getCheckBoxFromSensorId(String sensorId){
-        return sensorIdToCheckBox.get(sensorId);
-    }
-
-    public void updateButtonState(){
-        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
-        String[] strArr = fileStr.split(System.lineSeparator());
-        for (String innerStr : strArr){
-            String[] innerStrArr = innerStr.split(",");
-            String statusStr = innerStrArr[2];
-            String sensorId = innerStrArr[0].split(":")[1];
-            JButton button = SensorManager.getInstance().getButtonFromSensorId(sensorId);
-            if (statusStr.split(":")[1].equals("true")) {
-                //set the specific Check box checked
-                button.setBackground(Color.GREEN);
-                button.setOpaque(true);
-            } else {
-                button.setBackground(Color.WHITE);
-                button.setOpaque(true);
-            }
+    public void notifySensorChange() {
+        for (OnSensorChangeListener listener : onSensorChangeListeners){
+            listener.onSensorChange(this.sensors);
         }
     }
 
-    public void updateCheckBoxState(){
-        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
-        String[] strArr = fileStr.split(System.lineSeparator());
-        for (String innerStr : strArr){
-            String[] innerStrArr = innerStr.split(",");
-            String statusStr = innerStrArr[2];
-            String sensorId = innerStrArr[0].split(":")[1];
-            JCheckBox checkBox = sensorIdToCheckBox.get(sensorId);
-            if (statusStr.split(":")[1].equals("true")) {
-                checkBox.setSelected(true);
-            } else {
-                checkBox.setSelected(false);
-            }
-
-        }
+    private void syncFromFile() throws IOException {
+        sensors = SensorInfoFileManager.getFileManager().readFromFile();
     }
 }

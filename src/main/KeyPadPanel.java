@@ -115,8 +115,8 @@ public class KeyPadPanel extends JPanel {
                 if (isBuildingLayoutShown){
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
                 } else {
-                    SensorManager.getInstance().updateButtonState();
-                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "buildingLayoutPanel");
+                   // SensorManager.getInstance().updateButtonState();
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "newBuildingLayoutPanel");
                 }
                 isBuildingLayoutShown = !isBuildingLayoutShown;
             }
@@ -136,24 +136,15 @@ public class KeyPadPanel extends JPanel {
         offButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //update file
-                FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "false");
-                //update buttons
-                SensorManager.getInstance().updateButtonState();
-                //update checkboxed
-                SensorManager.getInstance().updateCheckBoxState();
+                SensorManager.getInstance().setAllSensors(false);
+
             }
         });
 
         onButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //update file
-                FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
-                //update buttons
-                SensorManager.getInstance().updateButtonState();
-                //update checkboxed
-                SensorManager.getInstance().updateCheckBoxState();
+                SensorManager.getInstance().setAllSensors(true);
             }
         });
     }

@@ -3,6 +3,7 @@ package menuPanels;
 import fileManagers.FileReplace;
 import fileManagers.SensorInfoFileManager;
 import main.DisplayPanel;
+import sensor.Sensor;
 import sensor.SensorManager;
 
 import javax.swing.*;
@@ -194,30 +195,10 @@ public class ScheduleTimePanel extends JPanel {
                 System.out.println("Current time " + time);
                 if (time.equals(startTime)){
                     //based on radio button is selected on/off
-                    if (turnOnSensor){
-                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
-                        System.out.println("*********** Sensors On ***********");
-                    } else {
-                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "false");
-                        System.out.println("$$$$$$$$$$$ Sensors Off $$$$$$$$$$$");
-                    }
-                    //update BuildingLayout and checkboxes;
-                    SensorManager.getInstance().updateButtonState();
-                    SensorManager.getInstance().updateCheckBoxState();
-                }
-
-                if (time.equals(endTime)){
+                    SensorManager.getInstance().setAllSensors(turnOnSensor);
+                } else if (time.equals(endTime)){
                     //based on radio button is selected on/off
-                    if (turnOnSensor){
-                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "false");
-                        System.out.println("########### Sensors Off ###########");
-                    } else {
-                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
-                        System.out.println("&&&&&&&&&&& Sensors On &&&&&&&&&&&");
-                    }
-                    //update BuildingLayout and checkboxes;
-                    SensorManager.getInstance().updateButtonState();
-                    SensorManager.getInstance().updateCheckBoxState();
+                    SensorManager.getInstance().setAllSensors(!turnOnSensor);
                     timer.stop();
                 }
 
