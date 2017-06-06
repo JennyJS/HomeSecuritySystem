@@ -1,4 +1,0 @@
-Sensor:FS1, type of:FIRE, isOn:true
-Sensor:FS2, type of:FIRE, isOn:true
-Sensor:BS1, type of:BREAKIN, isOn:true
-Sensor:BS2, type of:BREAKIN, isOn:true
