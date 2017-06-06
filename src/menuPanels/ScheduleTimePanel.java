@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -136,6 +138,55 @@ public class ScheduleTimePanel extends JPanel {
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });
+
+        fromHourTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(fromHourTextField);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+
+        fromMinuteTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(fromMinuteTextField);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+
+        toHourTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(toHourTextField);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+
+        toMinuteTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(toMinuteTextField);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
+
     }
 
     private void startTimer(String startTime, String endTime){
@@ -184,4 +235,6 @@ public class ScheduleTimePanel extends JPanel {
         timer.setInitialDelay(0);
 
     }
+
+
 }
