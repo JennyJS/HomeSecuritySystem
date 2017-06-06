@@ -1,11 +1,14 @@
 package main;
 
 import fileManagers.PasswordFileManager;
+import menuPanels.ActiveTextField;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 /**
  * Created by manhongren on 6/5/17.
@@ -68,5 +71,19 @@ public class PopupFrame extends JFrame {
                 }
             }
         });
+
+        passwordField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                ActiveTextField.getActiveTextField().setCurrentTextField(passwordField);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
     }
+
+
 }

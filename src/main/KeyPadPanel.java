@@ -137,7 +137,9 @@ public class KeyPadPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JTextField currTextField = ActiveTextField.getActiveTextField().getCurrentTextField();
-                currTextField.setText(""+currTextField.getText().substring(0, currTextField.getText().length() - 1));
+                if (currTextField.getText().length() > 0){
+                    currTextField.setText(""+currTextField.getText().substring(0, currTextField.getText().length() - 1));
+                }
             }
         });
     }
