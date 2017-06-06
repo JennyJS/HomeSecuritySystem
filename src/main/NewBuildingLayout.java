@@ -1,6 +1,7 @@
 package main;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import javafx.scene.control.RadioButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,8 +15,10 @@ import java.io.IOException;
  */
 public class NewBuildingLayout extends JPanel {
     private BufferedImage image;
-    private JButton fireSensorButton;
-    private JButton breakInSensorButton;
+    private JLabel fireLabel;
+    private JLabel breakInLabel;
+    private JRadioButton fireRadioButton;
+    private JRadioButton breakInRadioButton;
 
     private NewBuildingLayout(){}
     private static NewBuildingLayout newBuildingLayout;
@@ -51,22 +54,34 @@ public class NewBuildingLayout extends JPanel {
     }
 
     private void initializeButtons(){
-        fireSensorButton = new JButton("FS");
-        breakInSensorButton = new JButton("BS");
+        fireLabel = new JLabel("Fire Sensor");
+        breakInLabel = new JLabel("BreakIn Sensor");
+        fireRadioButton = new JRadioButton();
+        breakInRadioButton = new JRadioButton();
+        ButtonGroup group = new ButtonGroup();
+        group.add(fireRadioButton);
+        group.add(breakInRadioButton);
+
+
     }
 
     private void setPositionOfButtons(){
-        fireSensorButton.setBounds(150, 300, 50,50);
-        fireSensorButton.setForeground(Color.RED);
-        breakInSensorButton.setBounds(250, 300, 50,50);
-        breakInSensorButton.setForeground(Color.BLUE);
+        fireLabel.setBounds(100, 300, 100, 50);
+        fireLabel.setForeground(Color.RED);
+        fireRadioButton.setBounds(120, 330, 100, 50);
+        breakInLabel.setBounds(250, 300, 100, 50);
+        breakInRadioButton.setBounds(270, 330, 100,50);
+        breakInLabel.setForeground(Color.BLUE);
     }
 
     private void registerActionListeners(){}
 
     private void addButtonsToPanel(){
-        add(fireSensorButton);
-        add(breakInSensorButton);
+       // setLayout(new GridLayout(2,2));
+        add(fireLabel);
+        add(breakInLabel);
+        add(fireRadioButton);
+        add(breakInRadioButton);
     }
 
 
