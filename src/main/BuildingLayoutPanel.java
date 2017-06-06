@@ -161,17 +161,6 @@ public class BuildingLayoutPanel extends JPanel {
         SensorManager.getInstance().addToSensorButtonMap(breakInSensorBtn2, new Sensor("BS2", BS2isOn, BREAKIN));
     }
 
-//    private void registerActionListeners(){
-//        breakInSensorBtn1.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                Sensor sensor = SensorManager.getInstance().getSensorFromButton(breakInSensorBtn1);
-//                if (sensor.isSensorOn()){
-//                    System.out.println("**********BreakIn sensor triggered**************");
-//                }
-//            }
-//        });
-//    }
 
     private class ActionHandler implements ActionListener {
 

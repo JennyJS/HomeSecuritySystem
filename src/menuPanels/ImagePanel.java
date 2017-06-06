@@ -39,7 +39,6 @@ public class ImagePanel extends JPanel {
         setPositionOfButtons();
         addButtonsToPanel();
         //update checkbox state
-//        updateCheckBoxesState();
         SensorManager.getInstance().updateCheckBoxState();
         registerActionListeners();
     }
@@ -179,20 +178,5 @@ public class ImagePanel extends JPanel {
 
     }
 
-//    private void updateCheckBoxesState(){
-//        String fileStr = SensorInfoFileManager.getFileManager().readFromFile();
-//        String[] strArr = fileStr.split(System.lineSeparator());
-//        for (String innerStr : strArr){
-//            String[] innerStrArr = innerStr.split(",");
-//            String statusStr = innerStrArr[2];
-//            if (statusStr.split(":")[1].equals("true")) {
-//                String sensorId = innerStrArr[0].split(":")[1];
-//                //set the specific Check box checked
-//                JCheckBox checkBox = SensorManager.getInstance().getCheckBoxFromSensorId(sensorId);
-//                checkBox.setSelected(true);
-//            }
-//
-//        }
-//    }
 
 }

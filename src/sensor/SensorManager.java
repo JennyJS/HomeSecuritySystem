@@ -86,8 +86,6 @@ public class SensorManager {
             String[] innerStrArr = innerStr.split(",");
             String statusStr = innerStrArr[2];
             String sensorId = innerStrArr[0].split(":")[1];
-            //set the specific Check box checked
-//                JCheckBox checkBox = SensorManager.getInstance().getCheckBoxFromSensorId(sensorId);
             JCheckBox checkBox = sensorIdToCheckBox.get(sensorId);
             if (statusStr.split(":")[1].equals("true")) {
                 checkBox.setSelected(true);
