@@ -1,7 +1,11 @@
 package main;
 
+import fileManagers.PasswordFileManager;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by manhongren on 6/5/17.
@@ -18,6 +22,8 @@ public class PopupFrame extends JFrame {
         initializeComponents(fileName);
         addComponentsToPanel();
         setLayout(new GridLayout(0, 1));
+        //register action listeners
+        registerActionListeners();
         add(topImagePanel);
         add(bottomInputPanel);
         setLocationRelativeTo(null);
@@ -43,5 +49,24 @@ public class PopupFrame extends JFrame {
         bottomInputPanel.add(label);
         bottomInputPanel.add(passwordField);
         bottomInputPanel.add(enterButton);
+    }
+
+    private void registerActionListeners(){
+        enterButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String actualPassword = PasswordFileManager.getFileManager().readFromFile();
+                String userEnterPassword = String.valueOf(passwordField.getPassword());
+                if (actualPassword.equals(userEnterPassword)){
+                    dispose(); // close the pop up frame
+                } else {
+                    JOptionPane.showMessageDialog(getParent(),
+                            "The password is not correct",
+                            "Wrong Password",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+        });
     }
 }
