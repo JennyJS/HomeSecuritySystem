@@ -1,5 +1,6 @@
 package menuPanels;
 
+import fileManagers.PhoneNumberFileManager;
 import main.DisplayPanel;
 
 import javax.swing.*;
@@ -47,6 +48,23 @@ public class PhoneNumberPanel extends JPanel {
         doneBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //TODO check if enter phone numbers before
+                if (phoneNumberTextField1.getText() == null || phoneNumberTextField1.getText().length() == 0
+                        || phoneNumberTextField2.getText() == null || phoneNumberTextField2.getText().length() == 0 ){
+                    JOptionPane.showMessageDialog(getParent(),
+                            "Please enter two phone numbers",
+                            "No Phone Number",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+                //add phone numbers to PhoneNumberManager file
+                PhoneNumberFileManager.Entry entry1 = new PhoneNumberFileManager.Entry("1st",
+                        Integer.parseInt(phoneNumberTextField1.getText()));
+                PhoneNumberFileManager.getFileManager().addToFile(entry1);
+
+                PhoneNumberFileManager.Entry entry2 = new PhoneNumberFileManager.Entry("2nd",
+                        Integer.parseInt(phoneNumberTextField2.getText()));
+                PhoneNumberFileManager.getFileManager().addToFile(entry2);
+
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });
