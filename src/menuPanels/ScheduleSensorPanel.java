@@ -19,7 +19,7 @@ public class ScheduleSensorPanel extends JPanel {
     private JLabel scheduleSensorLabel;
     private JPanel labelPanel;
     private JPanel buttonPanel;
-    private JButton enterButton;
+    //private JButton enterButton;
     private JButton doneButton;
 
     public ScheduleSensorPanel(){
@@ -38,7 +38,7 @@ public class ScheduleSensorPanel extends JPanel {
     private void initializeComponents(){
         labelPanel = new JPanel();
         buttonPanel = new JPanel();
-        enterButton = new JButton("Enter");
+       // enterButton = new JButton("Enter");
         doneButton = new JButton("Done");
         scheduleSensorLabel = new JLabel("Check the sensor you want to turn on: ");
         scheduleSensorLabel.setFont(new Font("Serif", Font.BOLD, 16));
@@ -46,7 +46,7 @@ public class ScheduleSensorPanel extends JPanel {
 
     private void addButtonsToPanel() {
         labelPanel.add(scheduleSensorLabel);
-        buttonPanel.add(enterButton);
+       // buttonPanel.add(enterButton);
         buttonPanel.add(doneButton);
     }
 

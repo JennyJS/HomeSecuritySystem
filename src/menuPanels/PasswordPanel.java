@@ -11,7 +11,7 @@ import java.awt.event.*;
  * Created by manhongren on 6/2/17.
  */
 public class PasswordPanel extends JPanel{
-    private JButton enterBtn;
+    //private JButton enterBtn;
     private JButton doneBtn;
     private JPasswordField passwordTextField;
     private JPasswordField confirmPasswordTextField;
@@ -31,7 +31,7 @@ public class PasswordPanel extends JPanel{
     private void initiateBtns(){
         passwordLabel = new JLabel("Please enter your password: ");
         confirmPasswordLabel = new JLabel("Please confirm your password: ");
-        enterBtn = new JButton("Enter");
+        //enterBtn = new JButton("Enter");
         doneBtn = new JButton("Done");
         passwordTextField = new JPasswordField();
         passwordLabel.setFont(new Font("Serif", Font.ITALIC, 20));
@@ -43,7 +43,7 @@ public class PasswordPanel extends JPanel{
         add(passwordTextField);
         add(confirmPasswordLabel);
         add(confirmPasswordTextField);
-        add(enterBtn);
+       // add(enterBtn);
         add(doneBtn);
     }
 

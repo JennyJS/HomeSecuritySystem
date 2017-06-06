@@ -27,7 +27,7 @@ public class ScheduleTimePanel extends JPanel {
     private JLabel fromLabel;
     private JLabel toLabel;
     private JLabel titleLabel;
-    private JButton enterButton;
+   // private JButton enterButton;
     private JButton doneButton;
     private JTextField fromHourTextField;
     private JTextField fromMinuteTextField;
@@ -78,8 +78,9 @@ public class ScheduleTimePanel extends JPanel {
         colonLabel2 = new JLabel("         :");
         colonLabel2.setFont(new Font("Serif", Font.BOLD, 20));
 
-        enterButton = new JButton("Enter");
+       // enterButton = new JButton("Enter");
         doneButton = new JButton("Done");
+       // doneButton.setSize(30,20);
         titleLabel = new JLabel("Set sensor mode to : ");
         titleLabel.setFont(new Font("Serif", Font.ITALIC, 17));
     }
@@ -98,9 +99,13 @@ public class ScheduleTimePanel extends JPanel {
         timePanel.add(colonLabel2);
         timePanel.add(toMinuteTextField);
        // timePanel.add(toSpinner);
-        buttonPanel.setLayout(new GridLayout(0, 1));
-        buttonPanel.add(enterButton);
+       // buttonPanel.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+     //   buttonPanel.add(enterButton);
+       // buttonPanel.setLayout(new GridLayout(2,1));
         buttonPanel.add(doneButton);
+
+
+
     }
 
 

@@ -30,9 +30,9 @@ public class KeyPadPanel extends JPanel {
 
     private JButton menuBtn;
     private JButton deleteBtn;
-    private JButton enterBtn;
-    private JButton panicButton;
-    private JButton backBtn;
+//    private JButton enterBtn;
+//    private JButton panicButton;
+//    private JButton backBtn;
     private boolean isBuildingLayoutShown = true;
     private ActionHandler actionHandler = new ActionHandler();
 
@@ -45,7 +45,7 @@ public class KeyPadPanel extends JPanel {
 
         //Create the event handler
 
-        setLayout(new GridLayout(6,3));
+        setLayout(new GridLayout(5,3));
 
         // add action listeners
         addActionListeners();
@@ -79,9 +79,9 @@ public class KeyPadPanel extends JPanel {
         menuBtn = new JButton("menu");
         b0 = new JButton("0");
         deleteBtn = new JButton("delete");
-        enterBtn = new JButton("Enter");
-        panicButton = new JButton("Panic");
-        backBtn = new JButton("Back");
+//        enterBtn = new JButton("Enter");
+//        panicButton = new JButton("Panic");
+//        backBtn = new JButton("Back");
     }
 
     private void addBtnToPanel(){
@@ -100,9 +100,9 @@ public class KeyPadPanel extends JPanel {
         add(menuBtn);
         add(b0);
         add(deleteBtn);
-        add(enterBtn);
-        add(panicButton);
-        add(backBtn);
+//        add(enterBtn);
+//        add(panicButton);
+//        add(backBtn);
     }
 
     private void addActionListeners(){
