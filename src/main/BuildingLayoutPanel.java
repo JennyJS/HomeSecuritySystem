@@ -76,6 +76,7 @@ public class BuildingLayoutPanel extends JPanel {
         addToMaps();
         if(!f.exists()) {
             addSensorInfoToFile();
+            SensorManager.getInstance().updateButtonState();
         } else {
             SensorManager.getInstance().updateButtonState();
         }
@@ -111,10 +112,10 @@ public class BuildingLayoutPanel extends JPanel {
     }
 
     private void addSensorInfoToFile(){
-        SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry("FS1", false, FIRE);
-        SensorInfoFileManager.Entry entry2 = new SensorInfoFileManager.Entry("FS2", false, FIRE);
-        SensorInfoFileManager.Entry entry3 = new SensorInfoFileManager.Entry("BS1", false, BREAKIN);
-        SensorInfoFileManager.Entry entry4 = new SensorInfoFileManager.Entry("BS2", false, BREAKIN);
+        SensorInfoFileManager.Entry entry = new SensorInfoFileManager.Entry("FS1", true, FIRE);
+        SensorInfoFileManager.Entry entry2 = new SensorInfoFileManager.Entry("FS2", true, FIRE);
+        SensorInfoFileManager.Entry entry3 = new SensorInfoFileManager.Entry("BS1", true, BREAKIN);
+        SensorInfoFileManager.Entry entry4 = new SensorInfoFileManager.Entry("BS2", true, BREAKIN);
         SensorInfoFileManager.getFileManager().addToFile(entry.toString() + '\n' + entry2.toString() + '\n' +
                 entry3.toString() + '\n' + entry4.toString() );
     }
