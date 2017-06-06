@@ -138,6 +138,7 @@ public class ScheduleTimePanel extends JPanel {
                     FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
                     //update BuildingLayout and checkboxes
                     SensorManager.getInstance().updateButtonState();
+                    SensorManager.getInstance().updateCheckBoxState();
 
                     System.out.println("*********** Sensors On ***********");
                 }
@@ -145,6 +146,7 @@ public class ScheduleTimePanel extends JPanel {
                 if (time.equals(endTime)){
                     FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "false");
                     SensorManager.getInstance().updateButtonState();
+                    SensorManager.getInstance().updateCheckBoxState();
                     System.out.println("$$$$$$$$$$$ Sensors Off $$$$$$$$$$$");
                     timer.stop();
                 }
