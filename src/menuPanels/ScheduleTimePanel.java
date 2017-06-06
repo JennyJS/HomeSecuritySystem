@@ -1,6 +1,9 @@
 package menuPanels;
 
+import fileManagers.FileReplace;
+import fileManagers.SensorInfoFileManager;
 import main.DisplayPanel;
+import sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -126,30 +129,26 @@ public class ScheduleTimePanel extends JPanel {
         final DateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
         ActionListener timerListener = new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 Date date = new Date();
                 String time = timeFormat.format(date);
                 System.out.println("Current time " + time);
                 if (time.equals(startTime)){
+                    //TODO add based on radio button is selected on/off
+                    FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
+                    //update BuildingLayout and checkboxes
+                    SensorManager.getInstance().updateButtonState();
+
                     System.out.println("*********** Sensors On ***********");
                 }
 
                 if (time.equals(endTime)){
+                    FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "false");
+                    SensorManager.getInstance().updateButtonState();
                     System.out.println("$$$$$$$$$$$ Sensors Off $$$$$$$$$$$");
                     timer.stop();
                 }
-//                if (time.equals(startTime)){
-//                    //update file
-//                    System.out.println("*********** Sensor On ***********");
-//                    timer.start();
-//                }
-//
-//                if (time.equals(endTime)){
-//                    //update file
-//                    System.out.println("*********** Sensor Off ***********");
-//                    timer.stop();
-//                }
+
             }
         };
         timer = new Timer(10000, timerListener);
