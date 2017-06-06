@@ -1,5 +1,6 @@
 package main;
 
+import fileManagers.FileReplace;
 import fileManagers.SensorInfoFileManager;
 import menuPanels.ActiveTextField;
 import sensor.SensorManager;
@@ -140,6 +141,30 @@ public class KeyPadPanel extends JPanel {
                 if (currTextField.getText().length() > 0){
                     currTextField.setText(""+currTextField.getText().substring(0, currTextField.getText().length() - 1));
                 }
+            }
+        });
+
+        offButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //update file
+                FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "false");
+                //update buttons
+                SensorManager.getInstance().updateButtonState();
+                //update checkboxed
+                SensorManager.getInstance().updateCheckBoxState();
+            }
+        });
+
+        onButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //update file
+                FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
+                //update buttons
+                SensorManager.getInstance().updateButtonState();
+                //update checkboxed
+                SensorManager.getInstance().updateCheckBoxState();
             }
         });
     }
