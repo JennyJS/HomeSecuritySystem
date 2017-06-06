@@ -34,6 +34,7 @@ public class ScheduleTimePanel extends JPanel {
     private JLabel colonLabel;
     private JLabel colonLabel2;
     private Timer timer;
+    private boolean turnOnSensor;
     public ScheduleTimePanel(){
         initializeComponents();
 
@@ -116,6 +117,17 @@ public class ScheduleTimePanel extends JPanel {
                 sbToStartTimer.append(":");
                 sbToStartTimer.append(toMinuteTextField.getText());
 
+                //check radio button state
+                if (onJRadioButton.isSelected()){
+                    turnOnSensor = true;
+                } else if (onJRadioButton.isSelected()){
+                    turnOnSensor = false;
+                } else {
+                    JOptionPane.showMessageDialog(getParent(),
+                            "Select a mode first",
+                            "Sensor Mode is Not Selected",
+                            JOptionPane.WARNING_MESSAGE);
+                }
                 //Start Timer
                 startTimer(sbForStartTimer.toString(), sbToStartTimer.toString());
 
@@ -135,19 +147,33 @@ public class ScheduleTimePanel extends JPanel {
                 System.out.println("Current time " + time);
                 if (time.equals(startTime)){
                     //TODO add based on radio button is selected on/off
-                    FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
+                    if (turnOnSensor){
+                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "false", "true");
+                        System.out.println("*********** Sensors On ***********");
+                    } else {
+                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "off");
+                        System.out.println("$$$$$$$$$$$ Sensors Off $$$$$$$$$$$");
+                    }
+
                     //update BuildingLayout and checkboxes
                     SensorManager.getInstance().updateButtonState();
                     SensorManager.getInstance().updateCheckBoxState();
 
-                    System.out.println("*********** Sensors On ***********");
+                    //System.out.println("*********** Sensors On ***********");
                 }
 
                 if (time.equals(endTime)){
-                    FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "false");
+                    //TODO add based on radio button is selected on/off
+                    if (turnOnSensor){
+                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "true", "off");
+                        System.out.println("$$$$$$$$$$$ Sensors Off $$$$$$$$$$$");
+                    } else {
+                        FileReplace.doIt(SensorInfoFileManager.getFileManager().getFileName(), "off", "true");
+                        System.out.println("*********** Sensors On ***********");
+                    }
                     SensorManager.getInstance().updateButtonState();
                     SensorManager.getInstance().updateCheckBoxState();
-                    System.out.println("$$$$$$$$$$$ Sensors Off $$$$$$$$$$$");
+
                     timer.stop();
                 }
 
