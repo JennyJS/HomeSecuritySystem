@@ -129,6 +129,7 @@ public class ScheduleTimePanel extends JPanel {
                             "Select a mode first",
                             "Sensor Mode is Not Selected",
                             JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
                 //Start Timer
                 if (onJRadioButton.isSelected() || offJRadioButton.isSelected()){

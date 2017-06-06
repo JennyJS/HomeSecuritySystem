@@ -55,6 +55,7 @@ public class PhoneNumberPanel extends JPanel {
                             "Please enter two phone numbers",
                             "No Phone Number",
                             JOptionPane.WARNING_MESSAGE);
+                    return;
                 }
                 //add phone numbers to PhoneNumberManager file
                 PhoneNumberFileManager.Entry entry1 = new PhoneNumberFileManager.Entry("1st",

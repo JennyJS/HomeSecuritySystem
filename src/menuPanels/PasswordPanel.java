@@ -1,5 +1,6 @@
 package menuPanels;
 
+import fileManagers.PasswordFileManager;
 import main.DisplayPanel;
 
 import javax.swing.*;
@@ -16,6 +17,8 @@ public class PasswordPanel extends JPanel{
     private JPasswordField confirmPasswordTextField;
     private JLabel passwordLabel;
     private JLabel confirmPasswordLabel;
+    private char[] firstInput;
+    private char[] secondInput;
 
     public PasswordPanel(){
         initiateBtns();
@@ -48,6 +51,26 @@ public class PasswordPanel extends JPanel{
         doneBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                firstInput = passwordTextField.getPassword();
+                secondInput = confirmPasswordTextField.getPassword();
+                if (firstInput == null || firstInput.length == 0 || secondInput == null || secondInput.length == 0){
+                    JOptionPane.showMessageDialog(getParent(),
+                            "Please enter two passwords",
+                            "No Password",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+
+                }
+                for (int i = 0; i < firstInput.length; i++){
+                    if (firstInput[i] != secondInput[i]){
+                        JOptionPane.showMessageDialog(getParent(),
+                                "The two passwords are not matching",
+                                "Not Matching",
+                                JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
+                }
+                PasswordFileManager.getFileManager().addToFile(String.valueOf(secondInput));
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });

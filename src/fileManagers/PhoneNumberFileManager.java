@@ -8,6 +8,7 @@ import java.io.*;
  * Created by manhongren on 6/5/17.
  */
 public class PhoneNumberFileManager {
+
     private File file;
     /**
      * each line in a file is an entry
@@ -42,7 +43,7 @@ public class PhoneNumberFileManager {
     // add an entry to the file
     public void addToFile(Entry e){
         try {
-            FileWriter fw = new FileWriter(file,true); // false means not to append, to overwrite
+            FileWriter fw = new FileWriter(file,true); // true is append, false is to overwrite
             fw.append(e.toString() + '\n');
             System.out.println("Adding to file " + e.toString());
             fw.close();
@@ -51,16 +52,6 @@ public class PhoneNumberFileManager {
         }
     }
 
-//    public void addToFile(String str){
-//        try {
-//            FileWriter fw = new FileWriter(file,false); // false means not to append, to overwrite
-//            fw.append(str);
-//            System.out.println("Adding to file " + '\n' + str);
-//            fw.close();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
-//    }
 
     //read from the entire file
     public String readFromFile(){
@@ -81,26 +72,4 @@ public class PhoneNumberFileManager {
         return "";
     }
 
-    public File getFile(){
-        return this.file;
-    }
-
-    public String getFileName(){
-        return this.file.getName();
-    }
-
-
-    public boolean isFileEmpty(){
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader(file));
-            if (br.readLine() == null) {
-                System.out.println("Sensor Info File is empty");
-                return true;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 }
