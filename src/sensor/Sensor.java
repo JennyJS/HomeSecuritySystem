@@ -128,13 +128,15 @@ public class Sensor {
             Object source = e.getSource();
             if (source instanceof JButton) {
                 if (isSensorOn()){
-                    try {
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
-                        FeeManager.getFeeManager().addToFile(sb.toString());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+//                    try {
+//
+//                    } catch (IOException e1) {
+//                        e1.printStackTrace();
+//                    }
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
+                    FeeManager.getFeeManager().addToFile(sb.toString());
                     new PopupFrame("src/resources/sprinkler.jpg");
                 }
             }
@@ -147,14 +149,15 @@ public class Sensor {
             Object source = e.getSource();
             if (source instanceof JButton) {
                 if (isSensorOn()){
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
+                    FeeManager.getFeeManager().addToFile(sb.toString());
                     new PopupFrame("src/resources/burglar.jpeg");
-                    try {
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
-                        FeeManager.getFeeManager().addToFile(sb.toString());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+//                    try {
+//
+//                    } catch (IOException e1) {
+//                        e1.printStackTrace();
+//                    }
                 }
             }
         }
