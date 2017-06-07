@@ -11,6 +11,8 @@ public class Sensor {
 
     private static String SEPARATOR = ",";
     private static int BUTTON_SIZE = 100;
+    private static int CHECKBOX_WIDTH = 25;
+    private static int CHECKBOX_HEIGHT = 20;
 
     private final String id;
     private final Type type;
@@ -81,7 +83,9 @@ public class Sensor {
 
     public JCheckBox generateCheckBox() {
         JCheckBox checkBox = new JCheckBox();
-        checkBox.setBounds(x, y, 50, 50);
+        checkBox.setBounds(x, y, CHECKBOX_WIDTH, CHECKBOX_HEIGHT);
+        checkBox.setSelected(isOn);
+        checkBox.setEnabled(true);
         return checkBox;
     }
 

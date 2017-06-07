@@ -32,7 +32,7 @@ public class DisplayPanel extends JPanel {
         passwordPanel = new PasswordPanel();
         scheduleTimePanel = new ScheduleTimePanel();
         scheduleSensorPanel = new ScheduleSensorPanel();
-        newBuildingPanel = new NewBuildingPanel();
+        newBuildingPanel = new SensorPanel(true, true);
     }
 
     private void addPanels(){

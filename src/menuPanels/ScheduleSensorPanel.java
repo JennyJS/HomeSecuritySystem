@@ -1,7 +1,7 @@
 package menuPanels;
 
 import main.DisplayPanel;
-import main.NewBuildingPanel;
+import main.SensorPanel;
 import sensor.Sensor;
 import sensor.SensorManager;
 
@@ -22,7 +22,7 @@ public class ScheduleSensorPanel extends JPanel implements SensorManager.OnSenso
     private JPanel labelPanel;
     private JPanel buttonPanel;
     private JButton doneButton;
-    private JPanel newBuildingPanel;
+    private JPanel sensorPanel;
 
     private final Set<JCheckBox> checkBoxes;
 
@@ -34,24 +34,18 @@ public class ScheduleSensorPanel extends JPanel implements SensorManager.OnSenso
         labelPanel = new JPanel();
         buttonPanel = new JPanel();
         doneButton = new JButton("Done");
-        newBuildingPanel = new NewBuildingPanel();
+        sensorPanel = new SensorPanel(false, false);
         scheduleSensorLabel = new JLabel("Check the sensor you want to turn on: ");
         scheduleSensorLabel.setFont(new Font("Serif", Font.BOLD, 16));
 
         add(labelPanel);
-        add(newBuildingPanel);
+        add(sensorPanel);
         add(buttonPanel);
         addButtonsToPanel();
         setLayout(new BoxLayout(this, Y_AXIS));
 
         //add action listeners
         addActionListeners();
-
-        for (Sensor s : SensorManager.getInstance().getSensors()) {
-            JCheckBox checkBox = s.generateCheckBox();
-            checkBoxes.add(checkBox);
-            add(checkBox);
-        }
     }
 
     private void addButtonsToPanel() {
