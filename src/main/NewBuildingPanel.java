@@ -40,60 +40,24 @@ public class NewBuildingPanel extends JPanel {
             System.out.println("Can't open the image");
         }
 
-        this.addComponentListener(new ComponentListener() {
-            @Override
-            public void componentResized(ComponentEvent e) {}
-
-            @Override
-            public void componentMoved(ComponentEvent e) {}
-
-            @Override
-            public void componentShown(ComponentEvent e) {
-                Collection<Sensor> sensors = SensorManager.getInstance().getSensors();
-                for (Sensor s : sensors) {
-                    JButton button = s.generateButton();
-                    JCheckBox checkBox = s.generateCheckBox();
-                    add(button);
-                    add(checkBox);
-                    buttons.add(button);
-                    checkBoxes.add(checkBox);
-                }
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent e) {}
-        });
-
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Sensor sensor = new Sensor(true, getSensorType(), e.getX(), e.getY());
 
-                JButton button = new JButton("archer is awesome!");
-                button.setBounds(e.getX(), e.getY(), 50, 50);
-                add(button);
-
-                JCheckBox checkBox = new JCheckBox();
-                checkBox.setVisible(false);
-                checkBox.setBounds(e.getX(), e.getY(), 50, 50);
-                add(checkBox);
-
-                SensorManager.getInstance().addSensor(sensor);
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+                Sensor sensor = new Sensor(true, getSensorType(), e.getX(), e.getY());
+                SensorManager.getInstance().addSensor(sensor);
+                repaint();
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
             public void mouseExited(MouseEvent e) {}
@@ -111,7 +75,16 @@ public class NewBuildingPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        removeAll();
         g.drawImage(image, 0, 0, this);
+        Collection<Sensor> sensors = SensorManager.getInstance().getSensors();
+        for (Sensor s : sensors) {
+            JButton button = s.generateButton();
+            JCheckBox checkBox = s.generateCheckBox();
+            add(button);
+            buttons.add(button);
+            checkBoxes.add(checkBox);
+        }
     }
 
     private void initializeButtons(){

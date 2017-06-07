@@ -61,10 +61,6 @@ public class PasswordFileManager {
         return lastLine;
     }
     public boolean isExit(){
-        if (file.exists()){
-            return true;
-        } else {
-            return false;
-        }
+        return file.exists();
     }
 }

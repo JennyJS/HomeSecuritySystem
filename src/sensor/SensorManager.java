@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class SensorManager {
 
-    interface OnSensorChangeListener{
+    public interface OnSensorChangeListener{
         void onSensorChange(Set<Sensor> sensors);
     }
 
