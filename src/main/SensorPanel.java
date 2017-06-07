@@ -1,16 +1,12 @@
 package main;
 
-import menuPanels.ActiveTextField;
 import sensor.Sensor;
 import sensor.SensorManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.JTextComponent;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -37,6 +33,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
     private JRadioButton fireRadioButton;
     private JRadioButton breakInRadioButton;
     private final Map<JCheckBox, Sensor> sensorByCheckbox = new HashMap<>();
+    private final Map<JButton, Sensor> sensorByButton = new HashMap<>();
 
     private List<JLabel> roomLabels = new ArrayList<>();
 
@@ -174,8 +171,10 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
     }
 
     private void addButtons(Set<Sensor> sensors) {
+        sensorByButton.clear();
         for (Sensor s : sensors) {
             JButton button = s.generateButton();
+            sensorByButton.put(button, s);
             add(button);
         }
     }
@@ -195,5 +194,9 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
         }
         SensorManager.getInstance().syncToFile();
         SensorManager.getInstance().notifySensorChange();
+    }
+
+    public Map<JButton, Sensor> getSensorByButton(){
+        return sensorByButton;
     }
 }

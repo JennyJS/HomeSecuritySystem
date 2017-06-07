@@ -1,5 +1,6 @@
 package sensor;
 
+import fileManagers.FeeManager;
 import main.PopupFrame;
 import main.SensorPanel;
 
@@ -7,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.UUID;
 
 /**
@@ -123,7 +127,16 @@ public class Sensor {
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
             if (source instanceof JButton) {
-                new PopupFrame("src/resources/sprinkler.jpg");
+                if (isSensorOn()){
+                    try {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
+                        FeeManager.getFeeManager().addToFile(sb.toString());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    new PopupFrame("src/resources/sprinkler.jpg");
+                }
             }
         }
     }
@@ -133,7 +146,16 @@ public class Sensor {
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
             if (source instanceof JButton) {
-                new PopupFrame("src/resources/burglar.jpeg");
+                if (isSensorOn()){
+                    new PopupFrame("src/resources/burglar.jpeg");
+                    try {
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
+                        FeeManager.getFeeManager().addToFile(sb.toString());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
             }
         }
     }

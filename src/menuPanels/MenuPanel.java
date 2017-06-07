@@ -107,7 +107,7 @@ public class MenuPanel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
                 if (PasswordFileManager.getFileManager().isExit()){
-                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("scheduleTimePanel");
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("monthlyFeePanel");
                     checkIdentityFrame.setVisible(true);
                 } else {
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "monthlyFeePanel");
