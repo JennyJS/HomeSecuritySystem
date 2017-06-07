@@ -126,7 +126,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
        if (fireRadioButton.isSelected()) {
            return Sensor.Type.FIRE;
        } else if (breakInRadioButton.isSelected()) {
-           return Sensor.Type.BREAK_IN;
+           return Sensor.Type.BREAK;
        } else {
            return null;
        }

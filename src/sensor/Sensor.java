@@ -10,9 +10,11 @@ import java.util.UUID;
 public class Sensor {
 
     private static String SEPARATOR = ",";
-    private static int BUTTON_SIZE = 100;
-    private static int CHECKBOX_WIDTH = 25;
-    private static int CHECKBOX_HEIGHT = 20;
+    private static final int BUTTON_WIDTH = 80;
+    private static final int BUTTON_HEIGHT = 30;
+    private static final int CHECKBOX_WIDTH = 25;
+    private static final int CHECKBOX_HEIGHT = 20;
+    private static final Font BUTTON_FONT = new Font("GungSeo", Font.PLAIN, 12);
 
     private final String id;
     private final Type type;
@@ -23,7 +25,7 @@ public class Sensor {
 
     public enum Type{
         FIRE,
-        BREAK_IN;
+        BREAK;
 
         public static Type fromString(String str) {
             for (Type t : values()) {
@@ -74,9 +76,10 @@ public class Sensor {
 
     public JButton generateButton() {
         JButton button = new JButton();
-        button.setBounds(x, y, BUTTON_SIZE, BUTTON_SIZE);
+        button.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
         button.setBackground(isSensorOn() ? Color.GREEN : Color.WHITE);
         button.setText(type.name());
+        button.setFont(BUTTON_FONT);
         button.setOpaque(true);
         return button;
     }
