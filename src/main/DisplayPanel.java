@@ -17,6 +17,7 @@ public class DisplayPanel extends JPanel {
     private JPanel scheduleTimePanel;
     private JPanel scheduleSensorPanel;
     private JPanel newBuildingPanel;
+    private JPanel monthlyFeePanel;
 
 
     private DisplayPanel(){
@@ -33,6 +34,7 @@ public class DisplayPanel extends JPanel {
         scheduleTimePanel = new ScheduleTimePanel();
         scheduleSensorPanel = new ScheduleSensorPanel();
         newBuildingPanel = new SensorPanel(true, true);
+        monthlyFeePanel = new MonthlyFeePanel();
     }
 
     private void addPanels(){
@@ -42,6 +44,7 @@ public class DisplayPanel extends JPanel {
         add(passwordPanel, "passwordPanel");
         add(scheduleTimePanel, "scheduleTimePanel");
         add(scheduleSensorPanel, "scheduleSensorPanel");
+        add(monthlyFeePanel, "monthlyFeePanel");
     }
 
     public static DisplayPanel getDisplayPanel(){

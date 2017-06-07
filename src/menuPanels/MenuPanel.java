@@ -101,5 +101,20 @@ public class MenuPanel extends JPanel {
                 }
             }
         });
+
+        monthlyFeeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //enter password first to modify
+                if (PasswordFileManager.getFileManager().isExit()){
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("scheduleTimePanel");
+                    checkIdentityFrame.setVisible(true);
+                } else {
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "monthlyFeePanel");
+                }
+            }
+        });
+
+
     }
 }

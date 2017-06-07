@@ -98,7 +98,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
             });
         }
 
-        setPreferredSize(new Dimension(650, 500));
+        setPreferredSize(new Dimension(650, 350));
         try{
             image = ImageIO.read(new File("src/resources/clear_building.png"));
         } catch (IOException e) {
