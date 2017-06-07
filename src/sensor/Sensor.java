@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Sensor {
 
     private static String SEPARATOR = ",";
-    private static int BUTTON_SIZE = 20;
+    private static int BUTTON_SIZE = 100;
 
     private final String id;
     private final Type type;
@@ -74,6 +74,7 @@ public class Sensor {
         JButton button = new JButton();
         button.setBounds(x, y, BUTTON_SIZE, BUTTON_SIZE);
         button.setBackground(isSensorOn() ? Color.GREEN : Color.WHITE);
+        button.setText(type.name());
         button.setOpaque(true);
         return button;
     }

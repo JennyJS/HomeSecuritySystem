@@ -33,6 +33,14 @@ public class NewBuildingPanel extends JPanel {
     public NewBuildingPanel(){
         buttons = new HashSet<>();
         checkBoxes = new HashSet<>();
+        fireLabel = new JLabel("Fire Sensor");
+        breakInLabel = new JLabel("BreakIn Sensor");
+        fireRadioButton = new JRadioButton();
+        breakInRadioButton = new JRadioButton();
+        ButtonGroup group = new ButtonGroup();
+        group.add(fireRadioButton);
+        group.add(breakInRadioButton);
+        fireRadioButton.setSelected(true);
         setPreferredSize(new Dimension(350, 400));
         try{
             image = ImageIO.read(new File("src/resources/officeLayout.png"));
@@ -42,9 +50,7 @@ public class NewBuildingPanel extends JPanel {
 
         this.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
+            public void mouseClicked(MouseEvent e) {}
 
             @Override
             public void mousePressed(MouseEvent e) {
@@ -62,14 +68,9 @@ public class NewBuildingPanel extends JPanel {
             @Override
             public void mouseExited(MouseEvent e) {}
         });
-
-        initializeButtons();
         setLayout(null);
         setPositionOfButtons();
-        //add action listeners
         registerActionListeners();
-
-        addButtonsToPanel();
     }
 
     @Override
@@ -85,16 +86,7 @@ public class NewBuildingPanel extends JPanel {
             buttons.add(button);
             checkBoxes.add(checkBox);
         }
-    }
-
-    private void initializeButtons(){
-        fireLabel = new JLabel("Fire Sensor");
-        breakInLabel = new JLabel("BreakIn Sensor");
-        fireRadioButton = new JRadioButton();
-        breakInRadioButton = new JRadioButton();
-        ButtonGroup group = new ButtonGroup();
-        group.add(fireRadioButton);
-        group.add(breakInRadioButton);
+        addButtonsToPanel();
     }
 
     private void setPositionOfButtons(){
@@ -109,7 +101,6 @@ public class NewBuildingPanel extends JPanel {
     private void registerActionListeners(){}
 
     private void addButtonsToPanel(){
-       // setLayout(new GridLayout(2,2));
         add(fireLabel);
         add(breakInLabel);
         add(fireRadioButton);
