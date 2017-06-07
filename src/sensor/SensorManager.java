@@ -50,11 +50,7 @@ public class SensorManager {
 
     public void addSensor(Sensor sensor) {
         sensors.add(sensor);
-        try {
-            syncToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        syncToFile();
         notifySensorChange();
     }
 
@@ -62,9 +58,13 @@ public class SensorManager {
         return Collections.unmodifiableSet(sensors);
     }
 
-    public void syncToFile() throws IOException {
+    public void syncToFile() {
         // iterate all sensors
-        SensorInfoFileManager.getFileManager().updateSensors(sensors);
+        try {
+            SensorInfoFileManager.getFileManager().updateSensors(sensors);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setAllSensors(boolean isOn) {
@@ -72,11 +72,7 @@ public class SensorManager {
             s.setSensorOn(isOn);
         }
 
-        try {
-            syncToFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        syncToFile();
 
         notifySensorChange();
     }

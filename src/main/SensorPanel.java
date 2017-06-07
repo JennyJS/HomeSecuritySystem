@@ -11,7 +11,9 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -27,6 +29,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
     private JLabel breakInLabel;
     private JRadioButton fireRadioButton;
     private JRadioButton breakInRadioButton;
+    private final Map<JCheckBox, Sensor> sensorByCheckbox = new HashMap<>();
 
     private final Set<JButton> buttons;
     private final Set<JCheckBox> checkBoxes;
@@ -144,15 +147,23 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
         for (Sensor s : sensors) {
             JButton button = s.generateButton();
             add(button);
-//            buttons.add(button);
         }
     }
 
     private void addCheckBoxes(Set<Sensor> sensors) {
+        sensorByCheckbox.clear();
         for (Sensor s : sensors) {
             JCheckBox checkBox = s.generateCheckBox();
+            sensorByCheckbox.put(checkBox, s);
             add(checkBox);
-//            buttons.add(button);
         }
+    }
+
+    public void updateSensorsFromCheckBoxes() throws IOException {
+        for (Map.Entry<JCheckBox, Sensor> entry : sensorByCheckbox.entrySet()){
+            entry.getValue().setSensorOn(entry.getKey().isSelected());
+        }
+        SensorManager.getInstance().syncToFile();
+        SensorManager.getInstance().notifySensorChange();
     }
 }

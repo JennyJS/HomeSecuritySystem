@@ -2,13 +2,12 @@ package menuPanels;
 
 import main.DisplayPanel;
 import main.SensorPanel;
-import sensor.Sensor;
-import sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,12 +16,12 @@ import static javax.swing.BoxLayout.Y_AXIS;
 /**
  * Created by manhongren on 6/3/17.
  */
-public class ScheduleSensorPanel extends JPanel implements SensorManager.OnSensorChangeListener {
+public class ScheduleSensorPanel extends JPanel {
     private JLabel scheduleSensorLabel;
     private JPanel labelPanel;
     private JPanel buttonPanel;
     private JButton doneButton;
-    private JPanel sensorPanel;
+    private SensorPanel sensorPanel;
 
     private final Set<JCheckBox> checkBoxes;
 
@@ -57,15 +56,14 @@ public class ScheduleSensorPanel extends JPanel implements SensorManager.OnSenso
         doneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    sensorPanel.updateSensorsFromCheckBoxes();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });
-
-    }
-
-
-    @Override
-    public void onSensorChange(Set<Sensor> sensors) {
 
     }
 }
