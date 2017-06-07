@@ -5,21 +5,24 @@ import sensor.SensorManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by manhongren on 6/6/17.
  */
 public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeListener {
+    private static final Font LABEL_FONT = new Font("GungSeo", Font.PLAIN, 30);
+    private static final Border LABEL_BORDER = BorderFactory.createLineBorder(Color.BLUE, 2);
+    private static final int ROOM_NUM = 6;
+    private static final int ROOM_PER_ROW = 3;
 
     private final boolean showRadioButton;
     private final boolean showButton;
@@ -30,6 +33,8 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
     private JRadioButton fireRadioButton;
     private JRadioButton breakInRadioButton;
     private final Map<JCheckBox, Sensor> sensorByCheckbox = new HashMap<>();
+
+    private List<JLabel> roomLabels = new ArrayList<>();
 
     private final Set<JButton> buttons;
     private final Set<JCheckBox> checkBoxes;
@@ -42,6 +47,14 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
 
         buttons = new HashSet<>();
         checkBoxes = new HashSet<>();
+
+//        for (int i = 0; i < ROOM_NUM; i++) {
+//            JLabel label = new JLabel("Room " + (i + 1));
+//            label.setBorder(LABEL_BORDER);
+//            roomLabels.add(label);
+//            add(label);
+//        }
+
 
         if (showButton) {
             addButtons(SensorManager.getInstance().getSensors());
@@ -81,9 +94,9 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
             });
         }
 
-        setPreferredSize(new Dimension(350, 400));
+        setPreferredSize(new Dimension(650, 500));
         try{
-            image = ImageIO.read(new File("src/resources/officeLayout.png"));
+            image = ImageIO.read(new File("src/resources/clear_building.png"));
         } catch (IOException e) {
             System.out.println("Can't open the image");
         }
@@ -101,14 +114,27 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
         if (showRadioButton) {
             addRadioButtonsToPanel();
         }
+
+//        int labelWidth = image.getWidth() / ROOM_PER_ROW;
+//        int labelHeight = image.getHeight()
+//                / (roomLabels.size() / ROOM_PER_ROW + ((roomLabels.size() % ROOM_PER_ROW) > 0 ? 1 : 0));
+//
+//        for (int i = 0; i < roomLabels.size(); i++) {
+//            int row = i / ROOM_PER_ROW;
+//            int col = i % ROOM_PER_ROW;
+//            roomLabels.get(i).setBounds(col * labelWidth, row * labelHeight, labelWidth, labelHeight);
+//        }
     }
 
     private void layoutRadioButtons(){
-        fireLabel.setBounds(100, 300, 100, 50);
+        fireLabel.setBounds(120, 350, 200, 30);
         fireLabel.setForeground(Color.RED);
-        fireRadioButton.setBounds(120, 330, 100, 50);
-        breakInLabel.setBounds(250, 300, 100, 50);
-        breakInRadioButton.setBounds(270, 330, 100,50);
+        fireLabel.setFont(LABEL_FONT);
+        fireRadioButton.setBounds(150, 380, 50, 20);
+
+        breakInLabel.setBounds(300, 350, 200, 30);
+        breakInLabel.setFont(LABEL_FONT);
+        breakInRadioButton.setBounds(300, 380, 50,20);
         breakInLabel.setForeground(Color.BLUE);
     }
 
@@ -126,7 +152,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
        if (fireRadioButton.isSelected()) {
            return Sensor.Type.FIRE;
        } else if (breakInRadioButton.isSelected()) {
-           return Sensor.Type.BREAK;
+           return Sensor.Type.BREAK_IN;
        } else {
            return null;
        }
