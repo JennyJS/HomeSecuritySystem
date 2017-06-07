@@ -1,7 +1,12 @@
 package sensor;
 
+import main.PopupFrame;
+import main.SensorPanel;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.UUID;
 
 /**
@@ -81,6 +86,11 @@ public class Sensor {
         button.setText(type.name());
         button.setFont(BUTTON_FONT);
         button.setOpaque(true);
+        if (type == Type.FIRE) {
+            button.addActionListener(new FireButtonActionHandler());
+        } else if (type == Type.BREAK_IN) {
+            button.addActionListener(new BreakInButtonActionHandler());
+        }
         return button;
     }
 
@@ -106,5 +116,25 @@ public class Sensor {
         int y = Integer.parseInt(elements[4]);
 
         return new Sensor(id, status.equals("true"), Sensor.Type.fromString(type), x, y);
+    }
+
+    public class FireButtonActionHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Object source = e.getSource();
+            if (source instanceof JButton) {
+                new PopupFrame("src/resources/sprinkler.jpg");
+            }
+        }
+    }
+
+    public class BreakInButtonActionHandler implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            Object source = e.getSource();
+            if (source instanceof JButton) {
+                new PopupFrame("src/resources/burglar.jpeg");
+            }
+        }
     }
 }

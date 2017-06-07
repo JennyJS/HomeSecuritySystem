@@ -2,6 +2,7 @@ package main;
 
 import fileManagers.PasswordFileManager;
 import menuPanels.ActiveTextField;
+import sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,6 +63,7 @@ public class PopupFrame extends JFrame {
                 String userEnterPassword = String.valueOf(passwordField.getPassword());
                 if (actualPassword.equals(userEnterPassword)){
                     dispose(); // close the pop up frame
+                    SensorManager.getInstance().setAllSensors(false);
                 } else {
                     JOptionPane.showMessageDialog(getParent(),
                             "The password is not correct",
