@@ -10,7 +10,7 @@ import java.awt.*;
 /**
  * Created by manhongren on 6/7/17.
  */
-public class MonthlyFeePanel extends JPanel{
+public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChangeListener{
     private JPanel intrusionPanel;
     private JPanel firePanel;
     private JPanel totalPanel;
@@ -34,9 +34,15 @@ public class MonthlyFeePanel extends JPanel{
 
     private JTextField totalTextField;
 
+    private int fireTriggered = FeeManager.getFeeManager().getFireSensorTriggeredCount();
+    private int breakInTriggered = FeeManager.getFeeManager().getBreakInSensorTriggeredCount();
+    private int fireInstalled = FeeManager.getFeeManager().getFireSensorInstalledCount();
+    private int breakInInstalled = FeeManager.getFeeManager().getBreakInSensorInstalledCount();
+
     private int totalAmount;
 
     public MonthlyFeePanel(){
+        FeeManager.getFeeManager().registerOnFeeChangeListener(this);
 
         initialInstallLabelB = new JLabel("Initial Install Fee");
         sensorInstallLabelB = new JLabel("Sensor Install Fee");
@@ -45,14 +51,7 @@ public class MonthlyFeePanel extends JPanel{
         intrusionInitialInstallTextField = new JTextField();
         intrusionSensorInstallTextField = new JTextField();
         intrusionServiceTextField = new JTextField();
-        if (FeeManager.getFeeManager().getBreakInSensorInstalledCount() > 0){
-            intrusionInitialInstallTextField.setText("$200");
-            intrusionSensorInstallTextField.setText("$50 * " + FeeManager.getFeeManager().getBreakInSensorInstalledCount());
-            intrusionServiceTextField.setText("$20 * " + FeeManager.getFeeManager().getBreakInSensorTriggeredCount());
-            totalAmount = totalAmount +  200 + (50 * FeeManager.getFeeManager().getBreakInSensorInstalledCount())
-                    + (20 * FeeManager.getFeeManager().getBreakInSensorTriggeredCount());
 
-        }
 
         intrusionPanel = new JPanel();
         intrusionPanel.setBorder(new TitledBorder(new EtchedBorder(), "Intrusion"));
@@ -72,17 +71,7 @@ public class MonthlyFeePanel extends JPanel{
         fireSensorInstallTextField = new JTextField();
         fireServiceTextField = new JTextField();
 
-        if (FeeManager.getFeeManager().getFireSensorInstalledCount() > 0){
-            int disount = 0;
-            if (FeeManager.getFeeManager().getBreakInSensorInstalledCount() > 0){
-                disount = (int)(300 * 0.2);
-            }
-            fireInitialInstallTextField.setText("$300 - $" + disount);
-            fireSensorInstallTextField.setText("$100 * " + FeeManager.getFeeManager().getFireSensorInstalledCount());
-            fireServiceTextField.setText("$50 * " + FeeManager.getFeeManager().getFireSensorTriggeredCount());
-            totalAmount = totalAmount + (300 - disount) + (100 * FeeManager.getFeeManager().getFireSensorInstalledCount())
-                    + (50 * FeeManager.getFeeManager().getFireSensorTriggeredCount());
-        }
+
 
         firePanel = new JPanel();
         firePanel.setBorder(new TitledBorder(new EtchedBorder(), "Fire"));
@@ -94,14 +83,52 @@ public class MonthlyFeePanel extends JPanel{
         firePanel.add(serviceLabelF);
         firePanel.add(fireServiceTextField);
 
-        totalTextField = new JTextField("$" + totalAmount);
+        totalTextField = new JTextField();
+
         totalPanel = new JPanel();
         totalPanel.setBorder(new TitledBorder(new EtchedBorder(), "Total"));
         totalPanel.add(totalTextField);
-
+        populateView();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(intrusionPanel);
         add(firePanel);
         add(totalPanel);
+
     }
+
+    @Override
+    public void onFeeFileChange(int fireTriggered, int breakInTriggered, int fireInstalled, int breakInInstalled) {
+        this.fireTriggered = fireTriggered;
+        this.breakInTriggered = breakInTriggered;
+        this.fireInstalled = fireInstalled;
+        this.breakInInstalled = breakInInstalled;
+        populateView();
+    }
+
+    private void populateView(){
+        if (breakInInstalled > 0){
+            intrusionInitialInstallTextField.setText("$200");
+            intrusionSensorInstallTextField.setText("$50 * " + breakInInstalled);
+            intrusionServiceTextField.setText("$20 * " + breakInTriggered);
+//            totalAmount = totalAmount +  200 + (50 * breakInInstalled)
+//                    + (20 * breakInTriggered);
+
+        }
+
+        int disount = 0;
+        if (fireInstalled > 0){
+            if (fireInstalled > 0){
+                disount = (int)(300 * 0.2);
+            }
+            fireInitialInstallTextField.setText("$300 - $" + disount);
+            fireSensorInstallTextField.setText("$100 * " + fireInstalled);
+            fireServiceTextField.setText("$50 * " + fireTriggered);
+//            totalAmount = totalAmount + (300 - disount) + (100 * fireInstalled)
+//                    + (50 * fireTriggered);
+        }
+        totalAmount = 200 + (50 * breakInInstalled) + (20 * breakInTriggered) + (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
+        totalTextField.setText("$" + totalAmount);
+
+    }
+
 }

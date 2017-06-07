@@ -3,6 +3,7 @@ package fileManagers;
 import sensor.Sensor;
 import sensor.SensorManager;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +13,10 @@ import java.util.Set;
  */
 public class FeeManager {
     private File file;
-
+    public interface OnFeeFileChangeListener{
+        void onFeeFileChange(int fireTriggered, int breakInTriggered, int fireInstalled, int breakInInstalled);
+    }
+    private Set<OnFeeFileChangeListener> onFeeFileChangeListeners;
 
     private int fireSensorTriggeredCount;
     private int breakInSensorTriggeredCount;
@@ -29,15 +33,15 @@ public class FeeManager {
     }
 
     private FeeManager(){
+        onFeeFileChangeListeners = new HashSet<>();
         file = new File("feeInfo.txt");
-        populateSensorTriggeredCount();
-        countSensorInstalledCount();
-
         try {
             file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        populateSensorTriggeredCount();
+        countSensorInstalledCount();
     }
 
 
@@ -48,12 +52,17 @@ public class FeeManager {
             fw.append('\n');
             System.out.println("Adding to file " + '\n' + str);
             fw.close();
+            populateSensorTriggeredCount();
+            countSensorInstalledCount();
+            notifyFeeFileChange();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
 
     private void populateSensorTriggeredCount(){
+        fireSensorTriggeredCount = 0;
+        breakInSensorTriggeredCount = 0;
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
             String line;
             while ((line = br.readLine()) != null){
@@ -74,6 +83,8 @@ public class FeeManager {
     }
 
     private void countSensorInstalledCount(){
+        fireSensorInstalledCount = 0;
+        breakInSensorInstalledCount = 0;
         for (Sensor s : SensorManager.getInstance().getSensors()){
             if (s.getType() == Sensor.Type.FIRE){
                 fireSensorInstalledCount++;
@@ -81,20 +92,6 @@ public class FeeManager {
                 breakInSensorInstalledCount++;
             }
         }
-    }
-
-    //read from the entire file
-    public Set<Sensor> readFromFile(){
-        Set<Sensor> sensors = new HashSet<>();
-        try(BufferedReader br = new BufferedReader(new FileReader(file))){
-            String line;
-            while ((line = br.readLine()) != null){
-                sensors.add(Sensor.fromString(line));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sensors;
     }
 
     public int getFireSensorTriggeredCount() {
@@ -115,5 +112,23 @@ public class FeeManager {
 
     public boolean hasFireSensorDiscount(){
         return breakInSensorInstalledCount > 0;
+    }
+
+    public void registerOnFeeChangeListener(OnFeeFileChangeListener listener){
+        onFeeFileChangeListeners.add(listener);
+    }
+
+    public void removeOnFeeChangeListener(OnFeeFileChangeListener listener){
+        onFeeFileChangeListeners.remove(listener);
+    }
+
+    public void notifyFeeFileChange() {
+        for (OnFeeFileChangeListener listener : onFeeFileChangeListeners){
+            listener.onFeeFileChange(
+                    fireSensorTriggeredCount,
+                    breakInSensorTriggeredCount,
+                    fireSensorInstalledCount,
+                    breakInSensorInstalledCount);
+        }
     }
 }
