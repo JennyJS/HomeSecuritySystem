@@ -49,7 +49,6 @@ public class FeeManager {
             FileWriter fw = new FileWriter(file,true); // false means not to append, to overwrite
             fw.append(str);
             fw.append('\n');
-            System.out.println("Adding to file " + '\n' + str);
             fw.close();
             refreshFromFile();
             notifyFeeFileChange();
@@ -108,17 +107,11 @@ public class FeeManager {
         return breakInSensorInstalledCount;
     }
 
-    public boolean hasFireSensorDiscount(){
-        return breakInSensorInstalledCount > 0;
-    }
 
     public void registerOnFeeChangeListener(OnFeeFileChangeListener listener){
         onFeeFileChangeListeners.add(listener);
     }
 
-    public void removeOnFeeChangeListener(OnFeeFileChangeListener listener){
-        onFeeFileChangeListeners.remove(listener);
-    }
 
     public void notifyFeeFileChange() {
         for (OnFeeFileChangeListener listener : onFeeFileChangeListeners){

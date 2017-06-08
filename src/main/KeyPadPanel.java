@@ -200,27 +200,6 @@ public class KeyPadPanel extends JPanel {
         });
     }
 
-    public void slideOut(Component parent){
-        double x;
-        double y;
-        int initial = 0;
-        x = parent.getLocation().getX();
-        y = parent.getLocation().getY();
-
-        t1 = new Thread(() -> {
-            for(double i = x; i >= x-600; i-- ){
-                parent.setLocation((int)i,(int)y);
-                try{
-                    t1.sleep(1);
-                }
-                catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-            }
-
-        }); t1.start();
-
-    }
 
     public void slideIn(Component parent){
         double x;

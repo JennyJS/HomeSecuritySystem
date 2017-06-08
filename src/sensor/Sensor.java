@@ -3,13 +3,12 @@ package sensor;
 
 import fileManagers.FeeManager;
 import main.PopupFrame;
-import main.SensorPanel;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.UUID;
@@ -76,14 +75,6 @@ public class Sensor {
         return isOn;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public JButton generateButton() {
         JButton button = new JButton();
         button.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -148,11 +139,6 @@ public class Sensor {
                     sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
                     FeeManager.getFeeManager().addToFile(sb.toString());
                     new PopupFrame("src/resources/burglar.jpeg");
-//                    try {
-//
-//                    } catch (IOException e1) {
-//                        e1.printStackTrace();
-//                    }
                 }
             }
         }

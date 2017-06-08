@@ -31,7 +31,6 @@ public class PasswordFileManager {
         try {
             FileWriter fw = new FileWriter(file, true); // true is to append, false is to overwrite
             fw.append(password + '\n');
-            System.out.println("Adding password " + password + " to file");
             fw.close();
         } catch (IOException e1) {
             e1.printStackTrace();

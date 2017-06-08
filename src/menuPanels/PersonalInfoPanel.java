@@ -3,8 +3,7 @@ package menuPanels;
 import main.DisplayPanel;
 
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -150,7 +149,6 @@ public class PersonalInfoPanel extends JPanel {
         infoSummaryPanel.add(add);
 
         welcomePanel.setLayout(new GridLayout(0,1));
-        //welcomePanel.setSize(2,3);
 
         JPanel upperPanel = new JPanel();
         upperPanel.setLayout(new GridLayout(0,1));

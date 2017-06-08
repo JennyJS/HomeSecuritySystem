@@ -50,7 +50,6 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
         personalInfoPanel = new JPanel();
         personalInfoPanel.setBorder(new TitledBorder(new EtchedBorder(), "Personal Info"));
         textArea = new JTextArea();
-     //   populateTextArea();
         personalInfoPanel.add(textArea);
 
         initialInstallLabelB = new JLabel("Initial Install Fee");
@@ -109,7 +108,6 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
 
     @Override
     protected void paintComponent(Graphics g) {
-        //System.out.println("paint component");
         super.paintComponent(g);
         File file = new File("infoSummary.txt");
         if (file.exists()){
@@ -145,7 +143,6 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
             fireServiceTextField.setText("$50 * " + fireTriggered);
             totalAmount += (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
         }
-       // totalAmount = 200 + (50 * breakInInstalled) + (20 * breakInTriggered) + (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
         totalTextField.setText("$" + totalAmount);
 
     }

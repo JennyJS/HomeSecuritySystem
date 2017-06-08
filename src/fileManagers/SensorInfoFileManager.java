@@ -41,7 +41,6 @@ public class SensorInfoFileManager {
         try {
             FileWriter fw = new FileWriter(file,false); // false means not to append, to overwrite
             fw.append(str);
-            System.out.println("Adding to file " + '\n' + str);
             fw.close();
         } catch (IOException e1) {
             e1.printStackTrace();

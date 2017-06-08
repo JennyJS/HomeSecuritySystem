@@ -1,9 +1,7 @@
 package menuPanels;
 
-import fileManagers.FileReplace;
-import fileManagers.SensorInfoFileManager;
 import main.DisplayPanel;
-import sensor.Sensor;
+
 import sensor.SensorManager;
 
 import javax.swing.*;

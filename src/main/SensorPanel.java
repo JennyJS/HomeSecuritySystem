@@ -49,13 +49,6 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
         buttons = new HashSet<>();
         checkBoxes = new HashSet<>();
 
-//        for (int i = 0; i < ROOM_NUM; i++) {
-//            JLabel label = new JLabel("Room " + (i + 1));
-//            label.setBorder(LABEL_BORDER);
-//            roomLabels.add(label);
-//            add(label);
-//        }
-
 
         if (showButton) {
             addButtons(SensorManager.getInstance().getSensors());
@@ -117,15 +110,6 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
             addRadioButtonsToPanel();
         }
 
-//        int labelWidth = image.getWidth() / ROOM_PER_ROW;
-//        int labelHeight = image.getHeight()
-//                / (roomLabels.size() / ROOM_PER_ROW + ((roomLabels.size() % ROOM_PER_ROW) > 0 ? 1 : 0));
-//
-//        for (int i = 0; i < roomLabels.size(); i++) {
-//            int row = i / ROOM_PER_ROW;
-//            int col = i % ROOM_PER_ROW;
-//            roomLabels.get(i).setBounds(col * labelWidth, row * labelHeight, labelWidth, labelHeight);
-//        }
     }
 
     private void layoutRadioButtons(){
@@ -197,8 +181,5 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
         SensorManager.getInstance().notifySensorChange();
     }
 
-    public Map<JButton, Sensor> getSensorByButton(){
-        return sensorByButton;
-    }
 
 }

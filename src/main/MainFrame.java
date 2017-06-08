@@ -19,8 +19,6 @@ public class MainFrame extends JFrame{
 
     }
     public MainFrame(){
-       // setLayout(new GridLayout(0, 1));
-      //  setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setLayout(new BorderLayout());
         add(BorderLayout.NORTH, DisplayPanel.getDisplayPanel());
         add(BorderLayout.SOUTH, KeyPadPanel.getKeyPadPanel());

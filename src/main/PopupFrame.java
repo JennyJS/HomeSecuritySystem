@@ -109,7 +109,6 @@ public class PopupFrame extends JFrame {
         try {
             br = new BufferedReader(new FileReader("phoneNumber.txt"));
             while ((sCurrentLine = br.readLine()) != null) {
-                // System.out.println(sCurrentLine);
                 lastLine = sCurrentLine;
 
             }

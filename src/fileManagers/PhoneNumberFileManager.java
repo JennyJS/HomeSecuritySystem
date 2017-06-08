@@ -45,7 +45,6 @@ public class PhoneNumberFileManager {
         try {
             FileWriter fw = new FileWriter(file,true); // true is append, false is to overwrite
             fw.append(e.toString() + '\n');
-            System.out.println("Adding phone " + e.toString() + " to file");
             fw.close();
         } catch (IOException e1) {
             e1.printStackTrace();

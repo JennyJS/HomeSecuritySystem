@@ -12,7 +12,6 @@ public class DisplayPanel extends JPanel {
     private CardLayout cards = new CardLayout();
     private static DisplayPanel displayPanel;
     private JPanel menuPanel;
-    //private JPanel phoneNumberPanel;
     private JPanel passwordPanel;
     private JPanel scheduleTimePanel;
     private JPanel scheduleSensorPanel;
@@ -23,7 +22,6 @@ public class DisplayPanel extends JPanel {
 
     private DisplayPanel(){
         setLayout(cards);
-        //setBorder(BorderFactory.createEmptyBorder(8,8,12,8));
         initiatePanels();
         addPanels();
     }
