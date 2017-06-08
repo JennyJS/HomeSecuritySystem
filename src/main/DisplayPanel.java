@@ -12,12 +12,13 @@ public class DisplayPanel extends JPanel {
     private CardLayout cards = new CardLayout();
     private static DisplayPanel displayPanel;
     private JPanel menuPanel;
-    private JPanel phoneNumberPanel;
+    //private JPanel phoneNumberPanel;
     private JPanel passwordPanel;
     private JPanel scheduleTimePanel;
     private JPanel scheduleSensorPanel;
     private JPanel newBuildingPanel;
     private JPanel monthlyFeePanel;
+    private JPanel coverPanel;
 
 
     private DisplayPanel(){
@@ -29,7 +30,7 @@ public class DisplayPanel extends JPanel {
 
     private void initiatePanels(){
         menuPanel = new MenuPanel();
-        phoneNumberPanel = new PhoneNumberPanel();
+        coverPanel = new PersonalInfoPanel();
         passwordPanel = new PasswordPanel();
         scheduleTimePanel = new ScheduleTimePanel();
         scheduleSensorPanel = new ScheduleSensorPanel();
@@ -40,7 +41,7 @@ public class DisplayPanel extends JPanel {
     private void addPanels(){
         add(newBuildingPanel, "newBuildingLayoutPanel");
         add(menuPanel, "menuPanel");
-        add(phoneNumberPanel, "phoneNumberPanel");
+        add(coverPanel, "coverPanel");
         add(passwordPanel, "passwordPanel");
         add(scheduleTimePanel, "scheduleTimePanel");
         add(scheduleSensorPanel, "scheduleSensorPanel");

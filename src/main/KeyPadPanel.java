@@ -33,6 +33,9 @@ public class KeyPadPanel extends JPanel {
     private JButton deleteBtn;
     private boolean isBuildingLayoutShown = true;
     private ActionHandler actionHandler = new ActionHandler();
+    private Thread t1;
+    private Thread t2;
+    private int timeLeft = 10;
 
     private static KeyPadPanel keyPadPanel;
 
@@ -114,6 +117,7 @@ public class KeyPadPanel extends JPanel {
 
                 if (isBuildingLayoutShown){
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
+                    slideIn(DisplayPanel.getDisplayPanel());
                 } else {
                    // SensorManager.getInstance().updateButtonState();
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "newBuildingLayoutPanel");
@@ -147,8 +151,58 @@ public class KeyPadPanel extends JPanel {
                 SensorManager.getInstance().setAllSensors(true);
             }
         });
+
+        awayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timeLeft -= 1;
+
+            }
+        });
+    }
+    public void slideOut(Component parent){
+        double x;
+        double y;
+        int initial = 0;
+        x = parent.getLocation().getX();
+        y = parent.getLocation().getY();
+
+        t1 = new Thread(() -> {
+            for(double i = x; i >= x-600; i-- ){
+                parent.setLocation((int)i,(int)y);
+                try{
+                    t1.sleep(1);
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+
+        }); t1.start();
+
     }
 
+    public void slideIn(Component parent){
+        double x;
+        double y;
+        int initial = 0;
+        x = parent.getLocation().getX();
+        y = parent.getLocation().getY();
+
+        t2 = new Thread(() -> {
+            for(double i = 600 ; i >= 0 ; i-- ){
+                parent.setLocation((int)i,(int)y);
+                try{
+                    t2.sleep(1);
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+
+        }); t2.start();
+
+    }
 
     public class ActionHandler implements ActionListener {
 

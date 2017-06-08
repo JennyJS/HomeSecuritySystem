@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * Created by manhongren on 6/1/17.
  */
 public class MenuPanel extends JPanel {
-    private JButton setPhoneNumberBtn;
+    private JButton personalInfoBtn;
     private JButton setPasswordBtn;
     private JButton setSensorBtn;
     private JButton scheduleTimeBtn;
@@ -34,7 +34,7 @@ public class MenuPanel extends JPanel {
     }
 
     private void initiatedButtons(){
-        setPhoneNumberBtn = new JButton("Set Phone Number");
+        personalInfoBtn = new JButton("Set Personal Information");
         setPasswordBtn = new JButton("Set Password");
         setSensorBtn = new JButton("Schedule sensor");
         scheduleTimeBtn = new JButton("Schedule Time");
@@ -42,7 +42,7 @@ public class MenuPanel extends JPanel {
     }
 
     private void addButtonsToPanel(){
-        add(setPhoneNumberBtn);
+        add(personalInfoBtn);
         add(setPasswordBtn);
         add(setSensorBtn);
         add(scheduleTimeBtn);
@@ -50,15 +50,15 @@ public class MenuPanel extends JPanel {
     }
 
     private void addActionListeners(){
-        setPhoneNumberBtn.addActionListener(new ActionListener() {
+        personalInfoBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
                 if (PasswordFileManager.getFileManager().isExit()){
-                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("phoneNumberPanel");
+                    CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("coverPanel");
                     checkIdentityFrame.setVisible(true);
                 } else {
-                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "phoneNumberPanel");
+                    DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "coverPanel");
                 }
 
             }
