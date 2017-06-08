@@ -1,6 +1,7 @@
 package sensor;
 
 
+import fileManagers.FeeManager;
 import fileManagers.SensorInfoFileManager;
 
 import java.io.IOException;

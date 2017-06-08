@@ -40,8 +40,7 @@ public class FeeManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        populateSensorTriggeredCount();
-        countSensorInstalledCount();
+        refreshFromFile();
     }
 
 
@@ -52,8 +51,7 @@ public class FeeManager {
             fw.append('\n');
             System.out.println("Adding to file " + '\n' + str);
             fw.close();
-            populateSensorTriggeredCount();
-            countSensorInstalledCount();
+            refreshFromFile();
             notifyFeeFileChange();
         } catch (IOException e1) {
             e1.printStackTrace();
@@ -130,5 +128,9 @@ public class FeeManager {
                     fireSensorInstalledCount,
                     breakInSensorInstalledCount);
         }
+    }
+    public void refreshFromFile(){
+        populateSensorTriggeredCount();
+        countSensorInstalledCount();
     }
 }

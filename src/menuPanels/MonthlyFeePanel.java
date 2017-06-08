@@ -46,7 +46,6 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
 
     public MonthlyFeePanel(){
         FeeManager.getFeeManager().registerOnFeeChangeListener(this);
-        personalInfoPanel = new J
 
         initialInstallLabelB = new JLabel("Initial Install Fee");
         sensorInstallLabelB = new JLabel("Sensor Install Fee");
