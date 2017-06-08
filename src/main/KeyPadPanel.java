@@ -10,6 +10,7 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by manhongren on 5/31/17.
@@ -35,7 +36,10 @@ public class KeyPadPanel extends JPanel {
     private ActionHandler actionHandler = new ActionHandler();
     private Thread t1;
     private Thread t2;
-    private int timeLeft = 10;
+    private Timer timer;
+    private long startTime = -1;
+    private long duration = 10000;
+    private JLabel label;
 
     private static KeyPadPanel keyPadPanel;
 
@@ -152,14 +156,50 @@ public class KeyPadPanel extends JPanel {
             }
         });
 
-        awayButton.addActionListener(new ActionListener() {
+        timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                timeLeft -= 1;
 
+                if (startTime < 0) {
+                    startTime = System.currentTimeMillis();
+                }
+                long now = System.currentTimeMillis();
+                long clockTime = now - startTime;
+                if (clockTime >= duration) {
+                    clockTime = duration;
+
+                    timer.stop();
+                    SensorManager.getInstance().setAllSensors(true);
+                }
+                SimpleDateFormat df = new SimpleDateFormat("mm:ss");
+                label.setText(df.format(duration - clockTime));
+            }
+
+
+        });
+
+
+        awayButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //推迟10秒钟
+
+                if (!timer.isRunning()) {
+                    startTime = -1;
+                    timer.start();
+                }
+                label = new JLabel("Sensor will be turned on in 10 seconds");
+
+
+                JOptionPane.showMessageDialog(getParent(),
+                        label,
+                        "Warning Message",
+                        JOptionPane.WARNING_MESSAGE);
             }
         });
     }
+
     public void slideOut(Component parent){
         double x;
         double y;
