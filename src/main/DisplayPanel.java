@@ -23,7 +23,7 @@ public class DisplayPanel extends JPanel {
 
     private DisplayPanel(){
         setLayout(cards);
-        setBorder(BorderFactory.createEmptyBorder(8,8,12,8));
+        //setBorder(BorderFactory.createEmptyBorder(8,8,12,8));
         initiatePanels();
         addPanels();
     }

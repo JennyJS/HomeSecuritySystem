@@ -3,6 +3,8 @@ package main;
 import javax.swing.*;
 import java.awt.*;
 
+import static javafx.scene.input.KeyCode.Y;
+
 /**
  * Created by manhongren on 5/31/17.
  */
@@ -17,8 +19,10 @@ public class MainFrame extends JFrame{
 
     }
     public MainFrame(){
-        setLayout(new GridLayout(0, 1));
-        add(DisplayPanel.getDisplayPanel());
-        add(KeyPadPanel.getKeyPadPanel());
+       // setLayout(new GridLayout(0, 1));
+      //  setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BorderLayout());
+        add(BorderLayout.NORTH, DisplayPanel.getDisplayPanel());
+        add(BorderLayout.SOUTH, KeyPadPanel.getKeyPadPanel());
     }
 }

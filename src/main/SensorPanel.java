@@ -109,7 +109,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
 
     @Override
     protected void paintComponent(Graphics g) {
-        System.out.println("paint component");
+        //System.out.println("paint component");
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);
 

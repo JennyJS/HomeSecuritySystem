@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.io.*;
 
 /**
  * Created by manhongren on 6/7/17.
@@ -46,6 +47,11 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
 
     public MonthlyFeePanel(){
         FeeManager.getFeeManager().registerOnFeeChangeListener(this);
+        personalInfoPanel = new JPanel();
+        personalInfoPanel.setBorder(new TitledBorder(new EtchedBorder(), "Personal Info"));
+        textArea = new JTextArea();
+     //   populateTextArea();
+        personalInfoPanel.add(textArea);
 
         initialInstallLabelB = new JLabel("Initial Install Fee");
         sensorInstallLabelB = new JLabel("Sensor Install Fee");
@@ -94,10 +100,21 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
         totalPanel.add(totalTextField);
         populateView();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(personalInfoPanel);
         add(intrusionPanel);
         add(firePanel);
         add(totalPanel);
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        //System.out.println("paint component");
+        super.paintComponent(g);
+        File file = new File("infoSummary.txt");
+        if (file.exists()){
+            populateTextArea();
+        }
     }
 
     @Override
@@ -131,6 +148,20 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
        // totalAmount = 200 + (50 * breakInInstalled) + (20 * breakInTriggered) + (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
         totalTextField.setText("$" + totalAmount);
 
+    }
+
+    private void populateTextArea(){
+        textArea.setText(null);
+        try {
+            BufferedReader  bufferedReader = new BufferedReader(new FileReader("infoSummary.txt"));
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                textArea.append(line + '\n');
+            }
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
