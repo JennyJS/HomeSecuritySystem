@@ -1,7 +1,0 @@
-Customer name: Manhong
-Address of property: 2037 Colony
-Emergency contact added: 123
-Customer email: manhongren@hotmail.com
-Service ID: manhongren@hotmail.com
-Effective dates: 777
-

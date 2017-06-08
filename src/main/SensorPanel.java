@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * Created by manhongren on 6/6/17.
  */
-public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeListener {
+public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeListener  {
     private static final Font LABEL_FONT = new Font("GungSeo", Font.PLAIN, 30);
     private static final Border LABEL_BORDER = BorderFactory.createLineBorder(Color.BLUE, 2);
     private static final int ROOM_NUM = 6;
@@ -82,6 +82,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
                 public void mousePressed(MouseEvent e) {
                     Sensor sensor = new Sensor(true, getSensorType(), e.getX(), e.getY());
                     SensorManager.getInstance().addSensor(sensor);
+
                 }
 
                 @Override
@@ -199,4 +200,5 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
     public Map<JButton, Sensor> getSensorByButton(){
         return sensorByButton;
     }
+
 }

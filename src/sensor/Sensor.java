@@ -1,6 +1,6 @@
 package sensor;
 
-import fileManagers.FeeManager;
+
 import main.PopupFrame;
 import main.SensorPanel;
 

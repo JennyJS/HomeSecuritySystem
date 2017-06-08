@@ -1,10 +1,8 @@
 package sensor;
 
-import com.apple.eio.FileManager;
+
 import fileManagers.SensorInfoFileManager;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.*;
 
@@ -51,6 +49,8 @@ public class SensorManager {
     public void addSensor(Sensor sensor) {
         sensors.add(sensor);
         syncToFile();
+        FeeManager.getFeeManager().refreshFromFile();
+        FeeManager.getFeeManager().notifyFeeFileChange();
         notifySensorChange();
     }
 

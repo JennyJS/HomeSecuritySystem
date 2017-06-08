@@ -11,6 +11,7 @@ import java.awt.*;
  * Created by manhongren on 6/7/17.
  */
 public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChangeListener{
+    private JPanel personalInfoPanel;
     private JPanel intrusionPanel;
     private JPanel firePanel;
     private JPanel totalPanel;
@@ -34,6 +35,8 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
 
     private JTextField totalTextField;
 
+    private JTextArea textArea;
+
     private int fireTriggered = FeeManager.getFeeManager().getFireSensorTriggeredCount();
     private int breakInTriggered = FeeManager.getFeeManager().getBreakInSensorTriggeredCount();
     private int fireInstalled = FeeManager.getFeeManager().getFireSensorInstalledCount();
@@ -43,6 +46,7 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
 
     public MonthlyFeePanel(){
         FeeManager.getFeeManager().registerOnFeeChangeListener(this);
+        personalInfoPanel = new J
 
         initialInstallLabelB = new JLabel("Initial Install Fee");
         sensorInstallLabelB = new JLabel("Sensor Install Fee");
@@ -84,6 +88,7 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
         firePanel.add(fireServiceTextField);
 
         totalTextField = new JTextField();
+//        totalTextField.setSize(200,200);
 
         totalPanel = new JPanel();
         totalPanel.setBorder(new TitledBorder(new EtchedBorder(), "Total"));
@@ -106,13 +111,12 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
     }
 
     private void populateView(){
+        totalAmount = 0;
         if (breakInInstalled > 0){
             intrusionInitialInstallTextField.setText("$200");
             intrusionSensorInstallTextField.setText("$50 * " + breakInInstalled);
             intrusionServiceTextField.setText("$20 * " + breakInTriggered);
-//            totalAmount = totalAmount +  200 + (50 * breakInInstalled)
-//                    + (20 * breakInTriggered);
-
+            totalAmount += 200 + (50 * breakInInstalled) + (20 * breakInTriggered);
         }
 
         int disount = 0;
@@ -123,10 +127,9 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
             fireInitialInstallTextField.setText("$300 - $" + disount);
             fireSensorInstallTextField.setText("$100 * " + fireInstalled);
             fireServiceTextField.setText("$50 * " + fireTriggered);
-//            totalAmount = totalAmount + (300 - disount) + (100 * fireInstalled)
-//                    + (50 * fireTriggered);
+            totalAmount += (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
         }
-        totalAmount = 200 + (50 * breakInInstalled) + (20 * breakInTriggered) + (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
+       // totalAmount = 200 + (50 * breakInInstalled) + (20 * breakInTriggered) + (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
         totalTextField.setText("$" + totalAmount);
 
     }
