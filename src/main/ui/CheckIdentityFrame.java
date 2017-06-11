@@ -1,7 +1,7 @@
 package main;
 
-import fileManagers.PasswordFileManager;
-import menuPanels.ActiveTextField;
+import main.fileManagers.PasswordFileManager;
+import main.menuPanels.ActiveTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +37,7 @@ public class CheckIdentityFrame extends JFrame {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String actualPassword = PasswordFileManager.getFileManager().readFromFile();
+                String actualPassword = PasswordFileManager.getFileManager().getPassword();
                 String userEnterPassword = String.valueOf(passwordField.getPassword());
                 if (actualPassword.equals(userEnterPassword)){
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), nextPanelToShow);
@@ -55,7 +55,7 @@ public class CheckIdentityFrame extends JFrame {
         passwordField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(passwordField);
+                ActiveTextField.getInstance().setActiveTextField(passwordField);
             }
 
             @Override

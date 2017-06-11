@@ -1,4 +1,4 @@
-package menuPanels;
+package main.menuPanels;
 
 import main.fileManagers.FeeManager;
 
@@ -9,34 +9,36 @@ import java.awt.*;
 import java.io.*;
 
 /**
+ * UI for displaying monthly fee.
+ *
  * Created by manhongren on 6/7/17.
  */
-public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChangeListener{
-    private JPanel personalInfoPanel;
-    private JPanel intrusionPanel;
-    private JPanel firePanel;
-    private JPanel totalPanel;
+public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChangeListener {
+
+    private final JPanel personalInfoPanel;
+    private final JPanel intrusionPanel;
+    private final JPanel firePanel;
+    private final JPanel totalPanel;
 
 
-    private JLabel initialInstallLabelF;
-    private JLabel sensorInstallLabelF;
-    private JLabel serviceLabelF;
+    private final JLabel initialInstallLabelF;
+    private final JLabel sensorInstallLabelF;
+    private final JLabel serviceLabelF;
 
-    private JTextField intrusionInitialInstallTextField;
-    private JTextField intrusionSensorInstallTextField;
-    private JTextField intrusionServiceTextField;
+    private final JTextField intrusionInitialInstallTextField;
+    private final JTextField intrusionSensorInstallTextField;
+    private final JTextField intrusionServiceTextField;
 
-    private JLabel initialInstallLabelB;
-    private JLabel sensorInstallLabelB;
-    private JLabel serviceLabelB;
+    private final JLabel initialInstallLabelB;
+    private final JLabel sensorInstallLabelB;
+    private final JLabel serviceLabelB;
 
-    private JTextField fireInitialInstallTextField;
-    private JTextField fireSensorInstallTextField;
-    private JTextField fireServiceTextField;
+    private final JTextField fireInitialInstallTextField;
+    private final JTextField fireSensorInstallTextField;
+    private final JTextField fireServiceTextField;
 
-    private JTextField totalTextField;
-
-    private JTextArea textArea;
+    private final JTextField totalTextField;
+    private final JTextArea textArea;
 
     private int fireTriggered = FeeManager.getFeeManager().getFireSensorTriggeredCount();
     private int breakInTriggered = FeeManager.getFeeManager().getBreakInSensorTriggeredCount();
@@ -45,7 +47,7 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
 
     private int totalAmount;
 
-    public MonthlyFeePanel(){
+    public MonthlyFeePanel() {
         FeeManager.getFeeManager().registerOnFeeChangeListener(this);
         personalInfoPanel = new JPanel();
         personalInfoPanel.setBorder(new TitledBorder(new EtchedBorder(), "Personal Info"));
@@ -79,8 +81,6 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
         fireSensorInstallTextField = new JTextField();
         fireServiceTextField = new JTextField();
 
-
-
         firePanel = new JPanel();
         firePanel.setBorder(new TitledBorder(new EtchedBorder(), "Fire"));
         firePanel.setLayout(new GridLayout(3, 2));
@@ -92,7 +92,6 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
         firePanel.add(fireServiceTextField);
 
         totalTextField = new JTextField();
-//        totalTextField.setSize(200,200);
 
         totalPanel = new JPanel();
         totalPanel.setBorder(new TitledBorder(new EtchedBorder(), "Total"));
@@ -115,6 +114,9 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
         }
     }
 
+    /**
+     * Update view when fee information has changed.
+     */
     @Override
     public void onFeeFileChange(int fireTriggered, int breakInTriggered, int fireInstalled, int breakInInstalled) {
         this.fireTriggered = fireTriggered;
@@ -124,6 +126,9 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
         populateView();
     }
 
+    /**
+     * Populate view based on info from {@link FeeManager}.
+     */
     private void populateView(){
         totalAmount = 0;
         if (breakInInstalled > 0){
@@ -133,24 +138,26 @@ public class MonthlyFeePanel extends JPanel implements FeeManager.OnFeeFileChang
             totalAmount += 200 + (50 * breakInInstalled) + (20 * breakInTriggered);
         }
 
-        int disount = 0;
+        int discount = 0;
         if (fireInstalled > 0){
             if (fireInstalled > 0){
-                disount = (int)(300 * 0.2);
+                discount = (int)(300 * 0.2);
             }
-            fireInitialInstallTextField.setText("$300 - $" + disount);
+            fireInitialInstallTextField.setText("$300 - $" + discount);
             fireSensorInstallTextField.setText("$100 * " + fireInstalled);
             fireServiceTextField.setText("$50 * " + fireTriggered);
-            totalAmount += (300 - disount) + (100 * fireInstalled) + (50 * fireTriggered);
+            totalAmount += (300 - discount) + (100 * fireInstalled) + (50 * fireTriggered);
         }
         totalTextField.setText("$" + totalAmount);
-
     }
 
+    /**
+     * Populate text area from summary text file.
+     */
     private void populateTextArea(){
         textArea.setText(null);
         try {
-            BufferedReader  bufferedReader = new BufferedReader(new FileReader("infoSummary.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("infoSummary.txt"));
             String line;
             while((line = bufferedReader.readLine()) != null){
                 textArea.append(line + '\n');

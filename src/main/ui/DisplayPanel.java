@@ -1,6 +1,6 @@
 package main;
 
-import menuPanels.*;
+import main.menuPanels.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +10,9 @@ import java.awt.*;
  */
 public class DisplayPanel extends JPanel {
 
-    private CardLayout cards = new CardLayout();
     private static DisplayPanel displayPanel;
+
+    private CardLayout cards = new CardLayout();
     private JPanel menuPanel;
     private JPanel passwordPanel;
     private JPanel scheduleTimePanel;

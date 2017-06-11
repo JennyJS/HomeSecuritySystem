@@ -1,4 +1,4 @@
-package sensor;
+package main.sensor;
 
 
 import main.fileManagers.FeeManager;
@@ -43,15 +43,10 @@ public class SensorManager {
         onSensorChangeListeners.add(listener);
     }
 
-    public void removeOnSensorChangeListener(OnSensorChangeListener listener){
-        onSensorChangeListeners.remove(listener);
-    }
-
     public void addSensor(Sensor sensor) {
         sensors.add(sensor);
         syncToFile();
-        FeeManager.getFeeManager().refreshFromFile();
-        FeeManager.getFeeManager().notifyFeeFileChange();
+        FeeManager.getFeeManager().syncFromFile();
         notifySensorChange();
     }
 
@@ -62,7 +57,7 @@ public class SensorManager {
     public void syncToFile() {
         // iterate all sensors
         try {
-            SensorInfoFileManager.getFileManager().updateSensors(sensors);
+            SensorInfoFileManager.getFileManager().syncSensorsToFile(sensors);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,6 +80,6 @@ public class SensorManager {
     }
 
     private void syncFromFile() throws IOException {
-        sensors = SensorInfoFileManager.getFileManager().readFromFile();
+        sensors = SensorInfoFileManager.getFileManager().getSensors();
     }
 }

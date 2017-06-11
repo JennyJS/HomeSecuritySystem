@@ -1,4 +1,4 @@
-package menuPanels;
+package main.menuPanels;
 
 import main.DisplayPanel;
 
@@ -13,11 +13,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
+ * Display personal info.
+ *
  * Created by YALI on 6/6/17.
  */
 public class PersonalInfoPanel extends JPanel {
 
-    JPanel welcomePanel;
+    private final JPanel welcomePanel;
 
     public PersonalInfoPanel(){
         welcomePanel = new JPanel();
@@ -57,6 +59,8 @@ public class PersonalInfoPanel extends JPanel {
         emailPanel = new JPanel();
         datesPanel = new JPanel();
         infoSummaryPanel = new JPanel();
+
+        /******* Adding ActionListeners ****/
 
         name.addActionListener(new ActionListener() {
             @Override

@@ -1,4 +1,4 @@
-package menuPanels;
+package main.menuPanels;
 
 import main.DisplayPanel;
 import main.SensorPanel;
@@ -8,25 +8,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 import static javax.swing.BoxLayout.Y_AXIS;
 
 /**
+ * UI to schedule sensor on/off.
+ *
  * Created by manhongren on 6/3/17.
  */
 public class ScheduleSensorPanel extends JPanel {
-    private JLabel scheduleSensorLabel;
-    private JPanel labelPanel;
-    private JPanel buttonPanel;
-    private JButton doneButton;
-    private SensorPanel sensorPanel;
 
-    private final Set<JCheckBox> checkBoxes;
+    private final JLabel scheduleSensorLabel;
+    private final JPanel labelPanel;
+    private final JPanel buttonPanel;
+    private final JButton doneButton;
+    private final SensorPanel sensorPanel;
 
     public ScheduleSensorPanel(){
-        checkBoxes = new HashSet<>();
 
         setPreferredSize(new Dimension(350, 400));
 
@@ -34,22 +32,19 @@ public class ScheduleSensorPanel extends JPanel {
         buttonPanel = new JPanel();
         doneButton = new JButton("Done");
         sensorPanel = new SensorPanel(false, false);
-        scheduleSensorLabel = new JLabel("Check the sensor you want to turn on: ");
+        scheduleSensorLabel = new JLabel("Check the main.sensor you want to turn on: ");
         scheduleSensorLabel.setFont(new Font("Serif", Font.BOLD, 16));
 
         add(labelPanel);
         add(sensorPanel);
         add(buttonPanel);
-        addButtonsToPanel();
+        labelPanel.add(scheduleSensorLabel);
+        buttonPanel.add(doneButton);
+
         setLayout(new BoxLayout(this, Y_AXIS));
 
         //add action listeners
         addActionListeners();
-    }
-
-    private void addButtonsToPanel() {
-        labelPanel.add(scheduleSensorLabel);
-        buttonPanel.add(doneButton);
     }
 
     private void addActionListeners(){

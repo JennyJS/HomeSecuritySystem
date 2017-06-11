@@ -1,9 +1,7 @@
 package main;
 
-import fileManagers.FileReplace;
-import fileManagers.SensorInfoFileManager;
-import menuPanels.ActiveTextField;
-import sensor.SensorManager;
+import main.menuPanels.ActiveTextField;
+import main.sensor.SensorManager;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -34,7 +32,6 @@ public class KeyPadPanel extends JPanel {
     private JButton deleteBtn;
     private boolean isBuildingLayoutShown = true;
     private ActionHandler actionHandler = new ActionHandler();
-    private Thread t1;
     private Thread t2;
     private Timer timer;
     private long startTime = -1;
@@ -134,7 +131,7 @@ public class KeyPadPanel extends JPanel {
         deleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTextField currTextField = ActiveTextField.getActiveTextField().getCurrentTextField();
+                JTextField currTextField = ActiveTextField.getInstance().getActiveTextField();
                 if (currTextField.getText().length() > 0){
                     currTextField.setText(""+currTextField.getText().substring(0, currTextField.getText().length() - 1));
                 }
@@ -183,7 +180,6 @@ public class KeyPadPanel extends JPanel {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                //推迟10秒钟
 
                 if (!timer.isRunning()) {
                     startTime = -1;
@@ -202,10 +198,7 @@ public class KeyPadPanel extends JPanel {
 
 
     public void slideIn(Component parent){
-        double x;
         double y;
-        int initial = 0;
-        x = parent.getLocation().getX();
         y = parent.getLocation().getY();
 
         t2 = new Thread(() -> {
@@ -232,7 +225,7 @@ public class KeyPadPanel extends JPanel {
                 JButton btn = (JButton) source;
                 try {
                     int value = Integer.parseInt(btn.getText().trim());
-                    Component comp = ActiveTextField.getActiveTextField().getCurrentTextField();
+                    Component comp = ActiveTextField.getInstance().getActiveTextField();
                     if (comp instanceof JTextComponent) {
                         JTextComponent tc = (JTextComponent) comp;
                         tc.setText(tc.getText() + value);

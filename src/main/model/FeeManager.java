@@ -1,29 +1,35 @@
-package fileManagers;
+package main.fileManagers;
 
-import sensor.Sensor;
-import sensor.SensorManager;
+import main.sensor.Sensor;
+import main.sensor.SensorManager;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * This class records fee into file and notifies listeners when fee has change.
+ *
  * Created by manhongren on 6/7/17.
  */
 public class FeeManager {
-    private File file;
-    public interface OnFeeFileChangeListener{
+
+    /**
+     * Listener that will get notified when fee file has changed.
+     */
+    public interface OnFeeFileChangeListener {
         void onFeeFileChange(int fireTriggered, int breakInTriggered, int fireInstalled, int breakInInstalled);
     }
-    private Set<OnFeeFileChangeListener> onFeeFileChangeListeners;
+
+    private static FeeManager feeManager;
+
+    private final File file;
+    private final Set<OnFeeFileChangeListener> onFeeFileChangeListeners;
 
     private int fireSensorTriggeredCount;
     private int breakInSensorTriggeredCount;
     private int fireSensorInstalledCount;
     private int breakInSensorInstalledCount;
-
-    private static FeeManager feeManager;
 
     public static FeeManager getFeeManager() {
         if (feeManager == null){
@@ -40,24 +46,54 @@ public class FeeManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        refreshFromFile();
+        syncFromFile();
     }
 
+    /**
+     * Register {@link OnFeeFileChangeListener}.
+     */
+    public void registerOnFeeChangeListener(OnFeeFileChangeListener listener){
+        onFeeFileChangeListeners.add(listener);
+    }
 
-    public void addToFile(String str){
+    /**
+     * Notify all registered OnFeeFileChangeListeners that fee has changed.
+     */
+    public void notifyFeeFileChange() {
+        for (OnFeeFileChangeListener listener : onFeeFileChangeListeners){
+            listener.onFeeFileChange(
+                    fireSensorTriggeredCount,
+                    breakInSensorTriggeredCount,
+                    fireSensorInstalledCount,
+                    breakInSensorInstalledCount);
+        }
+    }
+
+    /**
+     * Read fee file and update memory. Also notify listeners with updated fee info.
+     */
+    public void syncFromFile(){
+        syncSensorTriggeredCountFromFile();
+        syncInstalledSensorCountFromFile();
+        notifyFeeFileChange();
+    }
+
+    public void addFeeEntryToFile(String feeEntry){
         try {
             FileWriter fw = new FileWriter(file,true); // false means not to append, to overwrite
-            fw.append(str);
+            fw.append(feeEntry);
             fw.append('\n');
             fw.close();
-            refreshFromFile();
-            notifyFeeFileChange();
+            syncFromFile();
         } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
 
-    private void populateSensorTriggeredCount(){
+    /**
+     * Read from file and update {@link breakInSensorTriggeredCount} and {@link fireSensorTriggeredCount}.
+     */
+    private void syncSensorTriggeredCountFromFile(){
         fireSensorTriggeredCount = 0;
         breakInSensorTriggeredCount = 0;
         try(BufferedReader br = new BufferedReader(new FileReader(file))){
@@ -79,7 +115,10 @@ public class FeeManager {
         }
     }
 
-    private void countSensorInstalledCount(){
+    /**
+     * Read from file and update {@link fireSensorInstalledCount} and {@link breakInSensorInstalledCount}.
+     */
+    private void syncInstalledSensorCountFromFile(){
         fireSensorInstalledCount = 0;
         breakInSensorInstalledCount = 0;
         for (Sensor s : SensorManager.getInstance().getSensors()){
@@ -105,25 +144,5 @@ public class FeeManager {
 
     public int getBreakInSensorInstalledCount() {
         return breakInSensorInstalledCount;
-    }
-
-
-    public void registerOnFeeChangeListener(OnFeeFileChangeListener listener){
-        onFeeFileChangeListeners.add(listener);
-    }
-
-
-    public void notifyFeeFileChange() {
-        for (OnFeeFileChangeListener listener : onFeeFileChangeListeners){
-            listener.onFeeFileChange(
-                    fireSensorTriggeredCount,
-                    breakInSensorTriggeredCount,
-                    fireSensorInstalledCount,
-                    breakInSensorInstalledCount);
-        }
-    }
-    public void refreshFromFile(){
-        populateSensorTriggeredCount();
-        countSensorInstalledCount();
     }
 }

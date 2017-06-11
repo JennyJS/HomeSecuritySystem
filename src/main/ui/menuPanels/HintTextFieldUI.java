@@ -1,4 +1,4 @@
-package menuPanels;
+package main.menuPanels;
 
 import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.swing.text.JTextComponent;
@@ -7,6 +7,8 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
+ * Display hint in text field.
+ *
  * Created by manhongren on 6/3/17.
  */
 public class HintTextFieldUI extends BasicTextFieldUI implements FocusListener {
@@ -15,40 +17,10 @@ public class HintTextFieldUI extends BasicTextFieldUI implements FocusListener {
     private boolean hideOnFocus;
     private Color color;
 
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-        repaint();
-    }
-
     private void repaint() {
         if(getComponent() != null) {
             getComponent().repaint();
         }
-    }
-
-    public boolean isHideOnFocus() {
-        return hideOnFocus;
-    }
-
-    public void setHideOnFocus(boolean hideOnFocus) {
-        this.hideOnFocus = hideOnFocus;
-        repaint();
-    }
-
-    public String getHint() {
-        return hint;
-    }
-
-    public void setHint(String hint) {
-        this.hint = hint;
-        repaint();
-    }
-    public HintTextFieldUI(String hint) {
-        this(hint,false);
     }
 
     public HintTextFieldUI(String hint, boolean hideOnFocus) {
@@ -65,7 +37,7 @@ public class HintTextFieldUI extends BasicTextFieldUI implements FocusListener {
     protected void paintSafely(Graphics g) {
         super.paintSafely(g);
         JTextComponent comp = getComponent();
-        if(hint!=null && comp.getText().length() == 0 && (!(hideOnFocus && comp.hasFocus()))){
+        if(hint != null && comp.getText().length() == 0 && !(hideOnFocus && comp.hasFocus())){
             if(color != null) {
                 g.setColor(color);
             } else {
@@ -86,11 +58,13 @@ public class HintTextFieldUI extends BasicTextFieldUI implements FocusListener {
     public void focusLost(FocusEvent e) {
         if(hideOnFocus) repaint();
     }
+
     @Override
     protected void installListeners() {
         super.installListeners();
         getComponent().addFocusListener(this);
     }
+
     @Override
     protected void uninstallListeners() {
         super.uninstallListeners();

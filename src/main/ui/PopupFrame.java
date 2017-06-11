@@ -1,8 +1,8 @@
 package main;
 
-import fileManagers.PasswordFileManager;
-import menuPanels.ActiveTextField;
-import sensor.SensorManager;
+import main.fileManagers.PasswordFileManager;
+import main.menuPanels.ActiveTextField;
+import main.sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -73,7 +73,7 @@ public class PopupFrame extends JFrame {
         enterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String actualPassword = PasswordFileManager.getFileManager().readFromFile();
+                String actualPassword = PasswordFileManager.getFileManager().getPassword();
                 String userEnterPassword = String.valueOf(passwordField.getPassword());
                 if (actualPassword.equals(userEnterPassword)){
                     dispose(); // close the pop up frame
@@ -91,7 +91,7 @@ public class PopupFrame extends JFrame {
         passwordField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(passwordField);
+                ActiveTextField.getInstance().setActiveTextField(passwordField);
             }
 
             @Override

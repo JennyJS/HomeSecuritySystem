@@ -1,8 +1,8 @@
-package menuPanels;
+package main.menuPanels;
 
 import main.DisplayPanel;
 
-import sensor.SensorManager;
+import main.sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,39 +15,32 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * JPanel UI to schedule sensor time.
+ *
  * Created by manhongren on 6/2/17.
  */
 public class ScheduleTimePanel extends JPanel {
-    private JRadioButton onJRadioButton;
-    private JRadioButton offJRadioButton;
-    private JPanel radioButtonPanel;
-    private JPanel timePanel;
-    private JPanel buttonPanel;
-    private JLabel fromLabel;
-    private JLabel toLabel;
-    private JLabel titleLabel;
-    private JButton doneButton;
-    private JTextField fromHourTextField;
-    private JTextField fromMinuteTextField;
-    private JTextField toHourTextField;
-    private JTextField toMinuteTextField;
-    private JLabel colonLabel;
-    private JLabel colonLabel2;
+
+    private final JRadioButton onJRadioButton;
+    private final JRadioButton offJRadioButton;
+    private final JPanel radioButtonPanel;
+    private final JPanel timePanel;
+    private final JPanel buttonPanel;
+    private final JLabel fromLabel;
+    private final JLabel toLabel;
+    private final JLabel titleLabel;
+    private final JButton doneButton;
+    private final JTextField fromHourTextField;
+    private final JTextField fromMinuteTextField;
+    private final JTextField toHourTextField;
+    private final JTextField toMinuteTextField;
+    private final JLabel colonLabel;
+    private final JLabel colonLabel2;
+
     private Timer timer;
     private boolean turnOnSensor;
+
     public ScheduleTimePanel(){
-        initializeComponents();
-
-        addComponentsToPanels();
-
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(radioButtonPanel);
-        add(timePanel);
-        add(buttonPanel);
-        addActionListeners();
-    }
-
-    private void initializeComponents(){
         onJRadioButton = new JRadioButton("On");
         offJRadioButton = new JRadioButton("Off");
         ButtonGroup group = new ButtonGroup();
@@ -76,9 +69,18 @@ public class ScheduleTimePanel extends JPanel {
         colonLabel2.setFont(new Font("Serif", Font.BOLD, 20));
 
         doneButton = new JButton("Done");
-        titleLabel = new JLabel("Set sensor mode to : ");
+        titleLabel = new JLabel("Set main.sensor mode to : ");
         titleLabel.setFont(new Font("Serif", Font.ITALIC, 17));
+
+        addComponentsToPanels();
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(radioButtonPanel);
+        add(timePanel);
+        add(buttonPanel);
+        addActionListeners();
     }
+
     private void addComponentsToPanels(){
         radioButtonPanel.add(titleLabel);
         radioButtonPanel.add(onJRadioButton);
@@ -135,7 +137,7 @@ public class ScheduleTimePanel extends JPanel {
         fromHourTextField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(fromHourTextField);
+                ActiveTextField.getInstance().setActiveTextField(fromHourTextField);
             }
 
             @Override
@@ -147,7 +149,7 @@ public class ScheduleTimePanel extends JPanel {
         fromMinuteTextField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(fromMinuteTextField);
+                ActiveTextField.getInstance().setActiveTextField(fromMinuteTextField);
             }
 
             @Override
@@ -159,7 +161,7 @@ public class ScheduleTimePanel extends JPanel {
         toHourTextField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(toHourTextField);
+                ActiveTextField.getInstance().setActiveTextField(toHourTextField);
             }
 
             @Override
@@ -171,7 +173,7 @@ public class ScheduleTimePanel extends JPanel {
         toMinuteTextField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(toMinuteTextField);
+                ActiveTextField.getInstance().setActiveTextField(toMinuteTextField);
             }
 
             @Override
@@ -182,6 +184,9 @@ public class ScheduleTimePanel extends JPanel {
 
     }
 
+    /**
+     * Start timer between a range.
+     */
     private void startTimer(String startTime, String endTime){
 
         final DateFormat timeFormat = new SimpleDateFormat("HH:mm");
@@ -206,8 +211,5 @@ public class ScheduleTimePanel extends JPanel {
         timer.start();
         // to make sure it doesn't wait one second at the start
         timer.setInitialDelay(0);
-
     }
-
-
 }

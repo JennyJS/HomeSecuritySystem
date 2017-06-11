@@ -1,4 +1,4 @@
-package menuPanels;
+package main.menuPanels;
 
 import main.fileManagers.PasswordFileManager;
 import main.DisplayPanel;
@@ -8,34 +8,37 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
+ * Display password UI.
+ *
  * Created by manhongren on 6/2/17.
  */
-public class PasswordPanel extends JPanel{
-    private JButton doneBtn;
-    private JPasswordField passwordTextField;
-    private JPasswordField confirmPasswordTextField;
-    private JLabel passwordLabel;
-    private JLabel confirmPasswordLabel;
+public class PasswordPanel extends JPanel {
+
+    private final JButton doneBtn;
+    private final JPasswordField passwordTextField;
+    private final JPasswordField confirmPasswordTextField;
+    private final JLabel passwordLabel;
+    private final JLabel confirmPasswordLabel;
+
     private char[] firstInput;
     private char[] secondInput;
 
-    public PasswordPanel(){
-        initiateBtns();
+    public PasswordPanel() {
+
+        passwordLabel = new JLabel("Please enter your password: ");
+        confirmPasswordLabel = new JLabel("Please confirm your password: ");
+        doneBtn = new JButton("Done");
+        passwordTextField = new JPasswordField();
+
+        passwordLabel.setFont(new Font("Serif", Font.ITALIC, 20));
+        confirmPasswordTextField = new JPasswordField();
+        confirmPasswordLabel.setFont(new Font("Serif", Font.ITALIC, 20));
+
         addActionListeners();
         setLayout(new GridLayout(0, 1, 5, 5));
         addBtnsToPanel();
     }
 
-
-    private void initiateBtns(){
-        passwordLabel = new JLabel("Please enter your password: ");
-        confirmPasswordLabel = new JLabel("Please confirm your password: ");
-        doneBtn = new JButton("Done");
-        passwordTextField = new JPasswordField();
-        passwordLabel.setFont(new Font("Serif", Font.ITALIC, 20));
-        confirmPasswordTextField = new JPasswordField();
-        confirmPasswordLabel.setFont(new Font("Serif", Font.ITALIC, 20));
-    }
     private void addBtnsToPanel(){
         add(passwordLabel);
         add(passwordTextField);
@@ -67,7 +70,7 @@ public class PasswordPanel extends JPanel{
                         return;
                     }
                 }
-                PasswordFileManager.getFileManager().addToFile(String.valueOf(secondInput));
+                PasswordFileManager.getFileManager().savePassword(String.valueOf(secondInput));
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });
@@ -75,7 +78,7 @@ public class PasswordPanel extends JPanel{
         passwordTextField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(passwordTextField);
+                ActiveTextField.getInstance().setActiveTextField(passwordTextField);
             }
 
             @Override
@@ -87,7 +90,7 @@ public class PasswordPanel extends JPanel{
         confirmPasswordTextField.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                ActiveTextField.getActiveTextField().setCurrentTextField(confirmPasswordTextField);
+                ActiveTextField.getInstance().setActiveTextField(confirmPasswordTextField);
             }
 
             @Override

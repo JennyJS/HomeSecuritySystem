@@ -1,4 +1,4 @@
-package sensor;
+package main.sensor;
 
 
 import main.fileManagers.FeeManager;
@@ -14,11 +14,13 @@ import java.util.Calendar;
 import java.util.UUID;
 
 /**
+ * Sensor Data.
+ *
  * Created by manhongren on 6/3/17.
  */
 public class Sensor {
 
-    private static String SEPARATOR = ",";
+    private static final String SEPARATOR = ",";
     private static final int BUTTON_WIDTH = 150;
     private static final int BUTTON_HEIGHT = 50;
     private static final int CHECKBOX_WIDTH = 25;
@@ -32,6 +34,9 @@ public class Sensor {
 
     private boolean isOn;
 
+    /**
+     * Type of {@link Sensor}.
+     */
     public enum Type{
         FIRE,
         BREAK_IN;
@@ -42,7 +47,6 @@ public class Sensor {
                     return t;
                 }
             }
-
             return null;
         }
     }
@@ -75,6 +79,9 @@ public class Sensor {
         return isOn;
     }
 
+    /**
+     * Create a {@link JButton} from sensor.
+     */
     public JButton generateButton() {
         JButton button = new JButton();
         button.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -90,6 +97,9 @@ public class Sensor {
         return button;
     }
 
+    /**
+     * Create a {@link JCheckBox} from sensor.
+     */
     public JCheckBox generateCheckBox() {
         JCheckBox checkBox = new JCheckBox();
         checkBox.setBounds(x, y, CHECKBOX_WIDTH, CHECKBOX_HEIGHT);
@@ -103,6 +113,9 @@ public class Sensor {
         return id + SEPARATOR + type + SEPARATOR + isOn + SEPARATOR + x + SEPARATOR + y;
     }
 
+    /**
+     * Create sensor from string.
+     */
     public static Sensor fromString(String str) {
         String[] elements = str.split(SEPARATOR);
         String id = elements[0];
@@ -114,7 +127,10 @@ public class Sensor {
         return new Sensor(id, status.equals("true"), Sensor.Type.fromString(type), x, y);
     }
 
-    public class FireButtonActionHandler implements ActionListener {
+    /**
+     * ActionListener for sensor of type {@link Type#FIRE}.
+     */
+    private class FireButtonActionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             Object source = e.getSource();
@@ -122,13 +138,16 @@ public class Sensor {
                 if (isSensorOn()){
                     StringBuilder sb = new StringBuilder();
                     sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
-                    FeeManager.getFeeManager().addToFile(sb.toString());
-                    new PopupFrame("src/resources/sprinkler.jpg");
+                    FeeManager.getFeeManager().addFeeEntryToFile(sb.toString());
+                    new PopupFrame("src/main/resources/sprinkler.jpg");
                 }
             }
         }
     }
 
+    /**
+     * ActionListener for sensor of type {@link Type#BREAK_IN}.
+     */
     public class BreakInButtonActionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -137,8 +156,8 @@ public class Sensor {
                 if (isSensorOn()){
                     StringBuilder sb = new StringBuilder();
                     sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
-                    FeeManager.getFeeManager().addToFile(sb.toString());
-                    new PopupFrame("src/resources/burglar.jpeg");
+                    FeeManager.getFeeManager().addFeeEntryToFile(sb.toString());
+                    new PopupFrame("src/main/resources/burglar.jpeg");
                 }
             }
         }

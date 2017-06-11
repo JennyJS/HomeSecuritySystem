@@ -1,4 +1,4 @@
-package menuPanels;
+package main.menuPanels;
 
 import main.fileManagers.PasswordFileManager;
 import main.CheckIdentityFrame;
@@ -10,35 +10,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Menu panel UI.
+ *
  * Created by manhongren on 6/1/17.
  */
 public class MenuPanel extends JPanel {
-    private JButton personalInfoBtn;
-    private JButton setPasswordBtn;
-    private JButton setSensorBtn;
-    private JButton scheduleTimeBtn;
-    private JButton monthlyFeeBtn;
+
+    private final JButton personalInfoBtn;
+    private final JButton setPasswordBtn;
+    private final JButton setSensorBtn;
+    private final JButton scheduleTimeBtn;
+    private final JButton monthlyFeeBtn;
 
     public MenuPanel(){
-        //initiate all buttons
-        initiatedButtons();
+
+        personalInfoBtn = new JButton("Set Personal Information");
+        setPasswordBtn = new JButton("Set Password");
+        setSensorBtn = new JButton("Schedule main.sensor");
+        scheduleTimeBtn = new JButton("Schedule Time");
+        monthlyFeeBtn = new JButton("Monthly Fee");
 
         setLayout(new GridLayout(0, 1));
 
-        //add action listeners
         addActionListeners();
-
-        //add buttons to this panel
         addButtonsToPanel();
-
-    }
-
-    private void initiatedButtons(){
-        personalInfoBtn = new JButton("Set Personal Information");
-        setPasswordBtn = new JButton("Set Password");
-        setSensorBtn = new JButton("Schedule sensor");
-        scheduleTimeBtn = new JButton("Schedule Time");
-        monthlyFeeBtn = new JButton("Monthly Fee");
     }
 
     private void addButtonsToPanel(){
@@ -54,7 +49,7 @@ public class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
-                if (PasswordFileManager.getFileManager().isExit()){
+                if (PasswordFileManager.getFileManager().isPasswordSet()){
                     CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("coverPanel");
                     checkIdentityFrame.setVisible(true);
                 } else {
@@ -68,7 +63,7 @@ public class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
-                if (PasswordFileManager.getFileManager().isExit()){
+                if (PasswordFileManager.getFileManager().isPasswordSet()){
                     CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("passwordPanel");
                     checkIdentityFrame.setVisible(true);
                 } else{
@@ -76,11 +71,12 @@ public class MenuPanel extends JPanel {
                 }
             }
         });
+
         setSensorBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
-                if (PasswordFileManager.getFileManager().isExit()){
+                if (PasswordFileManager.getFileManager().isPasswordSet()){
                     CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("scheduleSensorPanel");
                     checkIdentityFrame.setVisible(true);
                 } else {
@@ -93,7 +89,7 @@ public class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
-                if (PasswordFileManager.getFileManager().isExit()){
+                if (PasswordFileManager.getFileManager().isPasswordSet()){
                     CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("scheduleTimePanel");
                     checkIdentityFrame.setVisible(true);
                 } else {
@@ -106,7 +102,7 @@ public class MenuPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //enter password first to modify
-                if (PasswordFileManager.getFileManager().isExit()){
+                if (PasswordFileManager.getFileManager().isPasswordSet()){
                     CheckIdentityFrame checkIdentityFrame = new CheckIdentityFrame("monthlyFeePanel");
                     checkIdentityFrame.setVisible(true);
                 } else {
@@ -114,7 +110,5 @@ public class MenuPanel extends JPanel {
                 }
             }
         });
-
-
     }
 }
