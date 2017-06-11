@@ -5,7 +5,6 @@ import sensor.SensorManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,16 +12,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by manhongren on 6/6/17.
  */
 public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeListener  {
+
     private static final Font LABEL_FONT = new Font("GungSeo", Font.PLAIN, 30);
-    private static final Border LABEL_BORDER = BorderFactory.createLineBorder(Color.BLUE, 2);
-    private static final int ROOM_NUM = 6;
-    private static final int ROOM_PER_ROW = 3;
 
     private final boolean showRadioButton;
     private final boolean showButton;
@@ -35,19 +31,11 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
     private final Map<JCheckBox, Sensor> sensorByCheckbox = new HashMap<>();
     private final Map<JButton, Sensor> sensorByButton = new HashMap<>();
 
-    private List<JLabel> roomLabels = new ArrayList<>();
-
-    private final Set<JButton> buttons;
-    private final Set<JCheckBox> checkBoxes;
-
     public SensorPanel(boolean showRadioButton, boolean showButton){
         this.showRadioButton = showRadioButton;
         this.showButton = showButton;
 
         SensorManager.getInstance().registerOnSensorChangeListener(this);
-
-        buttons = new HashSet<>();
-        checkBoxes = new HashSet<>();
 
 
         if (showButton) {
@@ -75,7 +63,6 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
                 public void mousePressed(MouseEvent e) {
                     Sensor sensor = new Sensor(true, getSensorType(), e.getX(), e.getY());
                     SensorManager.getInstance().addSensor(sensor);
-
                 }
 
                 @Override
@@ -90,11 +77,7 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
         }
 
         setPreferredSize(new Dimension(650, 350));
-        try{
-            image = ImageIO.read(new File("src/resources/clear_building.png"));
-        } catch (IOException e) {
-            System.out.println("Can't open the image");
-        }
+        image = FileUtil.getImageWithName("clear_building.png");
 
         setLayout(null);
         registerActionListeners();

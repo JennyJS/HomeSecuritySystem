@@ -9,6 +9,7 @@ import java.awt.*;
  * Created by manhongren on 6/1/17.
  */
 public class DisplayPanel extends JPanel {
+
     private CardLayout cards = new CardLayout();
     private static DisplayPanel displayPanel;
     private JPanel menuPanel;

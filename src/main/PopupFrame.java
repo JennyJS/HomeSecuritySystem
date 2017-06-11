@@ -27,6 +27,7 @@ public class PopupFrame extends JFrame {
     private JPanel bottomInputPanel;
     private JLabel callingPhoneNumberLabel;
     private String phoneNumber;
+
     public PopupFrame(String fileName){
         phoneNumber = readFromPhoneNUmberFile();
         //initialize
@@ -47,7 +48,7 @@ public class PopupFrame extends JFrame {
         imageLabel = new JLabel();
         imageLabel.setIcon(icon);
         callingPhoneNumberLabel = new JLabel();
-        callingPhoneNumberLabel.setText("Calling Phone Number: " + phoneNumber+ "...");
+        callingPhoneNumberLabel.setText("Calling Phone Number: " + phoneNumber + "...");
         callingPhoneNumberLabel.setFont(LABEL_FONT);
         label = new JLabel(" Enter password to disarm system: ");
         label.setFont(LABEL_FONT);
@@ -105,18 +106,15 @@ public class PopupFrame extends JFrame {
         String lastLine = "";
         String sCurrentLine;
 
-        BufferedReader br = null;
+        BufferedReader br;
         try {
             br = new BufferedReader(new FileReader("phoneNumber.txt"));
             while ((sCurrentLine = br.readLine()) != null) {
                 lastLine = sCurrentLine;
-
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("phone number is empty");
         }
         return lastLine;
     }
-
-
 }
