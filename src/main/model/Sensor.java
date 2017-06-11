@@ -138,7 +138,7 @@ public class Sensor {
                     StringBuilder sb = new StringBuilder();
                     sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
                     FeeManager.getFeeManager().addFeeEntryToFile(sb.toString());
-                    new PopupFrame("src/main/resources/sprinkler.jpg");
+                    new PopupFrame("sprinkler.jpg");
                 }
             }
         }
@@ -156,7 +156,7 @@ public class Sensor {
                     StringBuilder sb = new StringBuilder();
                     sb.append(getSensorId()).append(",").append(new SimpleDateFormat("MMddyyyy_HH:mm:ss").format(Calendar.getInstance().getTime()));
                     FeeManager.getFeeManager().addFeeEntryToFile(sb.toString());
-                    new PopupFrame("src/main/resources/burglar.jpeg");
+                    new PopupFrame("burglar.jpeg");
                 }
             }
         }

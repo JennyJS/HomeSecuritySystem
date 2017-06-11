@@ -1,5 +1,6 @@
 package main.ui;
 
+import main.model.FileUtil;
 import main.model.PasswordFileManager;
 import main.ui.menuPanels.ActiveTextField;
 import main.model.SensorManager;
@@ -49,7 +50,7 @@ public class PopupFrame extends JFrame {
     }
 
     private void initializeComponents(String fileName){
-        ImageIcon icon = new ImageIcon(fileName);
+        ImageIcon icon = new ImageIcon(FileUtil.getPathWithName(fileName));
         imageLabel = new JLabel();
         imageLabel.setIcon(icon);
         callingPhoneNumberLabel = new JLabel();
