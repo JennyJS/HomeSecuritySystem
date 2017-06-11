@@ -1,8 +1,8 @@
 package sensor;
 
 
-import fileManagers.FeeManager;
-import fileManagers.SensorInfoFileManager;
+import main.fileManagers.FeeManager;
+import main.fileManagers.SensorInfoFileManager;
 
 import java.io.IOException;
 import java.util.*;

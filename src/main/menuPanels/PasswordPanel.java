@@ -1,6 +1,6 @@
 package menuPanels;
 
-import fileManagers.PasswordFileManager;
+import main.fileManagers.PasswordFileManager;
 import main.DisplayPanel;
 
 import javax.swing.*;
