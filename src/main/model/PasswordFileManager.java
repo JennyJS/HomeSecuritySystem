@@ -1,4 +1,4 @@
-package main.fileManagers;
+package main.model;
 
 import java.io.*;
 
@@ -51,7 +51,7 @@ public class PasswordFileManager {
                 lastLine = sCurrentLine;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Password hasn't been set");
         }
         return lastLine;
     }

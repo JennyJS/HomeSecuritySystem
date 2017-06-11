@@ -15,16 +15,20 @@ public class SensorInfoFileManager {
 
     private static SensorInfoFileManager fileManager;
 
-    public static SensorInfoFileManager getFileManager() throws IOException {
+    public static SensorInfoFileManager getFileManager() {
         if (fileManager == null){
             fileManager = new SensorInfoFileManager();
         }
         return fileManager;
     }
 
-    private SensorInfoFileManager() throws IOException {
+    private SensorInfoFileManager() {
         file = new File("sensorInfo.txt");
-        file.createNewFile();
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

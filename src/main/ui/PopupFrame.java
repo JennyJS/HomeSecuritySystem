@@ -1,8 +1,8 @@
-package main;
+package main.ui;
 
-import main.fileManagers.PasswordFileManager;
-import main.menuPanels.ActiveTextField;
-import main.sensor.SensorManager;
+import main.model.PasswordFileManager;
+import main.ui.menuPanels.ActiveTextField;
+import main.model.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +15,14 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
+ * UI frame to show popup.
+ *
  * Created by manhongren on 6/5/17.
  */
 public class PopupFrame extends JFrame {
+
     private static final Font LABEL_FONT = new Font("GungSeo", Font.PLAIN, 20);
+
     private JLabel imageLabel;
     private JLabel label;
     private JPasswordField passwordField;
@@ -30,12 +34,13 @@ public class PopupFrame extends JFrame {
 
     public PopupFrame(String fileName){
         phoneNumber = readFromPhoneNUmberFile();
-        //initialize
+
         initializeComponents(fileName);
         addComponentsToPanel();
         setLayout(new GridLayout(0, 1));
-        //register action listeners
+
         registerActionListeners();
+
         add(topImagePanel);
         add(bottomInputPanel);
         setLocationRelativeTo(null);
@@ -75,7 +80,7 @@ public class PopupFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String actualPassword = PasswordFileManager.getFileManager().getPassword();
                 String userEnterPassword = String.valueOf(passwordField.getPassword());
-                if (actualPassword.equals(userEnterPassword)){
+                if (actualPassword.length() == 0 || actualPassword.equals(userEnterPassword)){
                     dispose(); // close the pop up frame
                     SensorManager.getInstance().setAllSensors(false);
                 } else {

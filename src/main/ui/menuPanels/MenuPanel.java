@@ -1,8 +1,8 @@
-package main.menuPanels;
+package main.ui.menuPanels;
 
-import main.fileManagers.PasswordFileManager;
-import main.CheckIdentityFrame;
-import main.DisplayPanel;
+import main.model.PasswordFileManager;
+import main.ui.CheckIdentityFrame;
+import main.ui.DisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,7 @@ public class MenuPanel extends JPanel {
 
         personalInfoBtn = new JButton("Set Personal Information");
         setPasswordBtn = new JButton("Set Password");
-        setSensorBtn = new JButton("Schedule main.sensor");
+        setSensorBtn = new JButton("Schedule Sensor");
         scheduleTimeBtn = new JButton("Schedule Time");
         monthlyFeeBtn = new JButton("Monthly Fee");
 

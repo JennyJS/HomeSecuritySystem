@@ -1,7 +1,4 @@
-package main.fileManagers;
-
-import main.sensor.Sensor;
-import main.sensor.SensorManager;
+package main.model;
 
 import java.io.*;
 import java.util.HashSet;

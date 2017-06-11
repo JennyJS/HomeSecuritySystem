@@ -1,17 +1,19 @@
-package main;
+package main.ui;
 
-import main.sensor.Sensor;
-import main.sensor.SensorManager;
+import main.model.FileUtil;
+import main.model.Sensor;
+import main.model.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.*;
 
 /**
+ * Panel UI to add and display sensors.
+ *
  * Created by manhongren on 6/6/17.
  */
 public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeListener  {
@@ -21,11 +23,12 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
     private final boolean showRadioButton;
     private final boolean showButton;
 
-    private BufferedImage image;
+    private final BufferedImage image;
     private JLabel fireLabel;
     private JLabel breakInLabel;
     private JRadioButton fireRadioButton;
     private JRadioButton breakInRadioButton;
+
     private final Map<JCheckBox, Sensor> sensorByCheckbox = new HashMap<>();
     private final Map<JButton, Sensor> sensorByButton = new HashMap<>();
 
@@ -83,14 +86,20 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
 
     @Override
     protected void paintComponent(Graphics g) {
-        //System.out.println("paint component");
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);
 
         if (showRadioButton) {
             addRadioButtonsToPanel();
         }
+    }
 
+    public void updateSensorsFromCheckBoxes() {
+        for (Map.Entry<JCheckBox, Sensor> entry : sensorByCheckbox.entrySet()){
+            entry.getValue().setSensorOn(entry.getKey().isSelected());
+        }
+        SensorManager.getInstance().syncToFile();
+        SensorManager.getInstance().notifySensorChange();
     }
 
     private void layoutRadioButtons(){
@@ -125,6 +134,9 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
        }
     }
 
+    /**
+     * Upon sensor change. Remove all component and add buttons or check boxes.
+     */
     @Override
     public void onSensorChange(Set<Sensor> sensors) {
         removeAll();
@@ -153,14 +165,4 @@ public class SensorPanel extends JPanel implements SensorManager.OnSensorChangeL
             add(checkBox);
         }
     }
-
-    public void updateSensorsFromCheckBoxes() throws IOException {
-        for (Map.Entry<JCheckBox, Sensor> entry : sensorByCheckbox.entrySet()){
-            entry.getValue().setSensorOn(entry.getKey().isSelected());
-        }
-        SensorManager.getInstance().syncToFile();
-        SensorManager.getInstance().notifySensorChange();
-    }
-
-
 }

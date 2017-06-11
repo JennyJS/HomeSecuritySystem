@@ -1,7 +1,7 @@
-package main;
+package main.ui;
 
-import main.fileManagers.PasswordFileManager;
-import main.menuPanels.ActiveTextField;
+import main.model.PasswordFileManager;
+import main.ui.menuPanels.ActiveTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +11,17 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 /**
+ * Frame to verify password.
+ *
  * Created by manhongren on 6/5/17.
  */
 public class CheckIdentityFrame extends JFrame {
-    private JLabel label;
-    private JPasswordField passwordField;
-    private JButton enterButton;
-    private String nextPanelToShow;
+
+    private final JLabel label;
+    private final JPasswordField passwordField;
+    private final JButton enterButton;
+    private final String nextPanelToShow;
+
     public CheckIdentityFrame(String nextPanelToShow){
         this.nextPanelToShow = nextPanelToShow;
         label = new JLabel("    Enter Password:     ");
@@ -39,7 +43,7 @@ public class CheckIdentityFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String actualPassword = PasswordFileManager.getFileManager().getPassword();
                 String userEnterPassword = String.valueOf(passwordField.getPassword());
-                if (actualPassword.equals(userEnterPassword)){
+                if (actualPassword.length() == 0 || actualPassword.equals(userEnterPassword)){
                     DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), nextPanelToShow);
                     dispose(); // close the pop up frame
                 } else {

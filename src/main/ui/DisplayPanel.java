@@ -1,34 +1,32 @@
-package main;
+package main.ui;
 
-import main.menuPanels.*;
+import main.ui.menuPanels.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Card layout.
+ *
  * Created by manhongren on 6/1/17.
  */
 public class DisplayPanel extends JPanel {
 
     private static DisplayPanel displayPanel;
 
-    private CardLayout cards = new CardLayout();
-    private JPanel menuPanel;
-    private JPanel passwordPanel;
-    private JPanel scheduleTimePanel;
-    private JPanel scheduleSensorPanel;
-    private JPanel newBuildingPanel;
-    private JPanel monthlyFeePanel;
-    private JPanel coverPanel;
+    private final CardLayout cards = new CardLayout();
+    private final JPanel menuPanel;
+    private final JPanel passwordPanel;
+    private final JPanel scheduleTimePanel;
+    private final JPanel scheduleSensorPanel;
+    private final JPanel newBuildingPanel;
+    private final JPanel monthlyFeePanel;
+    private final JPanel coverPanel;
 
 
     private DisplayPanel(){
         setLayout(cards);
-        initiatePanels();
-        addPanels();
-    }
 
-    private void initiatePanels(){
         menuPanel = new MenuPanel();
         coverPanel = new PersonalInfoPanel();
         passwordPanel = new PasswordPanel();
@@ -36,6 +34,8 @@ public class DisplayPanel extends JPanel {
         scheduleSensorPanel = new ScheduleSensorPanel();
         newBuildingPanel = new SensorPanel(true, true);
         monthlyFeePanel = new MonthlyFeePanel();
+
+        addPanels();
     }
 
     private void addPanels(){

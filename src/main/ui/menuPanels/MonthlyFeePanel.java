@@ -1,6 +1,6 @@
-package main.menuPanels;
+package main.ui.menuPanels;
 
-import main.fileManagers.FeeManager;
+import main.model.FeeManager;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;

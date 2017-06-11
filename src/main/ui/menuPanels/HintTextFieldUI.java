@@ -1,4 +1,4 @@
-package main.menuPanels;
+package main.ui.menuPanels;
 
 import javax.swing.plaf.basic.BasicTextFieldUI;
 import javax.swing.text.JTextComponent;

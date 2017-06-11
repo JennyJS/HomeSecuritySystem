@@ -1,9 +1,11 @@
-package main;
+package main.ui;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Main frame.
+ *
  * Created by manhongren on 5/31/17.
  */
 public class MainFrame extends JFrame{

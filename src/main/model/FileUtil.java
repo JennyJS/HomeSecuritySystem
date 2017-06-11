@@ -1,4 +1,4 @@
-package main;
+package main.model;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

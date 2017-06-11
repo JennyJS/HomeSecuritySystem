@@ -1,7 +1,7 @@
-package main.menuPanels;
+package main.ui.menuPanels;
 
-import main.DisplayPanel;
-import main.SensorPanel;
+import main.ui.DisplayPanel;
+import main.ui.SensorPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,11 +51,7 @@ public class ScheduleSensorPanel extends JPanel {
         doneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    sensorPanel.updateSensorsFromCheckBoxes();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                sensorPanel.updateSensorsFromCheckBoxes();
                 DisplayPanel.getDisplayPanel().getCards().show(DisplayPanel.getDisplayPanel(), "menuPanel");
             }
         });

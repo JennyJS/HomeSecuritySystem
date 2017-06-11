@@ -1,8 +1,7 @@
-package main.sensor;
+package main.model;
 
 
-import main.fileManagers.FeeManager;
-import main.PopupFrame;
+import main.ui.PopupFrame;
 
 
 import javax.swing.*;
