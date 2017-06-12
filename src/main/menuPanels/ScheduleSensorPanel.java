@@ -1,13 +1,12 @@
-package main.ui.menuPanels;
+package main.menuPanels;
 
-import main.ui.DisplayPanel;
-import main.ui.SensorPanel;
+import main.DisplayPanel;
+import main.SensorPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 import static javax.swing.BoxLayout.Y_AXIS;
 

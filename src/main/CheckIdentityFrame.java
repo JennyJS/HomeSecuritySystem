@@ -1,7 +1,7 @@
-package main.ui;
+package main;
 
-import main.model.PasswordFileManager;
-import main.ui.menuPanels.ActiveTextField;
+import main.filemanagers.PasswordFileManager;
+import main.menuPanels.ActiveTextField;
 
 import javax.swing.*;
 import java.awt.*;

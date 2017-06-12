@@ -1,8 +1,7 @@
-package main.ui;
+package main;
 
-import main.model.FileUtil;
-import main.model.Sensor;
-import main.model.SensorManager;
+import main.sensor.Sensor;
+import main.sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package main.model;
+package main.filemanagers;
 
 import java.io.*;
 

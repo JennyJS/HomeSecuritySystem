@@ -1,7 +1,7 @@
-package main.ui;
+package main;
 
-import main.ui.menuPanels.ActiveTextField;
-import main.model.SensorManager;
+import main.menuPanels.ActiveTextField;
+import main.sensor.SensorManager;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;

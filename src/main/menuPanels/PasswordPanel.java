@@ -1,7 +1,7 @@
-package main.ui.menuPanels;
+package main.menuPanels;
 
-import main.model.PasswordFileManager;
-import main.ui.DisplayPanel;
+import main.filemanagers.PasswordFileManager;
+import main.DisplayPanel;
 
 import javax.swing.*;
 import java.awt.*;

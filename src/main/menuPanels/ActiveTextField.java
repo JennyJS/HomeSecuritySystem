@@ -1,4 +1,4 @@
-package main.ui.menuPanels;
+package main.menuPanels;
 
 import javax.swing.*;
 

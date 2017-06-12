@@ -1,7 +1,9 @@
-package main.model;
+package main.sensor;
 
 
-import java.io.IOException;
+import main.filemanagers.FeeManager;
+import main.filemanagers.SensorInfoFileManager;
+
 import java.util.*;
 
 /**

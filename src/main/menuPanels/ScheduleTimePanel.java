@@ -1,8 +1,8 @@
-package main.ui.menuPanels;
+package main.menuPanels;
 
-import main.ui.DisplayPanel;
+import main.DisplayPanel;
 
-import main.model.SensorManager;
+import main.sensor.SensorManager;
 
 import javax.swing.*;
 import java.awt.*;

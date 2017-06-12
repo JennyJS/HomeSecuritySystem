@@ -1,6 +1,6 @@
-package main.ui;
+package main;
 
-import main.ui.menuPanels.*;
+import main.menuPanels.*;
 
 import javax.swing.*;
 import java.awt.*;
